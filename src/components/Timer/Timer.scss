@@ -1,0 +1,15 @@
+@use '../../variables.scss' as *;
+@use '../../globalStyles.scss' as *;
+
+.timer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__time-container {
+        @include glowingText;
+        font-size: $fs-900;
+    }
+}

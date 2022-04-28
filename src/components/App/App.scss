@@ -1,0 +1,18 @@
+@use '../../variables.scss' as *;
+@use '../../globalStyles.scss';
+
+.app {
+    width: 100vw;
+    height: 100vh;
+    background: 
+        linear-gradient(
+            135deg,
+            $clr-primary-1, 
+            lighten($clr-primary-1, 15%)
+        );
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}

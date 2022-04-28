@@ -1,0 +1,8 @@
+@use '../../variables.scss' as *;
+
+.clock {
+    width: 25rem;
+    aspect-ratio: 1;
+    border: 0.5rem solid $clr-greyed;
+    border-radius: 50%;
+}
