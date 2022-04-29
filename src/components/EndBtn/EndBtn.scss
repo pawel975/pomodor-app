@@ -1,0 +1,8 @@
+@use '../../variables.scss' as *;
+@use '../../globalStyles.scss' as *;
+
+.end-btn {
+    @include controlBtnStyles;
+    @include glowingText;
+    font-size: $fs-300;
+}

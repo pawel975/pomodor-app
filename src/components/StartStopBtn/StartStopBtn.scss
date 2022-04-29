@@ -1,0 +1,16 @@
+@use '../../variables.scss' as *;
+@use '../../globalStyles.scss' as *;
+
+.start-stop-btn {
+    @include controlBtnStyles;
+    @include glowingText;
+    display: flex;
+    
+    .start-stop-icon {
+        padding: 0;
+        width: 80%;
+        height: 80%;
+        font-size: $fs-800;
+        margin: auto;
+    }
+}
