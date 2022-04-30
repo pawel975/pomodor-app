@@ -1,12 +1,12 @@
 @use '../../variables.scss' as *;
 @use '../../globalStyles.scss' as *;
 
-.start-stop-btn {
+.start-pause-btn {
     @include controlBtnStyles;
     @include glowingText;
     display: flex;
     
-    .start-stop-icon {
+    .start-pause-icon {
         padding: 0;
         width: 80%;
         height: 80%;
