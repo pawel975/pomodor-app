@@ -1,8 +1,25 @@
 import './SkipBtn.scss';
 
-const SkipBtn = () => {
+const SkipBtn = ({isTimerRun, isLearningBlockActive}) => {
+
+    let shouldSkipBtnBeVisible = false;
+
+    if (isLearningBlockActive) {
+        if (isTimerRun) {
+            shouldSkipBtnBeVisible = false;
+        } else {
+            shouldSkipBtnBeVisible = true;
+        }
+    }
+
+    console.log(isTimerRun)
+
     return (
-        <button className="skip-btn">Skip</button>
+        <button className={`skip-btn 
+            ${shouldSkipBtnBeVisible ? "side-btn-visible" : null}
+        `}>
+            Skip
+        </button>
     )
 }
 

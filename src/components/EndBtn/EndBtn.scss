@@ -5,4 +5,8 @@
     @include controlBtnStyles;
     @include glowingText;
     font-size: $fs-300;
+    opacity: 0;
+    transition: 0.1s;
+    pointer-events: none;
+            transform: translateY(-1rem);
 }

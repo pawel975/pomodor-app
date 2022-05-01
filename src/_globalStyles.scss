@@ -100,7 +100,7 @@ select {
 }
 
 @mixin glowingText {
-  color: lighten($color: $clr-primary-1, $amount: 60%);
-  text-shadow: 0 0 1rem lighten($color: $clr-primary-1, $amount: 30%);
+  color: lighten($color: $clr-text, $amount: 0%);
+  text-shadow: 0 0 0.5rem lighten($color: $clr-text, $amount: 0%);
   font-family: $ff-heading;
 }
