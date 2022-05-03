@@ -31,7 +31,7 @@ describe("<App/> component should", () => {
 
         render(
             <App>
-                <Clock time={1500}/>
+                <Clock learningTime={1500}/>
             </App>
         )
 
@@ -53,7 +53,7 @@ describe("<App/> component should", () => {
             <App>
                 <Clock 
                     isTimerRun={true}
-                    time={1500}
+                    learningTime={1500}
                     breakTime={300}
                     isLearningSessionActive={true}
                 />

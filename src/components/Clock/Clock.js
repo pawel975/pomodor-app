@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Timer from '../Timer/Timer';
 import './Clock.scss';
 
-const Clock = ({learningTime, breakTime, setLearningSetup, isTimerRun, isLearningSessionActive}) => {
+const Clock = ({learn, breakk, setLearn, setBreakk, learningTime, breakTime, setLearningSetup, isTimerRun, isLearningSessionActive}) => {
 
     useEffect(() => {
         
@@ -12,24 +12,18 @@ const Clock = ({learningTime, breakTime, setLearningSetup, isTimerRun, isLearnin
 
             if (isLearningSessionActive) {
 
-                if (learningTime > 0) {
+                if (learn > 0) {
         
                     countingTimeout = setTimeout(() => {
-                        setLearningSetup(prevState => ({
-                            ...prevState,
-                            learningTime: learningTime - 1,
-                        }))
+                        setLearn(learn - 1)
                     }, 1000);
                 }
 
             } else {
-                if (breakTime > 0) {
+                if (breakk > 0) {
         
                     countingTimeout = setTimeout(() => {
-                        setLearningSetup(prevState => ({
-                            ...prevState,
-                            breakTime: breakTime - 1,
-                        }))
+                        setBreakk(breakk - 1)
                     }, 1000);
                 }
             }
@@ -40,11 +34,11 @@ const Clock = ({learningTime, breakTime, setLearningSetup, isTimerRun, isLearnin
             }
         }
 
-    },[learningTime, setLearningSetup, isTimerRun, isLearningSessionActive, breakTime])
+    },[learningTime, setLearningSetup, isTimerRun, isLearningSessionActive, breakTime, setLearn, learn, setBreakk, breakk])
 
     return (
         <div className="clock" data-testid="clock">
-            <Timer countDownTime={isLearningSessionActive ? learningTime : breakTime}/>
+            <Timer countDownTime={isLearningSessionActive ? learn : breakk}/>
         </div>
     )
 

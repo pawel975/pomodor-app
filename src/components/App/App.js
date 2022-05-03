@@ -10,12 +10,22 @@ const App = () => {
     breakTime: 300,
     isLearningSessionActive: true,
   })
+
+  const [learn, setLearn] = useState(learningSetup.learningTime);
+  const [breakk, setBreakk] = useState(learningSetup.breakTime);
+
   const [isTimerRun, setIsTimerRun] = useState(false);
   const [isLearningBlockActive, setIsLearningBlockActive] = useState(false);
 
   return (
     <div className="app">
       <Clock 
+
+        learn={learn}
+        breakk={breakk}
+        setLearn={setLearn}
+        setBreakk={setBreakk}
+
         learningTime={learningSetup.learningTime} 
         breakTime={learningSetup.breakTime}
         setLearningSetup={setLearningSetup}
@@ -23,6 +33,10 @@ const App = () => {
         isTimerRun={isTimerRun}
       />
       <ControlPanel
+
+        setLearn={setLearn}
+        setBreakk={setBreakk}
+        
         learningSetup={learningSetup}
         setLearningSetup={setLearningSetup}
         isTimerRun={isTimerRun}
