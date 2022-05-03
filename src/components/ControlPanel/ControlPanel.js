@@ -1,11 +1,17 @@
-import { useState } from 'react';
 import EndBtn from '../EndBtn/EndBtn';
 import SkipBtn from '../SkipBtn/SkipBtn';
 import StartPauseBtn from '../StartPauseBtn/StartPauseBtn';
 import './ControlPanel.scss';
 
-const ControlPanel = ({isTimerRun, setIsTimerRun, isLearningBlockActive, setIsLearningBlockActive}) => {
+const ControlPanel = ({setLearningSetup, learningSetup, isTimerRun, setIsTimerRun, isLearningBlockActive, setIsLearningBlockActive}) => {
     
+    const handleSkipBtnClick = () => {
+        setLearningSetup(prevState => ({
+            ...prevState,
+            isLearningSessionActive: !prevState.isLearningSessionActive,
+        }))
+    }
+
     const handleStartPauseBtnClick = () => {
         setIsTimerRun(!isTimerRun);
         setIsLearningBlockActive(true)
@@ -20,6 +26,7 @@ const ControlPanel = ({isTimerRun, setIsTimerRun, isLearningBlockActive, setIsLe
             <SkipBtn 
                 isTimerRun={isTimerRun}
                 isLearningBlockActive={isLearningBlockActive}
+                handleSkipBtnClick={handleSkipBtnClick}
             />
             <StartPauseBtn 
                 isTimerRun={isTimerRun}
