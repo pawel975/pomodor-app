@@ -4,14 +4,11 @@ import SkipBtn from '../SkipBtn/SkipBtn';
 import StartPauseBtn from '../StartPauseBtn/StartPauseBtn';
 import './ControlPanel.scss';
 
-const ControlPanel = () => {
-
-    const [isTimerRun, setIsTimerRun] = useState(false);
-    const [isLearningBlockActive, setIsLearningBlockActive] = useState(true);
+const ControlPanel = ({isTimerRun, setIsTimerRun, isLearningBlockActive, setIsLearningBlockActive}) => {
     
     const handleStartPauseBtnClick = () => {
         setIsTimerRun(!isTimerRun);
-        // setIsLearningBlockActive(true)
+        setIsLearningBlockActive(true)
     }
 
     const handleEndBtnClick = () => {
@@ -26,6 +23,7 @@ const ControlPanel = () => {
             />
             <StartPauseBtn 
                 isTimerRun={isTimerRun}
+                isLearningBlockActive={isLearningBlockActive}
                 handleStartPauseBtnClick={handleStartPauseBtnClick}
             />
             <EndBtn 

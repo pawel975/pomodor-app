@@ -1,5 +1,4 @@
 import { screen, render } from "@testing-library/react";
-import { fireEvent } from "@testing-library/dom";
 import StartPauseBtn from "./StartPauseBtn";
 
 describe('<StartPauseBtn/> should', () => {
@@ -11,16 +10,23 @@ describe('<StartPauseBtn/> should', () => {
     })
 
     test("contain pause icon if timer runs", () => {
-        render(<StartPauseBtn isTimerRun={true}/>);
+        render(<StartPauseBtn isTimerRun={true} isLearningBlockActive={true}/>);
         const startPauseBtnComponent = screen.getByTestId("start-pause-btn")
         const pauseIcon = screen.getByTestId("pause-icon");
         expect(startPauseBtnComponent).toContainElement(pauseIcon)
     })
 
     test("contain play icon if timer is paused", () => {
-        render(<StartPauseBtn isTimerRun={false}/>);
+        render(<StartPauseBtn isTimerRun={false} isLearningBlockActive={true}/>);
         const startPauseBtnComponent = screen.getByTestId("start-pause-btn")
         const playIcon = screen.getByTestId("play-icon");
         expect(startPauseBtnComponent).toContainElement(playIcon)
+    })
+
+    test("contain 'start' text if learning block isn't active", () => {
+        render(<StartPauseBtn isTimerRun={false} isLearningBlockActive={false}/>);
+        const startPauseBtnComponent = screen.getByTestId("start-pause-btn")
+        const startText = screen.getByText(/start/i);
+        expect(startPauseBtnComponent).toContainElement(startText)
     })
 })

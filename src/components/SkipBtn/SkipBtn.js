@@ -12,8 +12,6 @@ const SkipBtn = ({isTimerRun, isLearningBlockActive}) => {
         }
     }
 
-    console.log(isTimerRun)
-
     return (
         <button className={`skip-btn 
             ${shouldSkipBtnBeVisible ? "side-btn-visible" : null}

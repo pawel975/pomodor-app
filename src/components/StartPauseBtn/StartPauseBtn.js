@@ -2,7 +2,19 @@ import './StartPauseBtn.scss';
 import {BsFillPlayFill as PlayIcon} from 'react-icons/bs';
 import {BsFillPauseFill as PauseIcon} from 'react-icons/bs';
 
-const StartPauseBtn = ({isTimerRun, handleStartPauseBtnClick}) => {
+const StartPauseBtn = ({isTimerRun, handleStartPauseBtnClick, isLearningBlockActive}) => {
+
+    let startPauseBtnIcon;
+
+    if (!isLearningBlockActive) {
+        startPauseBtnIcon = "Start"
+    } else {
+        if (isTimerRun) {
+            startPauseBtnIcon = <PauseIcon className='start-pause-icon' data-testid="pause-icon"/>
+        } else {
+            startPauseBtnIcon = <PlayIcon className='start-pause-icon' data-testid="play-icon"/>
+        }
+    }
 
     return (
         <button 
@@ -10,10 +22,7 @@ const StartPauseBtn = ({isTimerRun, handleStartPauseBtnClick}) => {
             className="start-pause-btn" 
             data-testid="start-pause-btn"
         >
-            {isTimerRun ? 
-                <PauseIcon className='start-pause-icon' data-testid="pause-icon"/> :
-                <PlayIcon className='start-pause-icon' data-testid="play-icon"/> 
-            }
+            {startPauseBtnIcon}
         </button>
     )
 }
