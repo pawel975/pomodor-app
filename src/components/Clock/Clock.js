@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Timer from '../Timer/Timer';
 import './Clock.scss';
 
-const Clock = ({learn, breakk, setLearn, setBreakk, learningTime, breakTime, setLearningSetup, isTimerRun, isLearningSessionActive}) => {
+const Clock = ({learnTime, breakTime, setLearnTime, setBreakTime, isTimerRun, isLearningSessionActive}) => {
 
     useEffect(() => {
         
@@ -12,33 +12,32 @@ const Clock = ({learn, breakk, setLearn, setBreakk, learningTime, breakTime, set
 
             if (isLearningSessionActive) {
 
-                if (learn > 0) {
+                if (learnTime > 0) {
         
                     countingTimeout = setTimeout(() => {
-                        setLearn(learn - 1)
+                        setLearnTime(learnTime - 1)
                     }, 1000);
                 }
 
             } else {
-                if (breakk > 0) {
+                if (breakTime > 0) {
         
                     countingTimeout = setTimeout(() => {
-                        setBreakk(breakk - 1)
+                        setBreakTime(breakTime - 1)
                     }, 1000);
                 }
             }
-    
     
             return () => {
                 clearTimeout(countingTimeout)
             }
         }
 
-    },[learningTime, setLearningSetup, isTimerRun, isLearningSessionActive, breakTime, setLearn, learn, setBreakk, breakk])
+    },[breakTime, isLearningSessionActive, isTimerRun, learnTime, setBreakTime, setLearnTime])
 
     return (
         <div className="clock" data-testid="clock">
-            <Timer countDownTime={isLearningSessionActive ? learn : breakk}/>
+            <Timer countDownTime={isLearningSessionActive ? learnTime : breakTime}/>
         </div>
     )
 

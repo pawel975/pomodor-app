@@ -1,4 +1,5 @@
 import { screen, render, fireEvent } from "@testing-library/react";
+import { useState } from "react";
 import { act } from "react-dom/test-utils";
 import Clock from "../Clock/Clock";
 import ControlPanel from "../ControlPanel/ControlPanel";
@@ -71,6 +72,39 @@ describe("<App/> component should", () => {
         const timer = screen.getByTestId("time-container");
         expect(timer).toHaveTextContent(/^5:00$/)
 
+    })
+
+    test("restart timer to init learning time when user click End button", () => {
+        
+        const MockApp = () => {
+
+            const [globalState, setGlobalState] = useState({
+                initLearnTime: 1500,
+              })
+            const [learnTime, setLearnTime] = useState(1498);
+            const [isLearningBlockActive, setIsLearningBlockActive] = useState(true)
+
+            return (
+                <App>
+                    <Clock learnTime={learnTime} setLearnTime={setLearnTime}/>
+                    <ControlPanel 
+                        globalState={globalState}
+                        setLearnTime={setLearnTime}
+                        isLearningBlockActive={isLearningBlockActive}
+                        setIsLearningBlockActive={jest.fn(() => setIsLearningBlockActive(false))}>
+                    </ControlPanel>
+                </App>
+            )
+        }
+
+        render(
+            <MockApp/>
+        )
+
+        const endBtn = screen.getByRole("button", {name: "End"});
+        const timer = screen.getByTestId("time-container");
+        fireEvent.click(endBtn)
+        expect(timer).toHaveTextContent("25:00");
     })
 
 })

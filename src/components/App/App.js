@@ -5,45 +5,55 @@ import './App.scss';
 
 const App = () => {
 
-  const [learningSetup, setLearningSetup] = useState({
-    learningTime: 1500,
-    breakTime: 300,
+  const [globalState, setGlobalState] = useState({
+    initLearnTime: 1500,
+    initBreakTime: 300,
     isLearningSessionActive: true,
   })
 
-  const [learn, setLearn] = useState(learningSetup.learningTime);
-  const [breakk, setBreakk] = useState(learningSetup.breakTime);
+  const [learnTime, setLearnTime] = useState(globalState.initLearnTime);
+  const [breakTime, setBreakTime] = useState(globalState.initBreakTime);
 
   const [isTimerRun, setIsTimerRun] = useState(false);
   const [isLearningBlockActive, setIsLearningBlockActive] = useState(false);
 
   return (
     <div className="app">
+      
       <Clock 
 
-        learn={learn}
-        breakk={breakk}
-        setLearn={setLearn}
-        setBreakk={setBreakk}
+        learnTime={learnTime}
+        breakTime={breakTime}
+        setLearnTime={setLearnTime}
+        setBreakTime={setBreakTime}
 
-        learningTime={learningSetup.learningTime} 
-        breakTime={learningSetup.breakTime}
-        setLearningSetup={setLearningSetup}
-        isLearningSessionActive={learningSetup.isLearningSessionActive}
+        initLearnTime={globalState.initLearnTime} 
+        initBreakTime={globalState.initBreakTime}
+
+        setGlobalState={setGlobalState}
+
+        isLearningSessionActive={globalState.isLearningSessionActive}
+
         isTimerRun={isTimerRun}
+
       />
+
       <ControlPanel
 
-        setLearn={setLearn}
-        setBreakk={setBreakk}
+        setLearnTime={setLearnTime}
+        setBreakTime={setBreakTime}
         
-        learningSetup={learningSetup}
-        setLearningSetup={setLearningSetup}
+        globalState={globalState}
+        setGlobalState={setGlobalState}
+
         isTimerRun={isTimerRun}
         setIsTimerRun={setIsTimerRun}
+
         isLearningBlockActive={isLearningBlockActive}
         setIsLearningBlockActive={setIsLearningBlockActive}
+
       />
+
     </div>
   );
 }
