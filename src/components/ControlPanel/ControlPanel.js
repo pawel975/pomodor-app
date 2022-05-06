@@ -20,6 +20,10 @@ const ControlPanel = ({setGlobalState, setLearnTime, globalState, setBreakTime, 
     }
     
     const handleEndBtnClick = () => {
+        setGlobalState(prevState => ({
+            ...prevState,
+            isLearningSessionActive: true,
+        }))
         setIsLearningBlockActive(false)
         setLearnTime(globalState.initLearnTime);
     }

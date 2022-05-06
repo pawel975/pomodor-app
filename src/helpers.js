@@ -1,4 +1,13 @@
+/**
+ * Stops program from continue for particular time
+ *
+ * @param {number} time in seconds to wait
+ * @returns promise which resolves after minute
+ */
 
+export const sleep = async (time) => {
+    return await new Promise(r => setTimeout(r, time));
+}
 
 /**
  * Returns time formated to hh/mm/ss.

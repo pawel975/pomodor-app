@@ -1,6 +1,6 @@
 import { screen, render, fireEvent } from "@testing-library/react";
-import { useState } from "react";
 import { act } from "react-dom/test-utils";
+import { sleep } from "../../helpers";
 import Clock from "../Clock/Clock";
 import ControlPanel from "../ControlPanel/ControlPanel";
 import App from "./App";
@@ -39,10 +39,8 @@ describe("<App/> component should", () => {
         const startPauseBtn = screen.getByTestId("start-pause-btn");
 
         fireEvent.click(startPauseBtn);
-        
-        await act(async () => {
-            return await new Promise(r => setTimeout(r, 1000));
-        })
+
+        await act(() => sleep(1000))
 
         const timer = screen.getByTestId("time-container");
         expect(timer).toHaveTextContent("24:59")
@@ -74,37 +72,50 @@ describe("<App/> component should", () => {
 
     })
 
-    test("restart timer to init learning time when user click End button", () => {
-        
-        const MockApp = () => {
+    test("restart timer to init learning time when user click End button", async () => {
 
-            const [globalState, setGlobalState] = useState({
-                initLearnTime: 1500,
-              })
-            const [learnTime, setLearnTime] = useState(1498);
-            const [isLearningBlockActive, setIsLearningBlockActive] = useState(true)
+        render(<App/>)
 
-            return (
-                <App>
-                    <Clock learnTime={learnTime} setLearnTime={setLearnTime}/>
-                    <ControlPanel 
-                        globalState={globalState}
-                        setLearnTime={setLearnTime}
-                        isLearningBlockActive={isLearningBlockActive}
-                        setIsLearningBlockActive={jest.fn(() => setIsLearningBlockActive(false))}>
-                    </ControlPanel>
-                </App>
-            )
-        }
-
-        render(
-            <MockApp/>
-        )
-
+        const startPauseBtn = screen.getByTestId("start-pause-btn");
         const endBtn = screen.getByRole("button", {name: "End"});
         const timer = screen.getByTestId("time-container");
+
+        fireEvent.click(startPauseBtn);
+
+        await act(() => sleep(1000))
+        
         fireEvent.click(endBtn)
+
         expect(timer).toHaveTextContent("25:00");
+    })
+
+    test("end learning block when 'End' button is clicked", () => {
+
+        render(<App/>)
+
+        const startPauseBtn = screen.getByTestId("start-pause-btn");
+        const endBtn = screen.getByRole("button", {name: "End"});
+        fireEvent.click(endBtn)
+        expect(startPauseBtn).toHaveTextContent("Start")
+    })
+    
+    test("change break time to active session time on timer when 'End' button is clicked", () => {
+        
+        render(<App/>)
+
+        const startPauseBtn = screen.getByTestId("start-pause-btn");
+        const skipBtn = screen.getByRole("button", {name: "Skip"});
+        const endBtn = screen.getByRole("button", {name: "End"});
+        const timer = screen.getByTestId("time-container");
+
+        fireEvent.click(startPauseBtn)
+        fireEvent.click(startPauseBtn)
+        fireEvent.click(skipBtn)
+        fireEvent.click(startPauseBtn)
+        fireEvent.click(endBtn);
+
+        expect(timer).toHaveTextContent(/^25:00$/i);
+
     })
 
 })
