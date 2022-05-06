@@ -9,13 +9,12 @@ const App = () => {
     initLearnTime: 1500,
     initBreakTime: 300,
     isLearningSessionActive: true,
+    isLearningBlockActive: false,
+    isTimerRun: false,
   })
 
   const [learnTime, setLearnTime] = useState(globalState.initLearnTime);
   const [breakTime, setBreakTime] = useState(globalState.initBreakTime);
-
-  const [isTimerRun, setIsTimerRun] = useState(false);
-  const [isLearningBlockActive, setIsLearningBlockActive] = useState(false);
 
   return (
     <div className="app">
@@ -34,7 +33,7 @@ const App = () => {
 
         isLearningSessionActive={globalState.isLearningSessionActive}
 
-        isTimerRun={isTimerRun}
+        isTimerRun={globalState.isTimerRun}
 
       />
 
@@ -46,11 +45,9 @@ const App = () => {
         globalState={globalState}
         setGlobalState={setGlobalState}
 
-        isTimerRun={isTimerRun}
-        setIsTimerRun={setIsTimerRun}
+        isTimerRun={globalState.isTimerRun}
 
-        isLearningBlockActive={isLearningBlockActive}
-        setIsLearningBlockActive={setIsLearningBlockActive}
+        isLearningBlockActive={globalState.isLearningBlockActive}
 
       />
 
