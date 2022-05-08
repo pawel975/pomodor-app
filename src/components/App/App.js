@@ -6,32 +6,32 @@ import './App.scss';
 const App = () => {
 
   const [globalState, setGlobalState] = useState({
-    initLearnTime: 1500,
-    initBreakTime: 300,
-    isLearningSessionActive: true,
+    initLearnTime: 2,
+    initBreakTime: 1,
+    isLearnPhaseActive: true,
     isLearningBlockActive: false,
     isTimerRun: false,
   })
-
-  const [learnTime, setLearnTime] = useState(globalState.initLearnTime);
-  const [breakTime, setBreakTime] = useState(globalState.initBreakTime);
+  const [remainLearnTime, setRemainLearnTime] = useState(globalState.initLearnTime);
+  const [remainBreakTime, setRemainBreakTime] = useState(globalState.initBreakTime);
 
   return (
     <div className="app">
-      
+
       <Clock 
 
-        learnTime={learnTime}
-        breakTime={breakTime}
-        setLearnTime={setLearnTime}
-        setBreakTime={setBreakTime}
+        remainLearnTime={remainLearnTime}
+        remainBreakTime={remainBreakTime}
+        setRemainLearnTime={setRemainLearnTime}
+        setRemainBreakTime={setRemainBreakTime}
 
-        initLearnTime={globalState.initLearnTime} 
         initBreakTime={globalState.initBreakTime}
+        initLearnTime={globalState.initLearnTime}
 
+        globalState={globalState}
         setGlobalState={setGlobalState}
 
-        isLearningSessionActive={globalState.isLearningSessionActive}
+        isLearnPhaseActive={globalState.isLearnPhaseActive}
 
         isTimerRun={globalState.isTimerRun}
 
@@ -39,8 +39,8 @@ const App = () => {
 
       <ControlPanel
 
-        setLearnTime={setLearnTime}
-        setBreakTime={setBreakTime}
+        setRemainLearnTime={setRemainLearnTime}
+        setRemainBreakTime={setRemainBreakTime}
         
         globalState={globalState}
         setGlobalState={setGlobalState}

@@ -8,11 +8,8 @@ import App from "./App";
 describe("<App/> component should", () => {
 
     test("stop timer from running if control panel paused it", async () => {
-        render(
-            <App>
-                <Clock time={1500}/>
-            </App>
-        )
+
+        render(<App/>)
 
         const startPauseBtn = screen.getByTestId("start-pause-btn");
 
@@ -27,6 +24,7 @@ describe("<App/> component should", () => {
         const timer = screen.getByTestId("time-container");
         expect(timer).toHaveTextContent("25:00")
     }) 
+
 
     test("run timer if control panel play icon is triggered", async () => {
 
@@ -45,6 +43,7 @@ describe("<App/> component should", () => {
         const timer = screen.getByTestId("time-container");
         expect(timer).toHaveTextContent("24:59")
     }) 
+
     
     test("skip to break if learning session is active", () => {
 
@@ -52,8 +51,6 @@ describe("<App/> component should", () => {
             <App>
                 <Clock 
                     isTimerRun={true}
-                    learningTime={1500}
-                    breakTime={300}
                     isLearningSessionActive={true}
                 />
                 <ControlPanel 
@@ -72,6 +69,7 @@ describe("<App/> component should", () => {
 
     })
 
+
     test("restart timer to init learning time when user click End button", async () => {
 
         render(<App/>)
@@ -89,6 +87,7 @@ describe("<App/> component should", () => {
         expect(timer).toHaveTextContent("25:00");
     })
 
+
     test("end learning block when 'End' button is clicked", () => {
 
         render(<App/>)
@@ -98,6 +97,7 @@ describe("<App/> component should", () => {
         fireEvent.click(endBtn)
         expect(startPauseBtn).toHaveTextContent("Start")
     })
+    
     
     test("change break time to active session time on timer when 'End' button is clicked", () => {
         

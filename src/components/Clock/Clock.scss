@@ -1,8 +1,12 @@
 @use '../../variables.scss' as *;
 
 .clock {
+    position: relative;
     width: 30rem;
     aspect-ratio: 1;
-    border: 0.5rem solid $clr-greyed;
+    border: 1rem solid $clr-greyed;
     border-radius: 50%;
+    display: grid;
+    place-items: center;
+    
 }

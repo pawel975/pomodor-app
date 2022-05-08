@@ -1,8 +1,17 @@
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
+import RemainTimeBar from '../RemainTimeBar/RemainTimeBar';
 import Timer from '../Timer/Timer';
 import './Clock.scss';
 
-const Clock = ({learnTime, breakTime, setLearnTime, setBreakTime, isTimerRun, isLearningSessionActive}) => {
+const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalState,  setRemainBreakTime, isTimerRun, isLearnPhaseActive, initLearnTime, initBreakTime}) => {
+
+    const resetTimer = useCallback(() => {
+        setRemainBreakTime(initBreakTime)
+        setRemainLearnTime(initLearnTime)
+        setGlobalState(prevState => ({
+            isLearnPhaseActive: !prevState.isLearnPhaseActive,
+        }))
+    }, [initBreakTime, initLearnTime, setGlobalState, setRemainBreakTime, setRemainLearnTime])
 
     useEffect(() => {
         
@@ -10,20 +19,28 @@ const Clock = ({learnTime, breakTime, setLearnTime, setBreakTime, isTimerRun, is
 
             let countingTimeout;
 
-            if (isLearningSessionActive) {
+            if (isLearnPhaseActive) {
 
-                if (learnTime > 0) {
+                if (remainLearnTime > 0) {
         
                     countingTimeout = setTimeout(() => {
-                        setLearnTime(learnTime - 1)
+                        setRemainLearnTime(remainLearnTime - 1)
+                    }, 1000);
+                } else {
+                    countingTimeout = setTimeout(() => {
+                        resetTimer();
                     }, 1000);
                 }
 
             } else {
-                if (breakTime > 0) {
+                if (remainBreakTime > 0) {
         
                     countingTimeout = setTimeout(() => {
-                        setBreakTime(breakTime - 1)
+                        setRemainBreakTime(remainBreakTime - 1)
+                    }, 1000);
+                } else {
+                    countingTimeout = setTimeout(() => {
+                        resetTimer();
                     }, 1000);
                 }
             }
@@ -33,11 +50,18 @@ const Clock = ({learnTime, breakTime, setLearnTime, setBreakTime, isTimerRun, is
             }
         }
 
-    },[breakTime, isLearningSessionActive, isTimerRun, learnTime, setBreakTime, setLearnTime])
+    },[isLearnPhaseActive, isTimerRun, remainBreakTime, remainLearnTime, resetTimer, setRemainBreakTime, setRemainLearnTime])
 
     return (
         <div className="clock" data-testid="clock">
-            <Timer countDownTime={isLearningSessionActive ? learnTime : breakTime}/>
+            <RemainTimeBar 
+                initLearnTime={initLearnTime}
+                remainLearnTime={remainLearnTime}
+                initBreakTime={initBreakTime}
+                remainBreakTime={remainBreakTime}
+                isLearnPhaseActive={isLearnPhaseActive}
+            />
+            <Timer countDownTime={isLearnPhaseActive ? remainLearnTime : remainBreakTime}/>
         </div>
     )
 

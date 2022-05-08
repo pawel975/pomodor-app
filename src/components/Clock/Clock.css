@@ -1,7 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Concert+One&family=Roboto&display=swap");
 .clock {
-  width: 25rem;
+  position: relative;
+  width: 30rem;
   aspect-ratio: 1;
-  border: 0.5rem solid rgba(255, 255, 255, 0.1);
+  border: 1rem solid rgba(255, 255, 255, 0.1);
   border-radius: 50%;
+  display: grid;
+  place-items: center;
 }/*# sourceMappingURL=Clock.css.map */

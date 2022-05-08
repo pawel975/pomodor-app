@@ -16,6 +16,10 @@
 html {
   font-family: $ff-casual;
   color: $clr-light;
+
+  @media (max-width: 25rem) {
+    font-size: 8px;
+  }
 }
 
 /* Remove default margin */
