@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { act } from 'react-dom/test-utils';
 import { sleep } from '../../helpers';
 import App from '../App/App';
@@ -16,8 +16,6 @@ describe("<Clock/> component should", () => {
     render (
         <App>
             <Clock 
-                remainBreakTime={0}
-                initBreakTime={200}
                 isLearnPhaseActive={true}
                 isTimerRun={true}
             />
@@ -26,7 +24,7 @@ describe("<Clock/> component should", () => {
 
     const timeContainer = screen.getByTestId("time-container");
     await act(() => sleep(1000));
-    expect(timeContainer).toHaveTextContent(/^3:20$/i)
+    expect(timeContainer).toHaveTextContent(/^25:00$/i)
 })
 
 })

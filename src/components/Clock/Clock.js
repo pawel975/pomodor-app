@@ -6,11 +6,11 @@ import './Clock.scss';
 const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalState,  setRemainBreakTime, isTimerRun, isLearnPhaseActive, initLearnTime, initBreakTime}) => {
 
     const resetTimer = useCallback(() => {
-        setRemainBreakTime(initBreakTime)
-        setRemainLearnTime(initLearnTime)
+
         setGlobalState(prevState => ({
             isLearnPhaseActive: !prevState.isLearnPhaseActive,
         }))
+
     }, [initBreakTime, initLearnTime, setGlobalState, setRemainBreakTime, setRemainLearnTime])
 
     useEffect(() => {
@@ -26,10 +26,15 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
                     countingTimeout = setTimeout(() => {
                         setRemainLearnTime(remainLearnTime - 1)
                     }, 1000);
+
+                    console.log(remainLearnTime)
                 } else {
                     countingTimeout = setTimeout(() => {
                         resetTimer();
+                        setRemainLearnTime(initLearnTime)
                     }, 1000);
+                    console.log(remainLearnTime)
+
                 }
 
             } else {
@@ -41,6 +46,8 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
                 } else {
                     countingTimeout = setTimeout(() => {
                         resetTimer();
+                        setRemainBreakTime(initBreakTime)
+
                     }, 1000);
                 }
             }

@@ -41,7 +41,7 @@ const App = () => {
 
         setRemainLearnTime={setRemainLearnTime}
         setRemainBreakTime={setRemainBreakTime}
-        
+
         globalState={globalState}
         setGlobalState={setGlobalState}
 

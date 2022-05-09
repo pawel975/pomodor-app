@@ -8,11 +8,24 @@ const RemainTimeBar = ({initLearnTime, remainLearnTime, initBreakTime, remainBre
     const refreshRemainTime = useCallback(() => {
         
         if (isLearnPhaseActive) {
+
             const offset = 1458 - (1458 * (remainLearnTime / initLearnTime))
-            setStrokeOffset(offset)
+
+            if (offset > 0) {
+                setStrokeOffset(offset)
+            } else {
+                setStrokeOffset(1);
+            }
+
         } else {
+            
             const offset = 1458 - (1458 * (remainBreakTime / initBreakTime))
-            setStrokeOffset(offset)
+            
+            if (offset > 0) {
+                setStrokeOffset(offset)
+            } else {
+                setStrokeOffset(1);
+            }
         }
 
     },[initBreakTime, initLearnTime, isLearnPhaseActive, remainBreakTime, remainLearnTime])
@@ -31,7 +44,7 @@ const RemainTimeBar = ({initLearnTime, remainLearnTime, initBreakTime, remainBre
                     </linearGradient>
                 </defs>
                 <circle
-                    style={{strokeDashoffset: strokeOffset}} className='remain-time-bar__stroke' data-testid='remain-time-bar__stroke' cx="50%" cy="50%" r="14.5rem"  />
+                    style={{strokeDashoffset: strokeOffset > 0 ? strokeOffset : 1}} className='remain-time-bar__stroke' data-testid='remain-time-bar__stroke' cx="50%" cy="50%" r="14.5rem"  />
             </svg>
         </div>
     )
