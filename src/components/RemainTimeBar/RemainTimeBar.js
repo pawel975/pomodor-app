@@ -39,7 +39,7 @@ const RemainTimeBar = ({initLearnTime, remainLearnTime, initBreakTime, remainBre
             <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="30rem" height="30rem">
                 <defs>
                     <linearGradient id="GradientColor">
-                        <stop offset="0%" stopColor="#e91e63" />
+                        <stop offset="0%" stopColor="#ff52c2" />
                         <stop offset="100%" stopColor="#673ab7" />
                     </linearGradient>
                 </defs>

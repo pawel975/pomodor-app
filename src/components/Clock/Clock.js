@@ -8,8 +8,12 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
     const resetTimer = useCallback(() => {
 
         setGlobalState(prevState => ({
+            ...prevState,
             isLearnPhaseActive: !prevState.isLearnPhaseActive,
+            isTimerRun: false,
         }))
+        setRemainLearnTime(initLearnTime)
+        setRemainBreakTime(initBreakTime)
 
     }, [initBreakTime, initLearnTime, setGlobalState, setRemainBreakTime, setRemainLearnTime])
 
@@ -22,32 +26,25 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
             if (isLearnPhaseActive) {
 
                 if (remainLearnTime > 0) {
-        
                     countingTimeout = setTimeout(() => {
                         setRemainLearnTime(remainLearnTime - 1)
                     }, 1000);
-
-                    console.log(remainLearnTime)
                 } else {
                     countingTimeout = setTimeout(() => {
                         resetTimer();
-                        setRemainLearnTime(initLearnTime)
                     }, 1000);
-                    console.log(remainLearnTime)
 
                 }
 
             } else {
+                
                 if (remainBreakTime > 0) {
-        
                     countingTimeout = setTimeout(() => {
                         setRemainBreakTime(remainBreakTime - 1)
                     }, 1000);
                 } else {
                     countingTimeout = setTimeout(() => {
                         resetTimer();
-                        setRemainBreakTime(initBreakTime)
-
                     }, 1000);
                 }
             }
