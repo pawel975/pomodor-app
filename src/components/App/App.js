@@ -4,6 +4,7 @@ import ControlPanel from '../ControlPanel/ControlPanel';
 import Nav from '../Nav/Nav';
 import Modal from '../Modal/Modal';
 import './App.scss';
+import UserSettings from '../UserSettings/UserSettings';
 
 const App = () => {
 
@@ -27,7 +28,7 @@ const App = () => {
 
       {isModalOpen && 
         <Modal 
-          content={null}
+          content={<UserSettings/>}
           setIsModalOpen={setIsModalOpen}
         />
       }
