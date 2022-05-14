@@ -3,17 +3,22 @@
 
 .start-pause-btn {
     @include controlBtnStyles;
-    @include glowingText;
+    @include glowingText($clr-text);
     display: flex;
     align-items: center;
     justify-content: center;
     width: 7rem;
     aspect-ratio: 1;
     font-size: $fs-500;
+
+    &:hover {
+        @include glowingText($clr-text2);
+    }
     
     .start-pause-icon {
         padding: 0;
         font-size: $fs-800;
         margin: auto;
     }
+
 }

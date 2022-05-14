@@ -10,7 +10,7 @@
 
 html {
   font-family: "Roboto", sans-serif;
-  color: #f5f5f5;
+  color: #0f021a;
 }
 @media (max-width: 25rem) {
   html {
@@ -115,6 +115,11 @@ select {
   width: 7rem;
   aspect-ratio: 1;
   font-size: 1.75rem;
+}
+.start-pause-btn:hover {
+  color: #d5ca24;
+  text-shadow: 0 0 0.5rem #d5ca24;
+  font-family: "Concert One", cursive;
 }
 .start-pause-btn .start-pause-icon {
   padding: 0;

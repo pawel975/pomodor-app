@@ -27,6 +27,7 @@ const App = () => {
 
       {isModalOpen && 
         <Modal 
+          content={null}
           setIsModalOpen={setIsModalOpen}
         />
       }

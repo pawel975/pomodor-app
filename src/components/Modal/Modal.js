@@ -12,6 +12,10 @@ const Modal = ({setIsModalOpen, content}) => {
             <div onClick={handleModalClose} className='modal__background'></div>
             <div className='modal__container'>
                 <header>
+                    <div className='modal__choose-tab-list' role='tablist'>
+                        <button aria-pressed='true'>Settings</button>
+                        <button aria-pressed='false'>Statistics</button>
+                    </div>
                     <button onClick={handleModalClose} className='modal__close-btn'>
                         <span className='sr-only'>close modal</span>
                         <CloseIcon className='modal__close-btn-icon'/>

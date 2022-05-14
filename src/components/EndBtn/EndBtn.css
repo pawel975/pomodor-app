@@ -10,7 +10,7 @@
 
 html {
   font-family: "Roboto", sans-serif;
-  color: #f5f5f5;
+  color: #0f021a;
 }
 @media (max-width: 25rem) {
   html {
@@ -114,4 +114,9 @@ select {
   transition: 0.1s;
   pointer-events: none;
   transform: translateY(-1rem);
+}
+.end-btn:hover {
+  color: #d5ca24;
+  text-shadow: 0 0 0.5rem #d5ca24;
+  font-family: "Concert One", cursive;
 }/*# sourceMappingURL=EndBtn.css.map */

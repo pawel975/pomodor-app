@@ -16,10 +16,7 @@ describe("<App/> component should", () => {
         fireEvent.click(startPauseBtn);
         fireEvent.click(startPauseBtn);
         
-        await act(async () => {
-
-            return await new Promise(r => setTimeout(r, 1000));
-        })
+        await act(() => sleep(1000))
 
         const timer = screen.getByTestId("time-container");
         expect(timer).toHaveTextContent("25:00")

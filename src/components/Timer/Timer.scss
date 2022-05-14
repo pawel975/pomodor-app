@@ -9,7 +9,7 @@
     justify-content: center;
 
     &__time-container {
-        @include glowingText;
+        @include glowingText($clr-text);
         font-size: $fs-900;
     }
 }

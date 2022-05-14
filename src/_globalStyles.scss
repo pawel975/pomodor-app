@@ -15,7 +15,7 @@
 
 html {
   font-family: $ff-casual;
-  color: $clr-light;
+  color: $clr-primary-1;
 
   @media (max-width: 25rem) {
     font-size: 8px;
@@ -103,9 +103,9 @@ select {
   border-radius: 50%;
 }
 
-@mixin glowingText {
-  color: lighten($color: $clr-text, $amount: 0%);
-  text-shadow: 0 0 0.5rem lighten($color: $clr-text, $amount: 0%);
+@mixin glowingText($color) {
+  color: lighten($color: $color, $amount: 0%);
+  text-shadow: 0 0 0.5rem lighten($color: $color, $amount: 0%);
   font-family: $ff-heading;
 }
 

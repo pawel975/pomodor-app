@@ -3,10 +3,14 @@
 
 .end-btn {
     @include controlBtnStyles;
-    @include glowingText;
+    @include glowingText($clr-text);
     font-size: $fs-300;
     opacity: 0;
     transition: 0.1s;
     pointer-events: none;
-            transform: translateY(-1rem);
+    transform: translateY(-1rem);
+
+    &:hover {
+        @include glowingText($clr-text2);
+    }
 }

@@ -31,10 +31,28 @@
   gap: 1rem;
 }
 .modal .modal__container header {
-  padding-block: 0.25rem;
+  padding-block: 0.5rem;
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
   border-bottom: 1px solid rgb(174, 173, 173);
+}
+.modal .modal__container header .modal__choose-tab-list {
+  display: flex;
+  flex-grow: 1;
+  gap: 1rem;
+}
+.modal .modal__container header .modal__choose-tab-list button {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  transition: 0.2s;
+}
+.modal .modal__container header .modal__choose-tab-list button:hover {
+  box-shadow: inset 0rem -0.5rem 0rem -0.3rem #ff52c2;
+}
+.modal .modal__container header .modal__choose-tab-list button[aria-pressed=true] {
+  color: #eb0098;
 }
 .modal .modal__container header .modal__close-btn {
   cursor: pointer;
@@ -42,4 +60,10 @@
   border: none;
   font-size: 1.5rem;
   color: #0f021a;
+  transition: 0.5s;
+  line-height: 1rem;
+}
+.modal .modal__container header .modal__close-btn:hover {
+  color: #ff52c2;
+  transform: rotate(360deg);
 }/*# sourceMappingURL=Modal.css.map */

@@ -33,10 +33,33 @@
         gap: 1rem;        
 
         header {
-            padding-block: 0.25rem;
+            padding-block: 0.5rem;
             display: flex;
-            justify-content: flex-end;
+            align-items: center;
             border-bottom: 1px solid rgb(174, 173, 173);
+
+            .modal__choose-tab-list {
+                display: flex;
+                flex-grow: 1;
+                gap: 1rem;
+                
+                button {
+                    cursor: pointer;
+                    background: transparent;
+                    border: none;
+                    font-size: $fs-200;
+                    transition: 0.2s;
+
+                    &:hover {
+                        box-shadow: inset 0rem -0.5rem 0rem -0.3rem $clr-text;
+                    }
+
+                }
+                
+                button[aria-pressed=true] {
+                    color: darken($color: $clr-text, $amount: 20%);
+                }
+            }
 
             .modal__close-btn {
                 cursor: pointer;
@@ -44,6 +67,13 @@
                 border: none;
                 font-size: 1.5rem;
                 color: $clr-primary-1;
+                transition: 0.5s;
+                line-height: 1rem;
+
+                &:hover {
+                    color: $clr-text;
+                    transform: rotate(360deg);
+                }
             }
         }
     }
