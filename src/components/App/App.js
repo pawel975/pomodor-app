@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Clock from '../Clock/Clock';
 import ControlPanel from '../ControlPanel/ControlPanel';
 import Nav from '../Nav/Nav';
+import Modal from '../Modal/Modal';
 import './App.scss';
 
 const App = () => {
@@ -15,11 +16,20 @@ const App = () => {
   })
   const [remainLearnTime, setRemainLearnTime] = useState(globalState.initLearnTime);
   const [remainBreakTime, setRemainBreakTime] = useState(globalState.initBreakTime);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="app">
 
-      <Nav/>
+      <Nav 
+        setIsModalOpen={setIsModalOpen}
+      />
+
+      {isModalOpen && 
+        <Modal 
+          setIsModalOpen={setIsModalOpen}
+        />
+      }
 
       <Clock 
         remainLearnTime={remainLearnTime}

@@ -1,8 +1,30 @@
+@use '../../globalStyles.scss';
+@use '../../variables.scss' as *;
 
 nav {
-    outline: 2px solid red;
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 1rem;
+
+    .nav-option-btn {
+        cursor: pointer;
+        background: transparent;
+        border: none;
+        font-size: $fs-700;
+        color: $clr-greyed;
+        transition: 0.2s ease-in-out;
+
+        &:hover {
+            color: $clr-text;
+            filter: drop-shadow(0px 0px 20px rgba(255,255,255,0.5))
+        }
+        
+        .nav-option-icon {
+            font-size: $fs-700;
+        }
+    }
 }

@@ -3,7 +3,7 @@
   position: relative;
   width: 30rem;
   aspect-ratio: 1;
-  border: 1rem solid rgba(255, 255, 255, 0.1);
+  border: 1rem solid rgba(255, 255, 255, 0.1019607843);
   border-radius: 50%;
   display: grid;
   place-items: center;
