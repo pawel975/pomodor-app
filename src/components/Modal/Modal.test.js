@@ -30,4 +30,19 @@ describe("<Modal/> should", () => {
 
         expect(modal).not.toBeInTheDocument();
     })
+
+    test("lighten up choosed modal tab when clicked", () => {
+        render(<App/>)
+
+        const settingsBtn = screen.getByTestId("settings-nav-btn");
+        fireEvent.click(settingsBtn);
+
+        const settingsTab = screen.getByTestId("modal__settings-tab");
+        const statisticsTab = screen.getByTestId("modal__statistics-tab");
+
+        fireEvent.click(statisticsTab);
+
+        expect(settingsTab).toHaveAttribute("aria-pressed", "false")
+        expect(statisticsTab).toHaveAttribute("aria-pressed", "true")
+    })
 })

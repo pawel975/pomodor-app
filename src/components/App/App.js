@@ -21,23 +21,11 @@ const App = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeModalContentBtnId, setActiveModalContentBtnId] = useState("");
 
-  // const handleModalTabClick = (e) => {
-  //   const targetTab = e.target;
-  //   const targetTabParent = e.target.parentNode;
-  //   console.log(targetTabParent)
-  //   // [...targetTabParent].forEach(tab => {
-  //   //   tab.setAttibute("aria-pressed", false);
-  //   // });
-  //   targetTab.setAttibute("aria-pressed", true);
-  //   const tabId = targetTab.id
-  //   setActiveModalContentBtnId(tabId);
-  // }
-
   const getModalContent = (activeModalContentBtnId) => {
     switch(activeModalContentBtnId) {
-      case "settings-btn":
+      case "settings-nav-btn":
         return <UserSettings/>
-      case "statistics-btn":
+      case "statistics-nav-btn":
         return <UserStatistics/>
       default:
         break
@@ -57,6 +45,7 @@ const App = () => {
           content={getModalContent(activeModalContentBtnId)}
           setIsModalOpen={setIsModalOpen}
           activeModalContentBtnId={activeModalContentBtnId}
+          setActiveModalContentBtnId={setActiveModalContentBtnId}
         />
       }
 

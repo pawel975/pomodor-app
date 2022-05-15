@@ -1,10 +1,24 @@
 import './Modal.scss';
 import {IoMdClose as CloseIcon} from 'react-icons/io' 
 
-const Modal = ({setIsModalOpen, content, activeModalContentBtnId}) => {
+const Modal = ({setIsModalOpen, content, activeModalContentBtnId, setActiveModalContentBtnId}) => {
 
     const handleModalClose = () => {
         setIsModalOpen(false);
+    }
+
+    const handleChoosedTabLighten = (e) => {
+        console.log(e.target.id)
+        switch(e.target.id) {
+            case "modal__settings-tab":
+                setActiveModalContentBtnId("settings-nav-btn")
+                break
+            case "modal__statistics-tab":
+                setActiveModalContentBtnId('statistics-nav-btn')
+                break
+            default:
+                break
+        }
     }
 
     return (
@@ -14,18 +28,20 @@ const Modal = ({setIsModalOpen, content, activeModalContentBtnId}) => {
                 <header>
                     <div className='modal__choose-tab-list' role='tablist'>
 
-                        <button 
+                        <button
+                            onClick={handleChoosedTabLighten}
                             id="modal__settings-tab" 
                             data-testid="modal__settings-tab" 
-                            aria-pressed={activeModalContentBtnId === 'settings-btn' ? true : false}
+                            aria-pressed={activeModalContentBtnId === 'settings-nav-btn' ? true : false}
                         >
                             Settings
                         </button>
 
                         <button 
+                            onClick={handleChoosedTabLighten}
                             id="modal__statistics-tab" 
                             data-testid="modal__statistics-tab" 
-                            aria-pressed={activeModalContentBtnId === 'statistics-btn' ? true : false}
+                            aria-pressed={activeModalContentBtnId === 'statistics-nav-btn' ? true : false}
                         >
                             Statistics
                         </button>
