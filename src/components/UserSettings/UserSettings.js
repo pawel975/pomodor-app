@@ -1,11 +1,25 @@
+import UserSettingsParam from '../UserSettingsParam/UserSettingsParam';
 import './UserSettings.scss';
 
 const UserSettings = () => {
+
     return (
         <div className="user-settings" data-testid="user-settings">
             <form className='user-settings__form'>
-                <label htmlFor='learning-time'>Learning Time</label>
-                <input type="range" className='user-settings__slider'></input>
+                <UserSettingsParam 
+                    paramId={"learning-time"} 
+                    paramName={"Learning Time"}
+                    min={1}
+                    max={100}
+                    paramValue={50}
+                />
+                <UserSettingsParam 
+                    paramId={"learning-time"} 
+                    paramName={"Learning Time"}
+                    min={1}
+                    max={100}
+                    paramValue={50}
+                />
             </form>
         </div>
     )

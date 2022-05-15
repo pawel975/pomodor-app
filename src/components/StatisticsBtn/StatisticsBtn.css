@@ -101,27 +101,4 @@ svg, path {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   border: 0;
-}
-
-.end-btn {
-  cursor: pointer;
-  border: 0.3rem solid rgba(255, 255, 255, 0.1019607843);
-  background: transparent;
-  min-width: 4rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  color: #ff52c2;
-  text-shadow: 0 0 0.5rem #ff52c2;
-  font-family: "Concert One", cursive;
-  font-size: 1.15rem;
-  opacity: 0;
-  visibility: hidden;
-  transition: 0.1s;
-  pointer-events: none;
-  transform: translateY(-1rem);
-}
-.end-btn:hover, .end-btn:focus {
-  color: #d5ca24;
-  text-shadow: 0 0 0.5rem #d5ca24;
-  font-family: "Concert One", cursive;
-}/*# sourceMappingURL=EndBtn.css.map */
+}/*# sourceMappingURL=StatisticsBtn.css.map */

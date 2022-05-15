@@ -71,6 +71,10 @@ select {
   font: inherit;
 }
 
+svg, path {
+  pointer-events: none;
+}
+
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
@@ -109,13 +113,14 @@ select {
   color: #ff52c2;
   text-shadow: 0 0 0.5rem #ff52c2;
   font-family: "Concert One", cursive;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   opacity: 0;
+  visibility: hidden;
   transition: 0.1s;
   pointer-events: none;
   transform: translateY(-1rem);
 }
-.skip-btn:hover {
+.skip-btn:hover, .skip-btn:focus {
   color: #d5ca24;
   text-shadow: 0 0 0.5rem #d5ca24;
   font-family: "Concert One", cursive;

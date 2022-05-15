@@ -8,6 +8,7 @@
 .side-btn-visible {
   transition: 0.1s ease-in-out;
   pointer-events: inherit;
+  visibility: visible;
   opacity: 1;
   transform: translateY(0rem);
 }/*# sourceMappingURL=ControlPanel.css.map */
