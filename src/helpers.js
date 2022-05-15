@@ -10,7 +10,7 @@ export const sleep = async (time) => {
 }
 
 /**
- * Returns time formated to hh/mm/ss.
+ * Converts 1 digit long time part to have 0 prefix
  *
  * @param {number} timePart hours/minutes/seconds to add 0 before if part is only 1 digit long
  * @return {string} formated timepart
@@ -59,3 +59,23 @@ export const formatTime = (time) => {
 
      return formattedTime;
 }
+
+/**
+ * Converts time in minutes into - ? h ? min - format
+ * @param {number} minutes to convert
+ * @returns {string} converted time
+ */
+export const formatMinutesToHours = (minutes) => {
+
+    let result;
+
+    if (minutes >= 60) {
+        const hours = Math.floor(minutes / 60);
+        const minutesLeft = minutes - (hours * 60);
+        result = `${hours} h ${minutesLeft} min`; 
+    } else {
+        result = `${minutes} min`;
+    }
+
+    return result;
+}   

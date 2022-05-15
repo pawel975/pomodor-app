@@ -13,13 +13,6 @@ const UserSettings = () => {
                     max={100}
                     paramValue={50}
                 />
-                <UserSettingsParam 
-                    paramId={"learning-time"} 
-                    paramName={"Learning Time"}
-                    min={1}
-                    max={100}
-                    paramValue={50}
-                />
             </form>
         </div>
     )

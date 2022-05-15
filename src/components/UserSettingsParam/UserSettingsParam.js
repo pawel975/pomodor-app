@@ -1,4 +1,5 @@
 import {useState } from "react";
+import { formatMinutesToHours } from "../../helpers";
 import './UserSettingsParam.scss';
 
 const UserSettingsParam = ({paramId, paramName, min, max, paramValue}) => {
@@ -18,14 +19,20 @@ const UserSettingsParam = ({paramId, paramName, min, max, paramValue}) => {
             className='user-settings__param-container'
             data-testid="user-settings__param-container"    
         >
-            <label>{paramName}<span>25 min</span></label>
+            <label>{paramName}
+                <span 
+                    id={paramId} 
+                    data-testid={paramId}
+                >
+                    {formatMinutesToHours(currentParamValue)}
+                </span>
+            </label>
             <input 
                 type="range" 
                 style={{backgroundSize: calculateSliderBgPosition(currentParamValue)}}
                 min={min} 
                 max={max} 
                 value={Math.floor(currentParamValue)} 
-                id={paramId} 
                 className='user-settings__slider'
                 onChange={(e) => handleParamValueChange(e)}
             />
