@@ -8,7 +8,6 @@ const Modal = ({setIsModalOpen, content, activeModalContentBtnId, setActiveModal
     }
 
     const handleChoosedTabLighten = (e) => {
-        console.log(e.target.id)
         switch(e.target.id) {
             case "modal__settings-tab":
                 setActiveModalContentBtnId("settings-nav-btn")

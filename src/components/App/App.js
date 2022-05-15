@@ -18,8 +18,8 @@ const App = () => {
   })
   const [remainLearnTime, setRemainLearnTime] = useState(globalState.initLearnTime);
   const [remainBreakTime, setRemainBreakTime] = useState(globalState.initBreakTime);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeModalContentBtnId, setActiveModalContentBtnId] = useState("");
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getModalContent = (activeModalContentBtnId) => {
     switch(activeModalContentBtnId) {

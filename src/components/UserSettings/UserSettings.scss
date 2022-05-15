@@ -1,0 +1,80 @@
+@use '../../globalStyles.scss' as *;
+@use '../../variables.scss' as *;
+
+.user-settings {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    padding: 1rem;
+    font-size: $fs-100;
+    text-align: right;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    &__slider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 0.5rem;
+        opacity: 0.7;
+        border-radius: 1rem;
+        background: rgb(223, 223, 223);
+        background-image: linear-gradient($clr-text, $clr-text);
+        background-size: 50% 100%;
+        background-repeat: no-repeat;
+
+        &:hover,
+        &:focus {
+            opacity: 1;
+            background-image: linear-gradient($clr-text2, $clr-text2);
+
+            &::-webkit-slider-thumb {
+                background: $clr-text2;
+            }
+        }
+
+        // thumb
+        &::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 0.250rem hsl(0, 0%, 100%),
+                0 0 0 0.275rem hsl(0, 0%, 0%);
+            background: $clr-text;
+            cursor: pointer;  
+
+        }
+
+        &::-moz-range-thumb {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 0.250rem hsl(0, 0%, 100%),
+                0 0 0 0.275rem hsl(0, 0%, 0%);
+            background: $clr-text;
+            cursor: pointer;  
+
+        }
+
+        &::-ms-range-thumb {
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            box-shadow:
+                0 0 0 0.250rem hsl(0, 0%, 100%),
+                0 0 0 0.275rem hsl(0, 0%, 0%);
+            background: $clr-text;
+            cursor: pointer;  
+          }
+
+    }
+}

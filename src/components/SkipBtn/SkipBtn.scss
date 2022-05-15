@@ -6,11 +6,13 @@
     @include glowingText($clr-text);
     font-size: $fs-300;
     opacity: 0;
+    visibility: hidden;
     transition: 0.1s;
     pointer-events: none;
     transform: translateY(-1rem);
 
-    &:hover {
+    &:hover,
+    &:focus {
         @include glowingText($clr-text2);
     }
 }

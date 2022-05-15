@@ -11,7 +11,8 @@
     aspect-ratio: 1;
     font-size: $fs-500;
 
-    &:hover {
+    &:hover,
+    &:focus {
         @include glowingText($clr-text2);
     }
     
