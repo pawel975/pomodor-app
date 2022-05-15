@@ -5,6 +5,7 @@ import Nav from '../Nav/Nav';
 import Modal from '../Modal/Modal';
 import './App.scss';
 import UserSettings from '../UserSettings/UserSettings';
+import UserStatistics from '../UserStatistics/UserStatistics';
 
 const App = () => {
 
@@ -18,18 +19,44 @@ const App = () => {
   const [remainLearnTime, setRemainLearnTime] = useState(globalState.initLearnTime);
   const [remainBreakTime, setRemainBreakTime] = useState(globalState.initBreakTime);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeModalContentBtnId, setActiveModalContentBtnId] = useState("");
+
+  // const handleModalTabClick = (e) => {
+  //   const targetTab = e.target;
+  //   const targetTabParent = e.target.parentNode;
+  //   console.log(targetTabParent)
+  //   // [...targetTabParent].forEach(tab => {
+  //   //   tab.setAttibute("aria-pressed", false);
+  //   // });
+  //   targetTab.setAttibute("aria-pressed", true);
+  //   const tabId = targetTab.id
+  //   setActiveModalContentBtnId(tabId);
+  // }
+
+  const getModalContent = (activeModalContentBtnId) => {
+    switch(activeModalContentBtnId) {
+      case "settings-btn":
+        return <UserSettings/>
+      case "statistics-btn":
+        return <UserStatistics/>
+      default:
+        break
+    }
+  }
 
   return (
     <div className="app">
 
       <Nav 
         setIsModalOpen={setIsModalOpen}
+        setActiveModalContentBtnId={setActiveModalContentBtnId}
       />
 
       {isModalOpen && 
         <Modal 
-          content={<UserSettings/>}
+          content={getModalContent(activeModalContentBtnId)}
           setIsModalOpen={setIsModalOpen}
+          activeModalContentBtnId={activeModalContentBtnId}
         />
       }
 

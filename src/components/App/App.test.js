@@ -115,4 +115,19 @@ describe("<App/> component should", () => {
 
     })
 
+    test('open modal when settings button is clicked and view user settings content', () => {
+        render(<App/>)
+
+        const settingsBtn = screen.getByRole("button", {name: /settings/i});
+        fireEvent.click(settingsBtn);
+
+        const modal = screen.getByTestId('modal');
+        const settingsTab = screen.getByTestId("modal__settings-tab");
+        const userSettingsContent = screen.getByTestId("user-settings");
+
+        expect(modal).toBeVisible();
+        expect(settingsTab).toHaveAttribute("aria-pressed", "true");
+        expect(userSettingsContent).toBeInTheDocument();
+    })
+
 })

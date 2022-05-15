@@ -2,10 +2,11 @@ import SettingsBtn from '../SettingsBtn/SettingsBtn';
 import StatisticsBtn from '../StatisticsBtn/StatisticsBtn';
 import './Nav.scss';
 
-const Nav = ({setIsModalOpen}) => {
+const Nav = ({setIsModalOpen, setActiveModalContentBtnId}) => {
 
-    const handleModalOpen = () => {
+    const handleModalOpen = (e) => {
         setIsModalOpen(true);
+        setActiveModalContentBtnId(e.target.id)
     }
 
     return (
