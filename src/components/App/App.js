@@ -12,6 +12,9 @@ const App = () => {
   const [globalState, setGlobalState] = useState({
     initLearnTime: 1500,
     initBreakTime: 300,
+    initLongBreakTime: 900,
+    sessionspPerBlock: 4,
+    amountOfBlocks: 2,
     isLearnPhaseActive: true,
     isLearningBlockActive: false,
     isTimerRun: false,
@@ -24,7 +27,12 @@ const App = () => {
   const getModalContent = (activeModalContentBtnId) => {
     switch(activeModalContentBtnId) {
       case "settings-nav-btn":
-        return <UserSettings/>
+        return (
+          <UserSettings
+            globalState={globalState}
+            setGlobalState={setGlobalState}
+          />
+        )
       case "statistics-nav-btn":
         return <UserStatistics/>
       default:

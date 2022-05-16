@@ -1,5 +1,6 @@
 import {render, screen, fireEvent} from '@testing-library/react';
 import App from '../App/App';
+import UserSettings from './UserSettings';
 
 describe('<UserSettings/> should', () => {
     
@@ -15,6 +16,14 @@ describe('<UserSettings/> should', () => {
         fireEvent.click(settingsBtn);
         const userSettingsComponent = screen.queryByTestId("user-settings");
         expect(userSettingsComponent).toBeInTheDocument();
+    })
+
+    test("contain 5 user params to change", () => {
+        render(<App/>)
+        const userSettingsForm = screen.getByTestId("user-settings__form");
+        const userSettingsParams = screen.getAllByTestId("user-settings__param-container");
+        expect(userSettingsForm).toBeInTheDocument();
+        expect(userSettingsParams).toHaveLength(5);
     })
 
 });

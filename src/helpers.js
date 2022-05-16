@@ -79,3 +79,22 @@ export const formatMinutesToHours = (minutes) => {
 
     return result;
 }   
+
+/**
+ * Return time converted from seconds to minutes
+ * @param {number} seconds 
+ * @returns time converted to minutes
+ */
+export const formatSecondsToMinutes = (seconds) => {
+
+    let result;
+
+    if (seconds >= 60) {
+        const minutes = Math.floor(seconds / 60);
+        result = minutes
+    } else {
+        result = seconds;
+    }
+
+    return result;
+}   
