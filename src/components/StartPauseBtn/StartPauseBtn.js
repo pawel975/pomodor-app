@@ -2,7 +2,9 @@ import './StartPauseBtn.scss';
 import {BsFillPlayFill as PlayIcon} from 'react-icons/bs';
 import {BsFillPauseFill as PauseIcon} from 'react-icons/bs';
 
-const StartPauseBtn = ({isTimerRun, handleStartPauseBtnClick, isLearningBlockActive}) => {
+const StartPauseBtn = ({handleStartPauseBtnClick, globalState}) => {
+
+    const {isTimerRun, isLearningBlockActive} = globalState;
 
     let startPauseBtnIcon;
 

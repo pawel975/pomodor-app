@@ -3,7 +3,7 @@ import SkipBtn from '../SkipBtn/SkipBtn';
 import StartPauseBtn from '../StartPauseBtn/StartPauseBtn';
 import './ControlPanel.scss';
 
-const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemainBreakTime, isTimerRun, isLearningBlockActive}) => {
+const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemainBreakTime}) => {
     
     const handleSkipBtnClick = () => {
         setGlobalState(prevState => ({
@@ -17,7 +17,7 @@ const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemai
     const handleStartPauseBtnClick = () => {
         setGlobalState(prevState => ({
             ...prevState,
-            isTimerRun: !isTimerRun,
+            isTimerRun: !prevState.isTimerRun,
             isLearningBlockActive: true
         }));
     }
@@ -34,18 +34,15 @@ const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemai
     return (
         <div className="control-panel" data-testid='control-panel'>
             <SkipBtn 
-                isTimerRun={isTimerRun}
-                isLearningBlockActive={isLearningBlockActive}
+                globalState={globalState}
                 handleSkipBtnClick={handleSkipBtnClick}
             />
             <StartPauseBtn 
-                isTimerRun={isTimerRun}
-                isLearningBlockActive={isLearningBlockActive}
+                globalState={globalState}
                 handleStartPauseBtnClick={handleStartPauseBtnClick}
             />
             <EndBtn 
-                isTimerRun={isTimerRun}
-                isLearningBlockActive={isLearningBlockActive}
+                globalState={globalState}
                 handleEndBtnClick={handleEndBtnClick}
             />
         </div>

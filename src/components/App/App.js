@@ -13,8 +13,10 @@ const App = () => {
     initLearnTime: 1500,
     initBreakTime: 300,
     initLongBreakTime: 900,
-    sessionspPerBlock: 4,
-    amountOfBlocks: 2,
+    maxSession: 4,
+    maxBlock: 2,
+    currentBlock: 1,
+    currentSession: 1,
     isLearnPhaseActive: true,
     isLearningBlockActive: false,
     isTimerRun: false,
@@ -65,12 +67,8 @@ const App = () => {
         remainBreakTime={remainBreakTime}
         setRemainLearnTime={setRemainLearnTime}
         setRemainBreakTime={setRemainBreakTime}
-        initBreakTime={globalState.initBreakTime}
-        initLearnTime={globalState.initLearnTime}
         globalState={globalState}
         setGlobalState={setGlobalState}
-        isLearnPhaseActive={globalState.isLearnPhaseActive}
-        isTimerRun={globalState.isTimerRun}
       />
 
       <ControlPanel
@@ -78,8 +76,6 @@ const App = () => {
         setRemainBreakTime={setRemainBreakTime}
         globalState={globalState}
         setGlobalState={setGlobalState}
-        isTimerRun={globalState.isTimerRun}
-        isLearningBlockActive={globalState.isLearningBlockActive}
       />
 
     </div>

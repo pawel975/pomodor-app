@@ -13,7 +13,8 @@
 
     &:hover,
     &:focus {
-        @include glowingText($clr-text2);
+        color: $clr-text2;
+        filter: drop-shadow(0px 0px 20px rgba(255,255,255,0.5))
     }
     
     .start-pause-icon {

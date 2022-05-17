@@ -36,7 +36,7 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
         {
             paramId: "sessions-per-block",
             paramName: "Sessions Per Block",
-            paramValue: globalState.sessionspPerBlock,
+            paramValue: globalState.maxSession,
             min: 2,
             max: 6,
             type: 'none',
@@ -45,7 +45,7 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
         {
             paramId: "amount-of-blocks",
             paramName: "Amount Of Blocks",
-            paramValue: globalState.amountOfBlocks,
+            paramValue: globalState.maxBlock,
             min: 1,
             max: 4,
             type: 'none',
@@ -59,7 +59,13 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
         e.preventDefault();
         setRemainLearnTime(tempStateToSaveToGlobal.initLearnTime)
         setRemainBreakTime(tempStateToSaveToGlobal.initBreakTime)
-        setGlobalState(tempStateToSaveToGlobal);
+        setGlobalState(prevState => ({
+            ...prevState,
+            ...tempStateToSaveToGlobal,
+            isLearnPhaseActive: true,
+            isLearningBlockActive: false,
+            isTimerRun: false,
+        }));
         setIsModalOpen(false);
     }
 

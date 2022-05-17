@@ -1,6 +1,8 @@
 import './EndBtn.scss';
 
-const EndBtn = ({isTimerRun, isLearningBlockActive, handleEndBtnClick}) => {
+const EndBtn = ({handleEndBtnClick, globalState}) => {
+
+    const {isTimerRun, isLearningBlockActive} = globalState;
 
     let shouldEndBtnBeVisible;
 

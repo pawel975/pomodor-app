@@ -1,6 +1,8 @@
 import './SkipBtn.scss';
 
-const SkipBtn = ({isTimerRun, isLearningBlockActive, handleSkipBtnClick}) => {
+const SkipBtn = ({globalState, handleSkipBtnClick}) => {
+
+    const {isTimerRun, isLearningBlockActive} = globalState;
 
     let shouldSkipBtnBeVisible = false;
 
@@ -15,7 +17,7 @@ const SkipBtn = ({isTimerRun, isLearningBlockActive, handleSkipBtnClick}) => {
     return (
         <button className={`skip-btn 
             ${shouldSkipBtnBeVisible ? "side-btn-visible" : null}
-            `}
+        `}
             onClick={handleSkipBtnClick}
         >
             Skip

@@ -1,9 +1,12 @@
 import { useCallback, useEffect } from 'react';
 import RemainTimeBar from '../RemainTimeBar/RemainTimeBar';
+import SessionAndBlockCounter from '../SessionAndBlockCounter/SessionAndBlockCounter';
 import Timer from '../Timer/Timer';
 import './Clock.scss';
 
-const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalState,  setRemainBreakTime, isTimerRun, isLearnPhaseActive, initLearnTime, initBreakTime}) => {
+const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalState,  setRemainBreakTime, globalState}) => {
+
+    const {isTimerRun, isLearnPhaseActive, initBreakTime, initLearnTime} = globalState;
 
     const resetTimer = useCallback(() => {
 
@@ -59,13 +62,12 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
     return (
         <div className="clock" data-testid="clock">
             <RemainTimeBar 
-                initLearnTime={initLearnTime}
+                globalState={globalState}
                 remainLearnTime={remainLearnTime}
-                initBreakTime={initBreakTime}
                 remainBreakTime={remainBreakTime}
-                isLearnPhaseActive={isLearnPhaseActive}
             />
             <Timer countDownTime={isLearnPhaseActive ? remainLearnTime : remainBreakTime}/>
+            <SessionAndBlockCounter globalState={globalState}/>
         </div>
     )
 

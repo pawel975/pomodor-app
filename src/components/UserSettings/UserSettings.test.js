@@ -61,4 +61,28 @@ describe('<UserSettings/> should', () => {
         
     });
 
+    test('reset timer and all sessions & blocks when user settings are changed and accepted', () => {
+        render(<App/>)
+
+        const startPauseBtn = screen.getByTestId("start-pause-btn");
+        fireEvent.click(startPauseBtn);
+        fireEvent.click(startPauseBtn);
+
+        const skipBtn = screen.getByText(/^skip$/i);
+        fireEvent.click(skipBtn);
+
+        const settingsBtn = screen.getByTestId("settings-nav-btn");
+        fireEvent.click(settingsBtn);
+
+        const learningTimeSlider = screen.getByTestId("learning-time");
+        fireEvent.change(learningTimeSlider, {target: {value: "30"}});
+
+        const acceptChangesBtn = screen.getByTestId("user-settings__accept-changes");
+        fireEvent.click(acceptChangesBtn);
+
+        const timer = screen.getByRole("timer");
+
+        expect(timer).toHaveTextContent(/^30:00$/i);
+    });
+
 });

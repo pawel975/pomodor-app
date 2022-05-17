@@ -1,8 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 import './RemainTimeBar.scss';
 
-const RemainTimeBar = ({initLearnTime, remainLearnTime, initBreakTime, remainBreakTime, isLearnPhaseActive}) => {
+const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
  
+    const {initBreakTime, initLearnTime, isLearnPhaseActive} = globalState;
+
     const [strokeOffset, setStrokeOffset] = useState(1458)
 
     const refreshRemainTime = useCallback(() => {
