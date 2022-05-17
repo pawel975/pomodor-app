@@ -72,7 +72,13 @@ export const formatMinutesToHours = (minutes) => {
     if (minutes >= 60) {
         const hours = Math.floor(minutes / 60);
         const minutesLeft = minutes - (hours * 60);
-        result = `${hours} h ${minutesLeft} min`; 
+
+        if (minutesLeft === 0) {
+           result = `${hours} h`
+        } else {
+            result = `${hours} h ${minutesLeft} min`; 
+        }
+
     } else {
         result = `${minutes} min`;
     }
