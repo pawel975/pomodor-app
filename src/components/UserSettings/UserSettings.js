@@ -2,11 +2,7 @@ import { formatSecondsToMinutes } from '../../helpers';
 import UserSettingsParam from '../UserSettingsParam/UserSettingsParam';
 import './UserSettings.scss';
 
-const UserSettings = ({globalState, setGlobalState}) => {
-
-    console.log(globalState)
-
-    // const {initLearnTime, initBreakTime, initLongBreakTime, sessionspPerBlock, amountOfBlocks} = globalState;
+const UserSettings = ({globalState}) => {
 
     const userStateData = [
         {
@@ -16,34 +12,34 @@ const UserSettings = ({globalState, setGlobalState}) => {
             min: 10,
             max: 60,
         },
-        {
-            paramId: "break-time",
-            paramName: "Break Time",
-            paramValue: formatSecondsToMinutes(globalState.initBreakTime),
-            min: 2,
-            max: 30,
-        },
-        {
-            paramId: "long-break-time",
-            paramName: "Long Break Time",
-            paramValue: formatSecondsToMinutes(globalState.initLongBreakTime),
-            min: 5,
-            max: 60,
-        },
-        {
-            paramId: "sessions-per-block",
-            paramName: "Sessions Per Block",
-            paramValue: globalState.sessionspPerBlock,
-            min: 2,
-            max: 6,
-        },
-        {
-            paramId: "amount-of-blocks",
-            paramName: "Amount Of Blocks",
-            paramValue: globalState.amountOfBlocks,
-            min: 1,
-            max: 4,
-        },
+        // {
+        //     paramId: "break-time",
+        //     paramName: "Break Time",
+        //     paramValue: formatSecondsToMinutes(globalState.initBreakTime),
+        //     min: 2,
+        //     max: 30,
+        // },
+        // {
+        //     paramId: "long-break-time",
+        //     paramName: "Long Break Time",
+        //     paramValue: formatSecondsToMinutes(globalState.initLongBreakTime),
+        //     min: 5,
+        //     max: 60,
+        // },
+        // {
+        //     paramId: "sessions-per-block",
+        //     paramName: "Sessions Per Block",
+        //     paramValue: globalState.sessionspPerBlock,
+        //     min: 2,
+        //     max: 6,
+        // },
+        // {
+        //     paramId: "amount-of-blocks",
+        //     paramName: "Amount Of Blocks",
+        //     paramValue: globalState.amountOfBlocks,
+        //     min: 1,
+        //     max: 4,
+        // },
     ]
 
     const allUserSettingsParams = userStateData.map((param, index) => (

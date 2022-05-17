@@ -11,7 +11,11 @@ const UserSettingsParam = ({paramId, paramName, min, max, paramValue}) => {
     }
 
     const calculateSliderBgPosition = (currentParamValue) => {
-        return `${Math.floor((currentParamValue/max)*100)}% 100%`
+
+        const verticalBgPosition = Math.floor(((currentParamValue-min)/(max-min))*100);
+        const bgPostition = `${verticalBgPosition}% 100%`
+        
+        return bgPostition;
     }
 
     return (
