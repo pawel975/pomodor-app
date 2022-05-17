@@ -8,7 +8,8 @@ const Timer = ({countDownTime}) => {
     return (
         <div className="timer" role='timer'>
             <span className="timer__time-container" data-testid="time-container">
-                {formattedTime}</span>
+                {formattedTime}
+            </span>
         </div>
     )
 }

@@ -34,17 +34,20 @@ describe('<UserSettingsParam/> should', () => {
     test("change param value based on slider value", () => {
         
         const paramId = "learning-time"
-        
+        const spanId = "learning-time__formatted-value-container"
+         
         render(
             <UserSettingsParam
+                setTempStateToSaveToGlobal={jest.fn()}
                 paramId={paramId}
+                type="time"
             />
         )
 
         const sliderInput = screen.getByRole('slider');
         fireEvent.change(sliderInput, {target: {value: 85}})
 
-        const paramContainer = screen.getByTestId(paramId)
+        const paramContainer = screen.getByTestId(spanId)
         expect(paramContainer).toHaveTextContent("1 h 25 min")
     })
 

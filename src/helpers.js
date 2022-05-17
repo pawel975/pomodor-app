@@ -61,29 +61,34 @@ export const formatTime = (time) => {
 }
 
 /**
- * Converts time in minutes into - ? h ? min - format
- * @param {number} minutes to convert
- * @returns {string} converted time
+ * Converts value into (? h ? min) if it's time value or returns it without convertion if it doesn't 
+ * @param {number} value to convert
+ * @returns {string} converted value
  */
-export const formatMinutesToHours = (minutes) => {
+export const formatParam = (value, type="none") => {
 
-    let result;
+    let convertedValue;
 
-    if (minutes >= 60) {
-        const hours = Math.floor(minutes / 60);
-        const minutesLeft = minutes - (hours * 60);
+    if (type === "time") {
 
-        if (minutesLeft === 0) {
-           result = `${hours} h`
+        if (value >= 60) {
+            const hours = Math.floor(value / 60);
+            const minutesLeft = value - (hours * 60);
+    
+            if (minutesLeft === 0) {
+               convertedValue = `${hours} h`
+            } else {
+                convertedValue = `${hours} h ${minutesLeft} min`; 
+            }
+    
         } else {
-            result = `${hours} h ${minutesLeft} min`; 
+            convertedValue = `${value} min`;
         }
-
-    } else {
-        result = `${minutes} min`;
+    } else if (type === "none") {
+        convertedValue = value;
     }
 
-    return result;
+    return convertedValue;
 }   
 
 /**
@@ -93,14 +98,14 @@ export const formatMinutesToHours = (minutes) => {
  */
 export const formatSecondsToMinutes = (seconds) => {
 
-    let result;
+    let convertedValue;
 
     if (seconds >= 60) {
         const minutes = Math.floor(seconds / 60);
-        result = minutes
+        convertedValue = minutes
     } else {
-        result = seconds;
+        convertedValue = seconds;
     }
 
-    return result;
+    return convertedValue;
 }   

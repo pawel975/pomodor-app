@@ -31,6 +31,7 @@ const App = () => {
           <UserSettings
             globalState={globalState}
             setGlobalState={setGlobalState}
+            setIsModalOpen={setIsModalOpen}
           />
         )
       case "statistics-nav-btn":

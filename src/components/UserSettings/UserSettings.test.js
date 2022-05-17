@@ -19,10 +19,46 @@ describe('<UserSettings/> should', () => {
 
     test("contain 5 user params to change", () => {
         render(<App/>)
+
+        const settingsBtn = screen.getByTestId("settings-nav-btn");
+        fireEvent.click(settingsBtn);
+
         const userSettingsForm = screen.getByTestId("user-settings__form");
         const userSettingsParams = screen.getAllByTestId("user-settings__param-container");
         expect(userSettingsForm).toBeInTheDocument();
         expect(userSettingsParams).toHaveLength(5);
     })
+
+    test('close modal on "Accept changes" button click in "user settings" tab', () => {
+        render(<App/>)
+
+        const settingsBtn = screen.getByTestId("settings-nav-btn");
+        fireEvent.click(settingsBtn);
+
+        const acceptChangesBtn = screen.getByTestId("user-settings__accept-changes");
+        fireEvent.click(acceptChangesBtn);
+
+        const modal = screen.queryByTestId("modal");
+        expect(modal).not.toBeInTheDocument();
+        
+    });
+
+    test('update globalState on "Accept changes" button click if user settings are changed', () => {
+        render(<App/>)
+
+        const settingsBtn = screen.getByTestId("settings-nav-btn");
+        fireEvent.click(settingsBtn);
+
+        const learningTimeSlider = screen.getByTestId("learning-time");
+        fireEvent.change(learningTimeSlider, {target: {value: "30"}});
+
+        const acceptChangesBtn = screen.getByTestId("user-settings__accept-changes");
+        fireEvent.click(acceptChangesBtn);
+
+        const timer = screen.getByRole("timer");
+
+        expect(timer).toHaveTextContent(/^30:00$/i);
+        
+    });
 
 });

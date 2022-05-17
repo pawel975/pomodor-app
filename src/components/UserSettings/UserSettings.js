@@ -1,8 +1,9 @@
+import { useState } from 'react';
 import { formatSecondsToMinutes } from '../../helpers';
 import UserSettingsParam from '../UserSettingsParam/UserSettingsParam';
 import './UserSettings.scss';
 
-const UserSettings = ({globalState}) => {
+const UserSettings = ({globalState, setGlobalState, setIsModalOpen}) => {
 
     const userStateData = [
         {
@@ -10,7 +11,9 @@ const UserSettings = ({globalState}) => {
             paramName: "Learning Time",
             paramValue: formatSecondsToMinutes(globalState.initLearnTime),
             min: 10,
-            max: 60,
+            max: 120,
+            type: 'time',
+            globalStatePropName: 'initLearnTime'
         },
         {
             paramId: "break-time",
@@ -18,6 +21,8 @@ const UserSettings = ({globalState}) => {
             paramValue: formatSecondsToMinutes(globalState.initBreakTime),
             min: 2,
             max: 30,
+            type: 'time',
+            globalStatePropName: 'initBreakTime'
         },
         {
             paramId: "long-break-time",
@@ -25,6 +30,8 @@ const UserSettings = ({globalState}) => {
             paramValue: formatSecondsToMinutes(globalState.initLongBreakTime),
             min: 5,
             max: 60,
+            type: 'time',
+            globalStatePropName: 'initLongBreakTime'
         },
         {
             paramId: "sessions-per-block",
@@ -32,6 +39,8 @@ const UserSettings = ({globalState}) => {
             paramValue: globalState.sessionspPerBlock,
             min: 2,
             max: 6,
+            type: 'none',
+            globalStatePropName: 'sessionspPerBlock'
         },
         {
             paramId: "amount-of-blocks",
@@ -39,18 +48,35 @@ const UserSettings = ({globalState}) => {
             paramValue: globalState.amountOfBlocks,
             min: 1,
             max: 4,
+            type: 'none',
+            globalStatePropName: 'amountOfBlocks'
         },
     ]
 
+    const [tempStateToSaveToGlobal, setTempStateToSaveToGlobal] = useState(globalState);
+
+    const handleAcceptChanges = (e) => {
+        e.preventDefault();
+        console.log(tempStateToSaveToGlobal);
+        console.log(globalState)
+        setGlobalState(tempStateToSaveToGlobal);
+        setIsModalOpen(false);
+    }
+
     const allUserSettingsParams = userStateData.map((param, index) => (
         <UserSettingsParam
-        key={index} 
-        paramId={param.paramId} 
-        paramName={param.paramName}
-        paramValue={param.paramValue}
-        min={param.min}
-        max={param.max}
-    />
+            key={index} 
+            paramId={param.paramId} 
+            paramName={param.paramName}
+            paramValue={param.paramValue}
+            min={param.min}
+            max={param.max}
+            type={param.type}
+            setGlobalState={setGlobalState}
+            globalStatePropName={param.globalStatePropName}
+            tempStateToSaveToGlobal={tempStateToSaveToGlobal}
+            setTempStateToSaveToGlobal={setTempStateToSaveToGlobal}
+        />
     ))
 
     return (
@@ -60,6 +86,13 @@ const UserSettings = ({globalState}) => {
                 data-testid='user-settings__form'
             >
                 {allUserSettingsParams}
+                <input 
+                    type="submit" 
+                    value="Accept changes" 
+                    className='user-settings__accept-changes'
+                    data-testid='user-settings__accept-changes'
+                    onClick={(e) => handleAcceptChanges(e)}
+                />
             </form>
         </div>
     )

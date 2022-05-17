@@ -1,13 +1,20 @@
-import {useState } from "react";
-import { formatMinutesToHours } from "../../helpers";
+import {useRef, useState } from "react";
+import { formatParam } from "../../helpers";
 import './UserSettingsParam.scss';
 
-const UserSettingsParam = ({paramId, paramName, min, max, paramValue}) => {
+const UserSettingsParam = ({paramId, paramName, min, max, paramValue, type, globalStatePropName, setTempStateToSaveToGlobal}) => {
 
     const [currentParamValue, setCurrentParamValue] = useState(paramValue)
+    const sliderRef = useRef();
 
     const handleParamValueChange = (e) => {
         setCurrentParamValue(e.target.value)
+        const paramValueToSaveToState = sliderRef.current.value
+        setTempStateToSaveToGlobal(prevState => ({
+            ...prevState,
+            [globalStatePropName]: 
+                type === "time" ? paramValueToSaveToState * 60 : paramValueToSaveToState,
+        }))
     }
 
     const calculateSliderBgPosition = (currentParamValue) => {
@@ -24,14 +31,17 @@ const UserSettingsParam = ({paramId, paramName, min, max, paramValue}) => {
             data-testid="user-settings__param-container"    
         >
             <label>{paramName}
-                <span 
-                    id={paramId} 
-                    data-testid={paramId}
+                <span
+                    id={`${paramId}__formatted-value-container`}
+                    data-testid={`${paramId}__formatted-value-container`}
                 >
-                    {formatMinutesToHours(currentParamValue)}
+                    {formatParam(currentParamValue, type)}
                 </span>
             </label>
             <input 
+                ref={sliderRef}
+                id={paramId} 
+                data-testid={paramId}
                 type="range" 
                 style={{backgroundSize: calculateSliderBgPosition(currentParamValue)}}
                 min={min} 
