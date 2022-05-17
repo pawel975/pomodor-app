@@ -3,7 +3,7 @@ import { formatSecondsToMinutes } from '../../helpers';
 import UserSettingsParam from '../UserSettingsParam/UserSettingsParam';
 import './UserSettings.scss';
 
-const UserSettings = ({globalState, setGlobalState, setIsModalOpen}) => {
+const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLearnTime, setRemainBreakTime}) => {
 
     const userStateData = [
         {
@@ -57,8 +57,8 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen}) => {
 
     const handleAcceptChanges = (e) => {
         e.preventDefault();
-        console.log(tempStateToSaveToGlobal);
-        console.log(globalState)
+        setRemainLearnTime(tempStateToSaveToGlobal.initLearnTime)
+        setRemainBreakTime(tempStateToSaveToGlobal.initBreakTime)
         setGlobalState(tempStateToSaveToGlobal);
         setIsModalOpen(false);
     }

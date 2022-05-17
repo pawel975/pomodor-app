@@ -32,6 +32,8 @@ const App = () => {
             globalState={globalState}
             setGlobalState={setGlobalState}
             setIsModalOpen={setIsModalOpen}
+            setRemainLearnTime={setRemainLearnTime}
+            setRemainBreakTime={setRemainBreakTime}
           />
         )
       case "statistics-nav-btn":
