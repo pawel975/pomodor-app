@@ -10,8 +10,8 @@ import UserStatistics from '../UserStatistics/UserStatistics';
 const App = () => {
 
   const [globalState, setGlobalState] = useState({
-    initLearnTime: 1500,
-    initBreakTime: 300,
+    initLearnTime: 2,
+    initBreakTime: 1,
     initLongBreakTime: 900,
     maxSession: 4,
     maxBlock: 2,
