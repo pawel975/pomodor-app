@@ -10,8 +10,8 @@ import UserStatistics from '../UserStatistics/UserStatistics';
 const App = () => {
 
   const [globalState, setGlobalState] = useState({
-    initLearnTime: 2,
-    initBreakTime: 1,
+    initLearnTime: 1500,
+    initBreakTime: 300,
     initLongBreakTime: 900,
     maxSession: 4,
     maxBlock: 2,
@@ -72,6 +72,7 @@ const App = () => {
       />
 
       <ControlPanel
+        remainBreakTime={remainBreakTime}
         setRemainLearnTime={setRemainLearnTime}
         setRemainBreakTime={setRemainBreakTime}
         globalState={globalState}

@@ -1,4 +1,8 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
+import { useState } from 'react';
+import App from '../App/App';
+import Clock from '../Clock/Clock';
+import ControlPanel from '../ControlPanel/ControlPanel';
 import SkipBtn from './SkipBtn';
 
 describe('<Skip/> should', () => {
@@ -32,5 +36,21 @@ describe('<Skip/> should', () => {
         const skipBtnComponent = screen.getByText("Skip");
         expect(skipBtnComponent).toHaveClass("side-btn-visible");
     })
+
+    test('should increment active session when break is skipped', () => {
+
+        render(<App/>)
+        const startPauseBtn = screen.getByTestId("start-pause-btn");
+        const skipBtn = screen.getByText(/skip/i);
+
+        fireEvent.click(startPauseBtn);
+        fireEvent.click(startPauseBtn);
+        fireEvent.click(skipBtn);
+        fireEvent.click(skipBtn);
+
+        const currentSession = screen.getByTestId('current-session');
+        expect(currentSession).toHaveTextContent(/2/i);
+
+    });
 
 });

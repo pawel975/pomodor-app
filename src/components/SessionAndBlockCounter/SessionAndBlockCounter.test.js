@@ -1,5 +1,5 @@
 import {render, screen} from '@testing-library/react';
-import Clock from '../Clock/Clock';
+import { useState } from 'react';
 import SessionAndBlockCounter from './SessionAndBlockCounter';
 
 describe('<SessionAndBlockCounter/> should', () => {
@@ -10,13 +10,26 @@ describe('<SessionAndBlockCounter/> should', () => {
         expect(sessionAndBlockCounterComponent).toBeInTheDocument();
     });
 
-    test('update session counter when short break is over', () => {
-        render(<Clock 
-            remainBreakTime={0}
-            setGlobalState={jest.fn()}
-            // setRemainBreakTime={setRemainBreakTime}
-            globalState={{currentSession: 1, maxSession: 2}}
-        />)
+    test('update session counter when short break is over', async () => {
+
+        const MockApp = () => {
+
+            const [globalState, setGlobalState] = useState({
+                currentSession: 1,
+                maxSession: 2
+            })
+
+            return (
+                <SessionAndBlockCounter 
+                    setGlobalState={setGlobalState}
+                    remainBreakTime={0}
+                    globalState={globalState}
+                />
+            )
+        }
+
+        render(<MockApp/>)
+
         const currentSession = screen.getByTestId("current-session");
         expect(currentSession).toHaveTextContent(/2/);
     });

@@ -7,8 +7,8 @@ const SessionAndBlockCounter = ({globalState, setGlobalState, remainBreakTime}) 
 
     useEffect(() => {
        
-        if (remainBreakTime === 0) {
-
+        if (remainBreakTime < 1) {
+            
             if (currentSession < maxSession) {
 
                 setGlobalState(prevState => ({
@@ -39,7 +39,7 @@ const SessionAndBlockCounter = ({globalState, setGlobalState, remainBreakTime}) 
             }
         }
 
-    },[currentBlock, currentSession, maxBlock, maxSession, remainBreakTime, setGlobalState])
+    },[remainBreakTime])
 
     return (
         <div

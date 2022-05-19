@@ -1,4 +1,5 @@
-import {render, screen} from '@testing-library/react';
+import {render, screen, fireEvent} from '@testing-library/react';
+import App from '../App/App';
 import EndBtn from './EndBtn';
 
 describe('<EndBtn> should', () => {
@@ -32,4 +33,29 @@ describe('<EndBtn> should', () => {
         const endBtn = screen.getByRole("button", {name: "End"});
         expect(endBtn).toHaveClass("side-btn-visible");
     })
+
+    test('reset sessions and block progress when clicked', () => {
+        render(<App/>)
+
+        const endBtn = screen.getByText(/End/i);
+        const startPauseBtn = screen.getByTestId("start-pause-btn");
+        const skipBtn = screen.getByText(/skip/i);
+
+        fireEvent.click(startPauseBtn);
+        fireEvent.click(startPauseBtn);
+
+        fireEvent.click(skipBtn)
+        fireEvent.click(skipBtn)
+        fireEvent.click(skipBtn)
+        fireEvent.click(skipBtn)
+        
+        fireEvent.click(endBtn);
+
+        const currentSession = screen.getByTestId("current-session");
+        const currentBlock = screen.getByTestId("current-block");
+
+        expect(currentSession).toHaveTextContent(/1/i);
+        expect(currentBlock).toHaveTextContent(/1/i);
+        
+    });
 })
