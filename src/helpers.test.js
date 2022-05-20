@@ -1,4 +1,4 @@
-import { formatSecondsToMinutes } from './helpers';
+import { formatSecondsToMinutes, getFromLocalStorage, saveToLocalStorage } from './helpers';
 
 test('formatSecondsToMinutes() should convert seconds to minutes properly', () => {
 
@@ -9,3 +9,11 @@ test('formatSecondsToMinutes() should convert seconds to minutes properly', () =
     expect(result_2).toBe(4);
     
 });
+
+test('app should save data to local storage', () => {
+
+    const data = 4;
+    saveToLocalStorage("data", data);
+    const fetchedData = getFromLocalStorage("data");
+    expect(fetchedData).toBe(String(data));
+})

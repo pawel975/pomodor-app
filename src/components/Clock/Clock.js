@@ -68,7 +68,6 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
             />
             <Timer countDownTime={isLearnPhaseActive ? remainLearnTime : remainBreakTime}/>
             <SessionAndBlockCounter 
-                remainLearnTime={remainLearnTime}
                 remainBreakTime={remainBreakTime}
                 globalState={globalState}
                 setGlobalState={setGlobalState}

@@ -6,7 +6,7 @@ import './ControlPanel.scss';
 
 const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemainBreakTime}) => {
 
-    const {currentSession, maxSession, currentBlock, maxBlock, isLearnPhaseActive} = globalState;
+    const {currentSession, maxSession, currentBlock, maxBlock, isLearnPhaseActive, initLearnTime, initBreakTime} = globalState;
     
     const handleSkipBtnClick = () => {
 
@@ -17,7 +17,6 @@ const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemai
                 setGlobalState(prevState => ({
                     ...prevState,
                     currentSession: currentSession + 1,
-                    
                 }))
 
             } else {
@@ -47,8 +46,8 @@ const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemai
             isLearnPhaseActive: !prevState.isLearnPhaseActive,
         }))
 
-        setRemainLearnTime(globalState.initLearnTime)
-        setRemainBreakTime(globalState.initBreakTime)
+        setRemainLearnTime(initLearnTime)
+        setRemainBreakTime(initBreakTime)
     }
 
     const handleStartPauseBtnClick = () => {
@@ -67,7 +66,7 @@ const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemai
             currentBlock: 1,
             currentSession: 1,
         }))
-        setRemainLearnTime(globalState.initLearnTime);
+        setRemainLearnTime(initLearnTime);
     }
 
     return (

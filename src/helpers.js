@@ -109,3 +109,12 @@ export const formatSecondsToMinutes = (seconds) => {
 
     return convertedValue;
 }   
+
+export const saveToLocalStorage = (key, dataToSave) => {
+    localStorage.setItem(key, dataToSave)
+}
+
+export const getFromLocalStorage = (key) => {
+    const fetchedData = localStorage.getItem(key)
+    return fetchedData;
+}

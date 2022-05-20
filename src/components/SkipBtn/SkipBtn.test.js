@@ -1,8 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
-import { useState } from 'react';
 import App from '../App/App';
-import Clock from '../Clock/Clock';
-import ControlPanel from '../ControlPanel/ControlPanel';
 import SkipBtn from './SkipBtn';
 
 describe('<Skip/> should', () => {
@@ -37,7 +34,7 @@ describe('<Skip/> should', () => {
         expect(skipBtnComponent).toHaveClass("side-btn-visible");
     })
 
-    test('should increment active session when break is skipped', () => {
+    test('increment active session when break is skipped', () => {
 
         render(<App/>)
         const startPauseBtn = screen.getByTestId("start-pause-btn");
@@ -53,4 +50,23 @@ describe('<Skip/> should', () => {
 
     });
 
+    test("save current session and block to state properly when cliked", () => {
+        
+        render(<App/>)
+        
+        const startPauseBtn = screen.getByTestId("start-pause-btn");
+        const skipBtn = screen.getByText(/skip/i);
+        
+        fireEvent.click(startPauseBtn);
+        fireEvent.click(startPauseBtn);
+        fireEvent.click(skipBtn);        
+        fireEvent.click(skipBtn);
+
+        fireEvent.keyDown(window, {key: 'F5', code: 'F5', charCode: 116})
+
+        const currentSession = screen.getByTestId("current-session");
+        expect(currentSession).toHaveTextContent(/1/i);
+    })
+
 });
+

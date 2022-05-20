@@ -1,3 +1,4 @@
+import './UserStatistics.scss';
 
 const UserStatistics = () => {
     
