@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import App from '../App/App';
 import SkipBtn from './SkipBtn';
+import userEvent from '@testing-library/user-event';
+import { getFromLocalStorage } from '../../helpers';
 
 describe('<Skip/> should', () => {
     
@@ -49,24 +51,6 @@ describe('<Skip/> should', () => {
         expect(currentSession).toHaveTextContent(/2/i);
 
     });
-
-    test("save current session and block to state properly when cliked", () => {
-        
-        render(<App/>)
-        
-        const startPauseBtn = screen.getByTestId("start-pause-btn");
-        const skipBtn = screen.getByText(/skip/i);
-        
-        fireEvent.click(startPauseBtn);
-        fireEvent.click(startPauseBtn);
-        fireEvent.click(skipBtn);        
-        fireEvent.click(skipBtn);
-
-        fireEvent.keyDown(window, {key: 'F5', code: 'F5', charCode: 116})
-
-        const currentSession = screen.getByTestId("current-session");
-        expect(currentSession).toHaveTextContent(/1/i);
-    })
 
 });
 

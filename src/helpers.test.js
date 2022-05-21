@@ -10,10 +10,9 @@ test('formatSecondsToMinutes() should convert seconds to minutes properly', () =
     
 });
 
-test('app should save data to local storage', () => {
+test('app should save data to local storag in primitive type of value', () => {
 
-    const data = 4;
-    saveToLocalStorage("data", data);
+    saveToLocalStorage("data", 4);
     const fetchedData = getFromLocalStorage("data");
-    expect(fetchedData).toBe(String(data));
+    expect(fetchedData).toBe(4);
 })

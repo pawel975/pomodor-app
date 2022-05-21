@@ -40,7 +40,7 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
             min: 2,
             max: 6,
             type: 'none',
-            globalStatePropName: 'sessionspPerBlock'
+            globalStatePropName: 'maxSession'
         },
         {
             paramId: "amount-of-blocks",
@@ -49,7 +49,7 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
             min: 1,
             max: 4,
             type: 'none',
-            globalStatePropName: 'amountOfBlocks'
+            globalStatePropName: 'maxBlock'
         },
     ]
 

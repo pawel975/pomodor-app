@@ -8,7 +8,9 @@ const UserSettingsParam = ({paramId, paramName, min, max, paramValue, type, glob
     const sliderRef = useRef();
 
     const handleParamValueChange = (e) => {
-        setCurrentParamValue(e.target.value)
+        setCurrentParamValue(
+            isNaN(Number(e.target.value))? e.target.value : Number(e.target.value) 
+        )
         const paramValueToSaveToState = sliderRef.current.value
         setTempStateToSaveToGlobal(prevState => ({
             ...prevState,

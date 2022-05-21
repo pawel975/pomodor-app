@@ -1,4 +1,5 @@
 
+import { saveToLocalStorage } from '../../helpers';
 import EndBtn from '../EndBtn/EndBtn';
 import SkipBtn from '../SkipBtn/SkipBtn';
 import StartPauseBtn from '../StartPauseBtn/StartPauseBtn';
@@ -7,6 +8,8 @@ import './ControlPanel.scss';
 const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemainBreakTime}) => {
 
     const {currentSession, maxSession, currentBlock, maxBlock, isLearnPhaseActive, initLearnTime, initBreakTime} = globalState;
+
+    saveToLocalStorage("globalState", globalState);
     
     const handleSkipBtnClick = () => {
 
@@ -48,6 +51,7 @@ const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemai
 
         setRemainLearnTime(initLearnTime)
         setRemainBreakTime(initBreakTime)
+
     }
 
     const handleStartPauseBtnClick = () => {

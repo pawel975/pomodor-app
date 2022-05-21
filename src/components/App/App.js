@@ -6,10 +6,11 @@ import Modal from '../Modal/Modal';
 import './App.scss';
 import UserSettings from '../UserSettings/UserSettings';
 import UserStatistics from '../UserStatistics/UserStatistics';
+import { getFromLocalStorage, saveToLocalStorage } from '../../helpers';
 
 const App = () => {
 
-  const [globalState, setGlobalState] = useState({
+  const initGlobalState = {
     initLearnTime: 1500,
     initBreakTime: 300,
     initLongBreakTime: 900,
@@ -20,11 +21,31 @@ const App = () => {
     isLearnPhaseActive: true,
     isLearningBlockActive: false,
     isTimerRun: false,
-  })
-  const [remainLearnTime, setRemainLearnTime] = useState(globalState.initLearnTime);
-  const [remainBreakTime, setRemainBreakTime] = useState(globalState.initBreakTime);
+  }
+  
+  const [globalState, setGlobalState] = useState(
+    getFromLocalStorage("globalState") ? 
+    getFromLocalStorage('globalState') :
+    initGlobalState
+  )
+
+  const [remainLearnTime, setRemainLearnTime] = useState(
+    getFromLocalStorage("remainLearnTime") ?
+    getFromLocalStorage("remainLearnTime") :
+    globalState.initLearnTime
+  );
+
+  const [remainBreakTime, setRemainBreakTime] = useState(
+    getFromLocalStorage("remainBreakTime") ?
+    getFromLocalStorage("remainBreakTime") :
+    globalState.initBreakTime
+  );
+
   const [activeModalContentBtnId, setActiveModalContentBtnId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  saveToLocalStorage("remainLearnTime", remainLearnTime);
+  saveToLocalStorage("remainBreakTime", remainBreakTime);
 
   const getModalContent = (activeModalContentBtnId) => {
     switch(activeModalContentBtnId) {

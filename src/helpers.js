@@ -110,11 +110,27 @@ export const formatSecondsToMinutes = (seconds) => {
     return convertedValue;
 }   
 
+/**
+ * Saves data to local storage at particular key
+ * @param {String} key is name of key in localStorage 
+ * @param {String} dataToSave is data which we want to store at key
+ */
 export const saveToLocalStorage = (key, dataToSave) => {
-    localStorage.setItem(key, dataToSave)
+    localStorage.setItem(key, JSON.stringify(dataToSave))
 }
 
+/**
+ * 
+ * @param {String} key is name of key in localStorage 
+ * @returns data get from key position in localStorage
+ */
 export const getFromLocalStorage = (key) => {
-    const fetchedData = localStorage.getItem(key)
+    
+    let fetchedData;
+
+    if (localStorage.getItem(key)) {
+        fetchedData = JSON.parse(localStorage.getItem(key));
+    }
+    
     return fetchedData;
 }
