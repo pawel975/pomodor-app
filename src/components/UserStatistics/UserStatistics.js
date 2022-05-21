@@ -2,9 +2,12 @@ import UserStatisticsChart from '../UserStatisticsChart/UserStatisticsChart';
 import './UserStatistics.scss';
 
 const UserStatistics = () => {
-    
+
     return (
-        <div className="user-statistics" data-testid="user-statistics">
+        <div 
+            className="user-statistics" 
+            data-testid="user-statistics"
+        >
             <UserStatisticsChart/>
         </div>
     )
