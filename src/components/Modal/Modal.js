@@ -15,6 +15,9 @@ const Modal = ({setIsModalOpen, content, activeModalContentBtnId, setActiveModal
             case "modal__statistics-tab":
                 setActiveModalContentBtnId('statistics-nav-btn')
                 break
+            case "modal__rules-info-tab":
+                setActiveModalContentBtnId('rules-info-nav-btn')
+                break
             default:
                 break
         }
@@ -43,6 +46,15 @@ const Modal = ({setIsModalOpen, content, activeModalContentBtnId, setActiveModal
                             aria-pressed={activeModalContentBtnId === 'statistics-nav-btn' ? true : false}
                         >
                             Statistics
+                        </button>
+
+                        <button 
+                            onClick={handleChoosedTabLighten}
+                            id="modal__rules-info-tab" 
+                            data-testid="modal__rules-info-tab" 
+                            aria-pressed={activeModalContentBtnId === 'rules-info-nav-btn' ? true : false}
+                        >
+                            Rules Info
                         </button>
 
                     </div>

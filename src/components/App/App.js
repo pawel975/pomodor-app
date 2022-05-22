@@ -6,9 +6,42 @@ import Modal from '../Modal/Modal';
 import './App.scss';
 import UserSettings from '../UserSettings/UserSettings';
 import UserStatistics from '../UserStatistics/UserStatistics';
-import { getFromLocalStorage, saveToLocalStorage } from '../../helpers';
+import { getFromLocalStorage, getLastWeek, saveToLocalStorage } from '../../helpers';
+import RulesInfoSection from '../RulesInfoSection/RulesInfoSection';
 
 const App = () => {
+
+  const lastWeekDates = getLastWeek();
+
+  if (!getFromLocalStorage("statistics")) {
+      const lastWeekRecords = [];
+
+      lastWeekDates.forEach(dayDate => {
+          lastWeekRecords.push({
+              date: dayDate,
+              minutesLearned: 0
+          })
+      })
+
+      saveToLocalStorage("statistics", lastWeekRecords);
+  } else {
+
+      const lastWeekRecords = getFromLocalStorage("statistics");
+      const filteredRecords = [];
+
+      lastWeekDates.forEach(day => {
+
+          const matchedRecordDay = lastWeekRecords.filter(record => record.date === day)
+
+          if (matchedRecordDay[0]) {
+              filteredRecords.push(matchedRecordDay[0])
+          } else {
+              filteredRecords.push({date: day, minutesLearned: 0})
+          }
+      })
+
+      saveToLocalStorage("statistics", filteredRecords);
+  }
 
   const initGlobalState = {
     initLearnTime: 1500,
@@ -28,6 +61,8 @@ const App = () => {
     getFromLocalStorage('globalState') :
     initGlobalState
   )
+
+  const [statistics, setStatistics] = useState(getFromLocalStorage("statistics"));
 
   const [remainLearnTime, setRemainLearnTime] = useState(
     getFromLocalStorage("remainLearnTime") ?
@@ -61,6 +96,8 @@ const App = () => {
         )
       case "statistics-nav-btn":
         return <UserStatistics/>
+      case "rules-info-nav-btn":
+        return <RulesInfoSection/>
       default:
         break
     }
@@ -84,6 +121,8 @@ const App = () => {
       }
 
       <Clock 
+        statistics={statistics}
+        setStatistics={setStatistics}
         remainLearnTime={remainLearnTime}
         remainBreakTime={remainBreakTime}
         setRemainLearnTime={setRemainLearnTime}

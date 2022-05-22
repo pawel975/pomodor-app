@@ -135,14 +135,19 @@ export const getFromLocalStorage = (key) => {
     return fetchedData;
 }
 
+/**
+ * 
+ * @param {number} startInTimeStamp is timestamp of starting day of generated week, if there is no value passed it gets current day as a starting point 
+ * @returns array of last 7 days including today in dd/mm format
+ */
 export const getLastWeek = (startInTimeStamp) => {
     const lastWeek = []
     const today = startInTimeStamp ? startInTimeStamp : new Date().getTime();
 
     for (let i = 0; i < 7; i++) {
         const date = new Date(today - (i * 24*60*60*1000))
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
+        const day = date.getDate() < 10 ? `0${date.getDate()}` : date.getDate();
+        const month = (date.getMonth() + 1) < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
         const formattedDate = `${day}.${month}`;
         lastWeek.push(formattedDate)
     }

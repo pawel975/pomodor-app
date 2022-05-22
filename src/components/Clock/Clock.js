@@ -1,10 +1,11 @@
 import { useCallback, useEffect } from 'react';
+import { getFromLocalStorage, saveToLocalStorage } from '../../helpers';
 import RemainTimeBar from '../RemainTimeBar/RemainTimeBar';
 import SessionAndBlockCounter from '../SessionAndBlockCounter/SessionAndBlockCounter';
 import Timer from '../Timer/Timer';
 import './Clock.scss';
 
-const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalState,  setRemainBreakTime, globalState}) => {
+const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalState,  setRemainBreakTime, globalState, statistics, setStatistics}) => {
 
     const {isTimerRun, isLearnPhaseActive, initBreakTime, initLearnTime} = globalState;
 
@@ -20,6 +21,12 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
 
     }, [initBreakTime, initLearnTime, setGlobalState, setRemainBreakTime, setRemainLearnTime])
 
+    const updatedStatistics = (statistics) => {
+        const statisticsAfter = statistics;
+        statisticsAfter[0].minutesLearned += 1;
+        return statisticsAfter
+    }
+
     useEffect(() => {
         
         if (isTimerRun) {
@@ -31,6 +38,8 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
                 if (remainLearnTime > 0) {
                     countingTimeout = setTimeout(() => {
                         setRemainLearnTime(remainLearnTime - 1)
+                        saveToLocalStorage("statistics", updatedStatistics(statistics));
+                        setStatistics(getFromLocalStorage("statistics"));
                     }, 1000);
                 } else {
                     countingTimeout = setTimeout(() => {

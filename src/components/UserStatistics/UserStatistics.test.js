@@ -1,11 +1,17 @@
 import {render, screen} from '@testing-library/react';
 import { getFromLocalStorage, getLastWeek, saveToLocalStorage } from '../../helpers';
-import UserStatistics from './UserStatistics';
+import App from '../App/App';
+import userEvent from '@testing-library/user-event';
 
 describe('<UserStatistics/> should', () => {
     
-    test('be rendered properly', () => {
-        render(<UserStatistics/>)
+    test('be rendered properly', async () => {
+        render(<App/>)
+        
+        const user = userEvent.setup();
+        const statisticsBtn = screen.getByTestId("statistics-nav-btn");
+        await user.click(statisticsBtn);
+        
         const userStatisticsComponent = screen.getByTestId("user-statistics")
         expect(userStatisticsComponent).toBeInTheDocument();
     });
@@ -13,35 +19,28 @@ describe('<UserStatistics/> should', () => {
     describe("create last 7 days learning time records to localStorage if it's empty and", () => {
        
         test('records amount should be 7', () => {
-            render(<UserStatistics/>)
+            render(<App/>)
             const statisticsFromState = getFromLocalStorage("statistics");
             expect(statisticsFromState).toHaveLength(7);
         });
         
         test("each record should have proper format", () => {
-            const date = new Date();
-            const day = date.getDate();
-            const month = date.getMonth() + 1;
-            const formattedDate = `${day}.${month}`
+            const firstRecordOfWeek = getLastWeek(new Date().getTime())[0];
 
-            render(<UserStatistics/>)
+            render(<App/>)
             const statisticsFromStateFirstRecord = getFromLocalStorage('statistics')[0];
             expect(statisticsFromStateFirstRecord).toStrictEqual(
-                {date: formattedDate, minutesLearned: 0}
+                {date: firstRecordOfWeek, minutesLearned: 0}
             )
         })
          
         test("last day should be 7 days back", () => {
-            const today = new Date().getTime()
-            const firstRecordOfWeek = new Date(today - 6*24*60*60*1000);
-            const day = firstRecordOfWeek.getDate();
-            const month = firstRecordOfWeek.getMonth() + 1;
-            const formattedDate = `${day}.${month}`
+            const firstRecordOfWeek = getLastWeek(new Date().getTime())[6]
 
-            render(<UserStatistics/>)
+            render(<App/>)
             const statisticsFromStateFirstRecord = getFromLocalStorage('statistics')[6];
             expect(statisticsFromStateFirstRecord).toStrictEqual(
-                {date: formattedDate, minutesLearned: 0}
+                {date: firstRecordOfWeek, minutesLearned: 0}
             )
         })
     })
@@ -58,16 +57,12 @@ describe('<UserStatistics/> should', () => {
             })
             saveToLocalStorage("statistics", obsoloteWeekRecords)
 
-            render(<UserStatistics/>)
-            const today = new Date().getTime()
-            const firstRecordOfWeek = new Date(today - 6*24*60*60*1000);
-            const day = firstRecordOfWeek.getDate();
-            const month = firstRecordOfWeek.getMonth() + 1;
-            const formattedDate = `${day}.${month}`
+            render(<App/>)
+            const firstRecordOfWeek = getLastWeek(new Date().getTime())[6];
 
             const statisticsFromStateFirstRecord = getFromLocalStorage('statistics')[6];
             expect(statisticsFromStateFirstRecord).toStrictEqual(
-                {date: formattedDate, minutesLearned: 0}
+                {date: firstRecordOfWeek, minutesLearned: 0}
             )
         });
 
