@@ -9,6 +9,19 @@ import UserStatistics from '../UserStatistics/UserStatistics';
 import { getFromLocalStorage, getLastWeek, saveToLocalStorage } from '../../helpers';
 import RulesInfoSection from '../RulesInfoSection/RulesInfoSection';
 
+export const initGlobalState = {
+  initLearnTime: 1500,
+  initBreakTime: 300,
+  initLongBreakTime: 900,
+  maxSession: 4,
+  maxBlock: 2,
+  currentBlock: 1,
+  currentSession: 1,
+  isLearnPhaseActive: true,
+  isLearningBlockActive: false,
+  isTimerRun: false,
+}
+
 const App = () => {
 
   const lastWeekDates = getLastWeek();
@@ -41,19 +54,6 @@ const App = () => {
       })
 
       saveToLocalStorage("statistics", filteredRecords);
-  }
-
-  const initGlobalState = {
-    initLearnTime: 1500,
-    initBreakTime: 300,
-    initLongBreakTime: 900,
-    maxSession: 4,
-    maxBlock: 2,
-    currentBlock: 1,
-    currentSession: 1,
-    isLearnPhaseActive: true,
-    isLearningBlockActive: false,
-    isTimerRun: false,
   }
   
   const [globalState, setGlobalState] = useState(

@@ -118,7 +118,13 @@ svg, path {
   flex-direction: column;
   gap: 1rem;
 }
-.user-settings__form .user-settings__accept-changes {
+.user-settings__form .submit-buttons-container {
+  align-self: flex-end;
+  display: flex;
+  gap: 1rem;
+}
+.user-settings__form .submit-buttons-container .user-settings__accept-changes,
+.user-settings__form .submit-buttons-container .user-settings__reset-settings {
   margin-top: 1rem;
   border: none;
   background: #ff52c2;
@@ -129,7 +135,8 @@ svg, path {
   font-size: 0.875rem;
   margin-left: auto;
 }
-.user-settings__form .user-settings__accept-changes:hover {
+.user-settings__form .submit-buttons-container .user-settings__accept-changes:hover,
+.user-settings__form .submit-buttons-container .user-settings__reset-settings:hover {
   background: #d5ca24;
   cursor: pointer;
 }

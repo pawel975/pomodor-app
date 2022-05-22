@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { formatSecondsToMinutes } from '../../helpers';
+import { initGlobalState } from '../App/App';
 import UserSettingsParam from '../UserSettingsParam/UserSettingsParam';
 import './UserSettings.scss';
 
@@ -69,6 +70,13 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
         setIsModalOpen(false);
     }
 
+    const handleResetSettings = (e) => {
+        e.preventDefault();
+        setRemainLearnTime(tempStateToSaveToGlobal.initLearnTime)
+        setRemainBreakTime(tempStateToSaveToGlobal.initBreakTime)
+        setGlobalState(initGlobalState);
+    }
+
     const allUserSettingsParams = userStateData.map((param, index) => (
         <UserSettingsParam
             key={index} 
@@ -92,13 +100,24 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
                 data-testid='user-settings__form'
             >
                 {allUserSettingsParams}
-                <input 
-                    type="submit" 
-                    value="Accept changes" 
-                    className='user-settings__accept-changes'
-                    data-testid='user-settings__accept-changes'
-                    onClick={(e) => handleAcceptChanges(e)}
-                />
+                
+                <div className='submit-buttons-container'>
+                    <input 
+                        type="submit" 
+                        value="Reset Settings" 
+                        className='user-settings__reset-settings'
+                        data-testid='user-settings__reset-settings'
+                        onClick={(e) => handleResetSettings(e)}
+                    />
+                    <input 
+                        type="submit" 
+                        value="Accept changes" 
+                        className='user-settings__accept-changes'
+                        data-testid='user-settings__accept-changes'
+                        onClick={(e) => handleAcceptChanges(e)}
+                    />
+                </div>
+
             </form>
         </div>
     )

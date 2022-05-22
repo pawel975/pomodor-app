@@ -16,23 +16,31 @@
         flex-direction: column;
         gap: 1rem;
 
-        .user-settings__accept-changes {
-            margin-top: 1rem;
-            border: none;
-            background: $clr-text;
-            border-radius: 0.5rem;
-            padding: 0.5rem;
-            color: white;
-            font-weight: bold;
-            font-size: $fs-200;
-            margin-left: auto;
+        .submit-buttons-container {
 
-            &:hover {
-                background: $clr-text2;
-                cursor: pointer;
+            align-self: flex-end;
+            display: flex;
+            gap: 1rem;
+
+            .user-settings__accept-changes,
+            .user-settings__reset-settings {
+                margin-top: 1rem;
+                border: none;
+                background: $clr-text;
+                border-radius: 0.5rem;
+                padding: 0.5rem;
+                color: white;
+                font-weight: bold;
+                font-size: $fs-200;
+                margin-left: auto;
+    
+                &:hover {
+                    background: $clr-text2;
+                    cursor: pointer;
+                }
             }
         }
-        
+
     }
     
     &__slider {

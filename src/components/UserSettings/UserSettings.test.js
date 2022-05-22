@@ -85,4 +85,22 @@ describe('<UserSettings/> should', () => {
         expect(timer).toHaveTextContent(/^30:00$/i);
     });
 
+    test('reset globalState on "reset settings" button click', () => {
+        render(<App/>)
+
+        const settingsBtn = screen.getByTestId("settings-nav-btn");
+        fireEvent.click(settingsBtn);
+
+        const learningTimeSlider = screen.getByTestId("learning-time");
+        fireEvent.change(learningTimeSlider, {target: {value: "30"}});
+
+        const resetSettingsBtn = screen.getByTestId("user-settings__reset-settings");
+        fireEvent.click(resetSettingsBtn);
+
+        const timer = screen.getByRole("timer");
+
+        expect(timer).toHaveTextContent(/^25:00$/i);
+        
+    });
+
 });
