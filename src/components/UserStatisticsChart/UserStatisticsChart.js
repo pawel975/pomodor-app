@@ -5,14 +5,7 @@ import './UserStatisticsChart.scss';
 
 const UserStatisticsChart = () => {
     
-    ChartJS.register(
-      CategoryScale,
-      LinearScale,
-      BarElement,
-      Title,
-      Tooltip,
-      Legend
-    );
+    ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
     
     const options = {
       responsive: true,

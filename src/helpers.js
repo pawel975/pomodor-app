@@ -134,3 +134,18 @@ export const getFromLocalStorage = (key) => {
     
     return fetchedData;
 }
+
+export const getLastWeek = (startInTimeStamp) => {
+    const lastWeek = []
+    const today = startInTimeStamp ? startInTimeStamp : new Date().getTime();
+
+    for (let i = 0; i < 7; i++) {
+        const date = new Date(today - (i * 24*60*60*1000))
+        const day = date.getDate();
+        const month = date.getMonth() + 1;
+        const formattedDate = `${day}.${month}`;
+        lastWeek.push(formattedDate)
+    }
+
+    return lastWeek;
+}

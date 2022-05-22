@@ -1,4 +1,4 @@
-import { formatSecondsToMinutes, getFromLocalStorage, saveToLocalStorage } from './helpers';
+import { formatSecondsToMinutes, getFromLocalStorage, getLastWeek, saveToLocalStorage } from './helpers';
 
 test('formatSecondsToMinutes() should convert seconds to minutes properly', () => {
 
@@ -15,4 +15,9 @@ test('app should save data to local storag in primitive type of value', () => {
     saveToLocalStorage("data", 4);
     const fetchedData = getFromLocalStorage("data");
     expect(fetchedData).toBe(4);
+})
+
+test("getLastWeek() should return array of last 7 days in dd/mm format", ()=> {
+    const lastWeek = getLastWeek();
+    expect(lastWeek).toHaveLength(7);
 })
