@@ -15,7 +15,7 @@ const UserSettingsParam = ({paramId, paramName, min, max, paramValue, type, glob
         setTempStateToSaveToGlobal(prevState => ({
             ...prevState,
             [globalStatePropName]: 
-                type === "time" ? paramValueToSaveToState * 60 : paramValueToSaveToState,
+                type === "time" ? paramValueToSaveToState * 60 : paramValueToSaveToState, // convert from seconds to minutes if value is time
         }))
     }
 

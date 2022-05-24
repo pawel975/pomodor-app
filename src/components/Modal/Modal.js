@@ -18,6 +18,9 @@ const Modal = ({setIsModalOpen, content, activeModalContentBtnId, setActiveModal
             case "modal__rules-info-tab":
                 setActiveModalContentBtnId('rules-info-nav-btn')
                 break
+            case "modal__appearance-section-tab":
+                setActiveModalContentBtnId('appearance-section-nav-btn')
+                break
             default:
                 break
         }
@@ -55,6 +58,15 @@ const Modal = ({setIsModalOpen, content, activeModalContentBtnId, setActiveModal
                             aria-pressed={activeModalContentBtnId === 'rules-info-nav-btn' ? true : false}
                         >
                             Rules Info
+                        </button>
+
+                        <button 
+                            onClick={handleChoosedTabLighten}
+                            id="modal__appearance-section-tab" 
+                            data-testid="modal__appearance-section-tab" 
+                            aria-pressed={activeModalContentBtnId === 'appearance-section-nav-btn' ? true : false}
+                        >
+                            Appearance
                         </button>
 
                     </div>

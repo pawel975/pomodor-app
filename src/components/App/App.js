@@ -8,6 +8,7 @@ import UserSettings from '../UserSettings/UserSettings';
 import UserStatistics from '../UserStatistics/UserStatistics';
 import { getFromLocalStorage, getLastWeek, saveToLocalStorage } from '../../helpers';
 import RulesInfoSection from '../RulesInfoSection/RulesInfoSection';
+import AppearanceSection from '../AppearanceSection/AppearanceSection';
 
 export const initGlobalState = {
   initLearnTime: 1500,
@@ -26,6 +27,7 @@ const App = () => {
 
   const lastWeekDates = getLastWeek();
 
+  // Check if local storage is empty to create record structure, and to update structure if it's not.
   if (!getFromLocalStorage("statistics")) {
       const lastWeekRecords = [];
 
@@ -98,6 +100,8 @@ const App = () => {
         return <UserStatistics/>
       case "rules-info-nav-btn":
         return <RulesInfoSection/>
+      case "appearance-section-nav-btn":
+        return <AppearanceSection/>
       default:
         break
     }

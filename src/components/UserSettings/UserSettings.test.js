@@ -96,6 +96,7 @@ describe('<UserSettings/> should', () => {
 
         const resetSettingsBtn = screen.getByTestId("user-settings__reset-settings");
         fireEvent.click(resetSettingsBtn);
+        fireEvent.click(settingsBtn)
 
         const timer = screen.getByRole("timer");
 

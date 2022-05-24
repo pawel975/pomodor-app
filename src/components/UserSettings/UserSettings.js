@@ -53,7 +53,7 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
             globalStatePropName: 'maxBlock'
         },
     ]
-
+    
     const [tempStateToSaveToGlobal, setTempStateToSaveToGlobal] = useState(globalState);
 
     const handleAcceptChanges = (e) => {
@@ -72,9 +72,10 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
 
     const handleResetSettings = (e) => {
         e.preventDefault();
-        setRemainLearnTime(tempStateToSaveToGlobal.initLearnTime)
-        setRemainBreakTime(tempStateToSaveToGlobal.initBreakTime)
+        setRemainLearnTime(initGlobalState.initLearnTime);
+        setRemainBreakTime(initGlobalState.initBreakTime);
         setGlobalState(initGlobalState);
+        setIsModalOpen(false);
     }
 
     const allUserSettingsParams = userStateData.map((param, index) => (

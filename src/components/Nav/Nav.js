@@ -1,3 +1,4 @@
+import AppearanceSectionBtn from '../AppearanceSectionBtn/AppearanceSectionBtn';
 import RulesInfoBtn from '../RulesInfoBtn/RulesInfoBtn';
 import SettingsBtn from '../SettingsBtn/SettingsBtn';
 import StatisticsBtn from '../StatisticsBtn/StatisticsBtn';
@@ -15,6 +16,7 @@ const Nav = ({setIsModalOpen, setActiveModalContentBtnId}) => {
             <SettingsBtn handleModalOpen={handleModalOpen}/>
             <StatisticsBtn handleModalOpen={handleModalOpen}/>
             <RulesInfoBtn handleModalOpen={handleModalOpen}/>
+            <AppearanceSectionBtn handleModalOpen={handleModalOpen}/>
         </nav>
     )
 }

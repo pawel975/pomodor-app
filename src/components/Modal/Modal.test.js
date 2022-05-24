@@ -1,6 +1,7 @@
 import {render, screen, fireEvent} from '@testing-library/react';
 import Modal from './Modal';
 import App from '../App/App';
+import userEvent from "@testing-library/user-event";
 
 describe("<Modal/> should", () => {
 
@@ -44,5 +45,31 @@ describe("<Modal/> should", () => {
 
         expect(settingsTab).toHaveAttribute("aria-pressed", "false")
         expect(statisticsTab).toHaveAttribute("aria-pressed", "true")
+    })
+
+    test("contain all required tabs", () => {
+        render(<Modal/>)
+        const settingsTab = screen.getByRole("button", {name: /settings/i});
+        const statisticsTab = screen.getByRole("button", {name: /statistics/i});
+        const rulesInfoTab = screen.getByRole("button", {name: /rules info/i});
+        const appearanceTab = screen.getByRole("button", {name: /appearance/i});
+        expect(settingsTab).toBeInTheDocument();
+        expect(statisticsTab).toBeInTheDocument();
+        expect(rulesInfoTab).toBeInTheDocument();
+        expect(appearanceTab).toBeInTheDocument();
+    })
+
+    test("should show 'Appearance Section' content when clicking on 'Appearance' tab", async () => {
+        render(<App/>)
+        const user = userEvent.setup();
+        
+        const appearanceSectionBtn = screen.getByTestId("appearance-section-nav-btn");
+        await user.click(appearanceSectionBtn);
+
+        const appearanceSectionTab = screen.getByTestId("modal__appearance-section-tab");
+        await user.click(appearanceSectionTab);
+
+        const appearanceSection = screen.getByRole("heading", {name: /theme/i});
+        expect(appearanceSection).toBeInTheDocument();
     })
 })
