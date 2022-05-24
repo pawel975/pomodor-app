@@ -1,5 +1,4 @@
-
-import {IoMdColorPalette as AppearanceSectionBtnIcon} from 'react-icons/io';
+import {FaPalette as AppearanceSectionBtnIcon} from 'react-icons/fa';
 
 const AppearanceSectionBtn = ({handleModalOpen}) => {
 

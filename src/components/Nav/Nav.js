@@ -12,7 +12,7 @@ const Nav = ({setIsModalOpen, setActiveModalContentBtnId}) => {
     }
 
     return (
-        <nav>
+        <nav className='dark'>
             <SettingsBtn handleModalOpen={handleModalOpen}/>
             <StatisticsBtn handleModalOpen={handleModalOpen}/>
             <RulesInfoBtn handleModalOpen={handleModalOpen}/>

@@ -1,3 +1,4 @@
+import  './AppearanceSection.scss';
 
 const AppearanceSection = () => {
 
