@@ -24,7 +24,7 @@ export const initGlobalState = {
 }
 
 const App = () => {
-
+  
   const lastWeekDates = getLastWeek();
 
   // Check if local storage is empty to create record structure, and to update structure if it's not.
@@ -108,7 +108,7 @@ const App = () => {
   }
 
   return (
-    <div className="app" data-testid="app">
+    <div className="app darkTheme" data-testid="app">
 
       <Nav 
         setIsModalOpen={setIsModalOpen}
