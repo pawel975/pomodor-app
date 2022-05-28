@@ -24,7 +24,7 @@ export const initGlobalState = {
 }
 
 const App = () => {
-  
+
   const lastWeekDates = getLastWeek();
 
   // Check if local storage is empty to create record structure, and to update structure if it's not.
