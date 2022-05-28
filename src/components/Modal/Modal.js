@@ -5,7 +5,6 @@ const Modal = ({setIsModalOpen, content, activeModalContentBtnId, setActiveModal
 
     const handleModalClose = () => {
         setIsModalOpen(false);
-        document.documentElement.style.setProperty("--clr-primary-1", "yellow")
     }
 
     const handleChoosedTabLighten = (e) => {

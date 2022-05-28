@@ -8,19 +8,72 @@
     
     h1 {
         width: 100%;
+        font-size: $fs-200;
+        font-weight: 400;
+        color: $clr-primary-1;
+        border-bottom: 0.1rem solid lightgrey;
     }
 
     .appearance-section__theme {
         display: flex;
         gap: 1rem;
         flex-wrap: wrap;
+        font-size: $fs-200;
+        justify-content: center;
 
+        /* Customize the label (the container) */
         label {
-
-            input {
-                // display: none;
-            }
+            display: block;
+            position: relative;
+            width: 7rem;
+            height: 3rem;
+            text-align: center;
+            line-height: 2.5rem;
+            color: darken($color: $clr-text, $amount: 10%);
+            font-weight: 700;
+            cursor: pointer;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Hide the browser's default checkbox */
+        label input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+            height: 0;
+            width: 0;
+        }
+        
+        /* Create a custom checkbox */
+        .checkmark {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 7rem;
+            height: 3rem;
+            border: 0.15rem solid $clr-text;
+            border-radius: 1rem;
+            // background-color: $clr-greyed;
+        }
+        
+        /* On mouse-over, add a grey background color */
+        label:hover input ~ .checkmark,
+        label input:checked:hover ~ .checkmark {
+            background-color: $clr-text2;
+            color: $clr-light;
+            border-color: $clr-text2;
+        }
+        
+        /* When the checkbox is checked, add a blue background */
+        label input:checked ~ .checkmark {
+            background-color: $clr-text;
+            color: $clr-light;
+            border-color: $clr-text;
         }
 
     }
 }
+

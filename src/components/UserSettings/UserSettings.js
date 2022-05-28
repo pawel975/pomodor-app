@@ -74,7 +74,11 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
         e.preventDefault();
         setRemainLearnTime(initGlobalState.initLearnTime);
         setRemainBreakTime(initGlobalState.initBreakTime);
-        setGlobalState(initGlobalState);
+        setGlobalState(prevState => ({
+            ...prevState,
+            ...initGlobalState,
+            themeId: prevState.themeId,
+        }));
         setIsModalOpen(false);
     }
 

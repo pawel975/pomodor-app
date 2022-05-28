@@ -1,38 +1,51 @@
+import AppearanceSectionTheme from '../AppearanceSectionTheme/AppearanceSectionTheme';
 import  './AppearanceSection.scss';
 
-const AppearanceSection = () => {
+const AppearanceSection = ({globalState, setGlobalState}) => {
+
+    const themes = [
+        {
+            themeId: "synthwave-85",
+            themeName: "Synthwave 85"
+        },
+        {
+            themeId: "infinite-ocean",
+            themeName: "Infinite Ocean"
+        },
+        {
+            themeId: "wild-desert",
+            themeName: "Wild Desert"
+        }
+    ]
+
+    const handleThemeChange = (e) => {
+        setGlobalState(prevState => ({
+            ...prevState,
+            themeId: e.target.id
+        }));
+    }
+
+    const allThemes = themes.map(theme => (
+        <AppearanceSectionTheme
+            key={theme.themeId}
+            themeId={theme.themeId}
+            themeName={theme.themeName}
+            handleThemeChange={handleThemeChange}
+            globalState={globalState}
+        />
+    ))
 
     return (
         <section
             className="appearance-section"
             data-testid="appearance-section"
         >
-            <section className='appearance-section__theme'>
+            <section 
+                className='appearance-section__theme'
+                data-testid='appearance-section__theme'
+            >
                 <h1>Theme</h1>
-                <label htmlFor='synthwave-85'>
-                    <input 
-                        type="radio" 
-                        name='choose-theme'
-                        id='synthwave-85'
-                    ></input>
-                    <span>Synthwave 85</span>
-                </label>
-                <label htmlFor='infinite-ocean'>
-                    <input 
-                        type="radio" 
-                        name='choose-theme'
-                        id='infinite-ocean'
-                    ></input>
-                    <span>Infinite Ocean</span>
-                </label >
-                <label htmlFor='wild-desert'>
-                    <input 
-                        type="radio" 
-                        name='choose-theme'
-                        id='wild-desert'
-                    ></input>
-                    <span>Wild Desert</span>
-                </label>
+                {allThemes}
             </section>
         </section>
     )

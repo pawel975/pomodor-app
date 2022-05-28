@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Clock from '../Clock/Clock';
 import ControlPanel from '../ControlPanel/ControlPanel';
 import Nav from '../Nav/Nav';
@@ -21,6 +21,7 @@ export const initGlobalState = {
   isLearnPhaseActive: true,
   isLearningBlockActive: false,
   isTimerRun: false,
+  themeId: "infinite-ocean",
 }
 
 const App = () => {
@@ -101,14 +102,38 @@ const App = () => {
       case "rules-info-nav-btn":
         return <RulesInfoSection/>
       case "appearance-section-nav-btn":
-        return <AppearanceSection/>
+        return (
+          <AppearanceSection
+            globalState={globalState}
+            setGlobalState={setGlobalState}
+          />
+        )
       default:
         break
     }
   }
 
+  useEffect(() => {
+
+    const activeThemeId = globalState.themeId
+    // Assign particular filter on whole app to generate theme based on theme id
+    switch(activeThemeId) {
+      case "synthwave-85":
+          document.documentElement.style.filter = "";
+          break
+      case "infinite-ocean":
+          document.documentElement.style.filter = "hue-rotate(300deg)";
+          break
+      case "wild-desert":
+          document.documentElement.style.filter = "hue-rotate(70deg)";
+          break
+      default:
+          break
+  }
+  },[globalState.themeId])
+
   return (
-    <div className="app darkTheme" data-testid="app">
+    <div className="app" data-testid="app">
 
       <Nav 
         setIsModalOpen={setIsModalOpen}
