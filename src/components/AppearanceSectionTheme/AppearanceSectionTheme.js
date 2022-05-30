@@ -1,22 +1,47 @@
+import AppearanceSectionThemeOption from "../AppearanceSectionThemeOption/AppearanceSectionThemeOption";
 
-const AppearanceSectionTheme = ({themeId, themeName, handleThemeChange, globalState}) => {
+const AppearanceSectionTheme = ({setGlobalState, globalState}) => {
     
+    const themesParams = [
+        {
+            themeId: "synthwave-85",
+            themeName: "Synthwave 85"
+        },
+        {
+            themeId: "infinite-ocean",
+            themeName: "Infinite Ocean"
+        },
+        {
+            themeId: "wild-desert",
+            themeName: "Wild Desert"
+        }
+    ]
+
+    const handleThemeChange = (e) => {
+        setGlobalState(prevState => ({
+            ...prevState,
+            themeId: e.target.id
+        }));
+    }
+
+    const allThemesOptions = themesParams.map(theme => (
+        <AppearanceSectionThemeOption
+            key={theme.themeId}
+            themeId={theme.themeId}
+            themeName={theme.themeName}
+            handleThemeChange={handleThemeChange}
+            globalState={globalState}
+        />
+    ))
+
     return (
-        <label 
-            onClick={(e) => handleThemeChange(e)}
-            htmlFor={themeId}
-            tabIndex="0"
-            data-testid="theme-option"
+        <section 
+            className='appearance-section__theme'
+            data-testid='appearance-section__theme'
         >
-            <input 
-                type="radio" 
-                name='choose-theme'
-                data-testid={themeId}
-                checked={themeId === globalState.themeId}
-                id={themeId}
-            ></input>
-            <span className='checkmark'>{themeName}</span>
-        </label>
+            <h1>Theme</h1>
+            {allThemesOptions}
+        </section>
     )
 }
 

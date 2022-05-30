@@ -1,4 +1,12 @@
 @use './variables.scss' as *;
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch&family=Concert+One&family=Tiro+Tamil&display=swap');
+:root {
+  --ff-app: 'Concert One', cursive;
+  // Available fonts:
+  // 'Concert One', cursive;
+  // 'Arvo', serif;
+  // 'Chakra Petch', sans-serif;
+}
 
 /////////////////
 /// CSS RESET ///
@@ -14,7 +22,7 @@
 }
 
 html {
-  font-family: $ff-casual;
+  font-family: var(--ff-app);
   color: $clr-primary-1;
 
   @media (max-width: 25rem) {
@@ -110,7 +118,6 @@ svg, path {
 @mixin glowingText($color) {
   color: lighten($color: $color, $amount: 0%);
   text-shadow: 0 0 0.5rem lighten($color: $color, $amount: 0%);
-  font-family: $ff-heading;
 }
 
 .sr-only {

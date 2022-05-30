@@ -22,6 +22,7 @@ export const initGlobalState = {
   isLearningBlockActive: false,
   isTimerRun: false,
   themeId: "infinite-ocean",
+  fontId: "concert-one"
 }
 
 const App = () => {
@@ -131,6 +132,25 @@ const App = () => {
           break
   }
   },[globalState.themeId])
+
+  useEffect(() => {
+
+    const activeFontId = globalState.fontId
+    // Assign particular filter on whole app to generate theme based on theme id
+    switch(activeFontId) {
+      case "concert-one":
+          document.documentElement.style.setProperty("--ff-app", "'Concert One', cursive");
+          break
+      case "arvo":
+          document.documentElement.style.setProperty("--ff-app", "'Arvo', serif");
+          break
+      case "chakra-petch":
+          document.documentElement.style.setProperty("--ff-app", "'Chakra Petch', sans-serif");
+          break
+      default:
+          break
+  }
+  },[globalState.fontId])
 
   return (
     <div className="app" data-testid="app">

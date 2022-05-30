@@ -1,7 +1,7 @@
 import {render, screen} from '@testing-library/react';
 import AppearanceSection from './AppearanceSection';
 import userEvent from '@testing-library/user-event';
-import AppearanceSectionTheme from '../AppearanceSectionTheme/AppearanceSectionTheme';
+import AppearanceSectionThemeOption from '../AppearanceSectionThemeOption/AppearanceSectionThemeOption';
 
 describe('<AppearanceSection/> should', () => {
 
@@ -28,7 +28,7 @@ describe('<AppearanceSection/> should', () => {
         const mockHandleThemeChange = jest.fn();
 
         render(
-            <AppearanceSectionTheme 
+            <AppearanceSectionThemeOption 
                 themeId="infinite-ocean" 
                 themeName="Infinite Ocean"
                 handleThemeChange={mockHandleThemeChange}
@@ -42,5 +42,16 @@ describe('<AppearanceSection/> should', () => {
 
         expect(mockHandleThemeChange).toHaveBeenCalledTimes(1);
     });
+
+    test("contain font section", () => {
+        render(<AppearanceSection globalState={{}}/>)
+        const fontSection = screen.getByTestId("appearance-section__font");
+        expect(fontSection).toBeInTheDocument();
+    })
     
+    test("render font option", () => {
+        render(<AppearanceSection globalState={{}}/>)
+        const fontOptions = screen.getAllByTestId("font-option");
+        expect(fontOptions).toHaveLength(3);
+    })
 });
