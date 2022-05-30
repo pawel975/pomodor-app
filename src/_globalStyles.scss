@@ -25,8 +25,88 @@ html {
   font-family: var(--ff-app);
   color: $clr-primary-1;
 
-  @media (max-width: 25rem) {
+  @media (min-width: 450rem) {
+    font-size: 60px;
+  }
+
+  @media (max-width: 440rem) {
+    font-size: 55px;
+  }
+
+  @media (max-width: 400rem) {
+    font-size: 50px;
+  }
+
+  @media (max-width: 360rem) {
+    font-size: 45px;
+  }
+
+  @media (max-width: 320rem) {
+    font-size: 40px;
+  }
+
+  @media (max-width: 280rem) {
+    font-size: 40px;
+  }
+
+  @media (max-width: 240rem) {
+    font-size: 36px;
+  }
+
+  @media (max-width: 220rem) {
+    font-size: 32px;
+  }
+
+  @media (max-width: 200rem) {
+    font-size: 28px;
+  }
+
+  @media (max-width: 190rem) {
+    font-size: 25px;
+  }
+
+  @media (max-width: 160rem) {
+    font-size: 22px;
+  }
+
+  @media (max-width: 150rem) {
+    font-size: 20px;
+  }
+
+  @media (max-width: 140rem) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 130rem) {
+    font-size: 16px;
+  }
+
+  @media (max-width: 50rem) {
+    font-size: 15px;
+  }
+
+  @media (max-width: 45rem) {
+    font-size: 14px;
+  }
+
+  @media (max-width: 40rem) {
+    font-size: 13px;
+  }
+
+  @media (max-width: 30rem) {
+    font-size: 12px;
+  }
+
+  @media (max-width: 30rem) {
+    font-size: 11px;
+  }
+
+  @media (max-width: 23rem) {
     font-size: 8px;
+  }
+
+  @media (max-width: 20rem) {
+    font-size: 7px;
   }
 }
 
