@@ -1,17 +1,27 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import './RemainTimeBar.scss';
 
 const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
  
     const {initBreakTime, initLearnTime, isLearnPhaseActive} = globalState;
 
-    const [strokeOffset, setStrokeOffset] = useState(1458)
+    // Gets default font size for current resolution without 'px'
+    const htmlFontSize = window.getComputedStyle(document.documentElement).getPropertyValue("font-size").slice(0,-2)
+    console.log(htmlFontSize)
+
+    const circleRef = useRef(null);
+    
+    const defaultStrokeArray = 1458 * (htmlFontSize / 16);
+    circleRef.current.style.strokeDashoffset = defaultStrokeArray;
+    // circleRef.current.style.strok = defaultStrokeOffset;
+    
+    const [strokeOffset, setStrokeOffset] = useState(defaultStrokeArray)
 
     const refreshRemainTime = useCallback(() => {
         
         if (isLearnPhaseActive) {
 
-            const offset = 1458 - (1458 * (remainLearnTime / initLearnTime))
+            const offset = defaultStrokeArray - (defaultStrokeArray * (remainLearnTime / initLearnTime))
 
             if (offset > 0) {
                 setStrokeOffset(offset)
@@ -21,7 +31,7 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
 
         } else {
             
-            const offset = 1458 - (1458 * (remainBreakTime / initBreakTime))
+            const offset = defaultStrokeArray - (defaultStrokeArray * (remainBreakTime / initBreakTime))
             
             if (offset > 0) {
                 setStrokeOffset(offset)
@@ -30,7 +40,7 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
             }
         }
 
-    },[initBreakTime, initLearnTime, isLearnPhaseActive, remainBreakTime, remainLearnTime])
+    },[defaultStrokeArray, initBreakTime, initLearnTime, isLearnPhaseActive, remainBreakTime, remainLearnTime])
     
     useEffect(() => {
         refreshRemainTime();
@@ -46,6 +56,7 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
                     </linearGradient>
                 </defs>
                 <circle
+                    ref={circleRef}
                     style={{strokeDashoffset: strokeOffset > 0 ? strokeOffset : 1}} className='remain-time-bar__stroke' data-testid='remain-time-bar__stroke' cx="50%" cy="50%" r="14.5rem"  />
             </svg>
         </div>
