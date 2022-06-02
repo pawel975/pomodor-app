@@ -12,7 +12,7 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
     const circleRef = useRef(null);
     
     const defaultStrokeArray = 1458 * (htmlFontSize / 16);
-    circleRef.current.style.strokeDashoffset = defaultStrokeArray;
+    // circleRef.current.style.strokeDashoffset = defaultStrokeArray;
     // circleRef.current.style.strok = defaultStrokeOffset;
     
     const [strokeOffset, setStrokeOffset] = useState(defaultStrokeArray)
