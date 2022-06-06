@@ -7,13 +7,12 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
 
     // Gets default font size for current resolution without 'px'
     const htmlFontSize = window.getComputedStyle(document.documentElement).getPropertyValue("font-size").slice(0,-2)
-    console.log(htmlFontSize)
 
+    // Sets svg progress bar to being reponsive on window size change
     const circleRef = useRef(null);
-    
     const defaultStrokeArray = 1458 * (htmlFontSize / 16);
-    // circleRef.current.style.strokeDashoffset = defaultStrokeArray;
-    // circleRef.current.style.strok = defaultStrokeOffset;
+    circleRef.current.style.strokeDashoffset = 0;
+    circleRef.current.style.strokeDasharray = defaultStrokeArray;
     
     const [strokeOffset, setStrokeOffset] = useState(defaultStrokeArray)
 
