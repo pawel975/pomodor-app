@@ -10,6 +10,14 @@ nav {
     align-items: center;
     gap: 1rem;
 
+    @media (orientation: portrait) {
+        top: 3rem;
+        left: 50%;
+        flex-direction: row;
+        transform: translate(-50%);
+        gap: 2rem;
+    }
+
     .nav-option-btn {
         cursor: pointer;
         background: transparent;
@@ -28,4 +36,5 @@ nav {
             font-size: $fs-700;
         }
     }
+
 }

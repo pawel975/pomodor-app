@@ -8,13 +8,24 @@
     display: flex;
     flex-direction: column;
     gap: 2rem;
+
+    @media (max-width: $screen-small) {
+        margin-top: 3rem;
+        gap: 4rem;
+    }
     
     h1 {
         width: 100%;
         font-size: $fs-200;
         font-weight: 400;
         color: $clr-primary-1;
-        border-bottom: 0.1rem solid lightgrey;
+        border-bottom: 0.05rem solid lightgrey;
+        
+        @media (max-width: $screen-small) {
+            font-size: $fs-500;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
     }
 
     .appearance-section__theme,
@@ -24,6 +35,16 @@
         flex-wrap: wrap;
         font-size: $fs-200;
         justify-content: center;
+
+        @media (max-width: $screen-small) {
+            border-radius: 0;
+            border: none;
+            width: 100%;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: $fs-400;
+        }
 
         /* Customize the label (the container) */
         label {
@@ -39,6 +60,12 @@
             -moz-user-select: none;
             -ms-user-select: none;
             user-select: none;
+
+            @media (max-width: $screen-small) {
+                width: 12rem;
+                height: 6rem;
+                line-height: 5rem;
+            }
         }
         
         /* Hide the browser's default checkbox */
@@ -59,7 +86,11 @@
             height: 3rem;
             border: 0.15rem solid $clr-text;
             border-radius: 1rem;
-            // background-color: $clr-greyed;
+
+            @media (max-width: $screen-small) {
+                width: 12rem;
+                height: 6rem;
+            }
         }
         
         /* On mouse-over, add a grey background color */

@@ -8,11 +8,8 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
     // Gets default font size for current resolution without 'px'
     const htmlFontSize = window.getComputedStyle(document.documentElement).getPropertyValue("font-size").slice(0,-2)
 
-    // Sets svg progress bar to being reponsive on window size change
     const circleRef = useRef(null);
     const defaultStrokeArray = 1458 * (htmlFontSize / 16);
-    circleRef.current.style.strokeDashoffset = 0;
-    circleRef.current.style.strokeDasharray = defaultStrokeArray;
     
     const [strokeOffset, setStrokeOffset] = useState(defaultStrokeArray)
 
@@ -43,7 +40,10 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
     
     useEffect(() => {
         refreshRemainTime();
-    },[refreshRemainTime])
+        // Sets svg progress bar to being reponsive on window size change
+        circleRef.current.style.strokeDashoffset = 0;
+        circleRef.current.style.strokeDasharray = defaultStrokeArray;
+    },[defaultStrokeArray, refreshRemainTime])
     
     return (
         <div className='remain-time-bar__container' data-testid="remain-time-bar">
