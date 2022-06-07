@@ -11,16 +11,41 @@
     font-size: $fs-200;
     text-align: right;
 
+    @media (max-width: $screen-small) {
+        font-size: $fs-500;
+    }
+
     &__form {
         display: flex;
         flex-direction: column;
         gap: 1rem;
+
+        @media (max-width: $screen-small) {
+            gap: 3rem;
+        }
+
+        .settings-section__param-container {
+            
+            span {
+                font-size: $fs-100;
+
+                @media (max-width: $screen-small) {
+                    font-size: $fs-400;
+                }
+            }
+
+        }
 
         .submit-buttons-container {
 
             align-self: flex-end;
             display: flex;
             gap: 1rem;
+
+            @media (max-width: $screen-small) {
+                margin-top: 1.5rem;
+                margin: auto;
+            }
 
             .settings-section__accept-changes,
             .settings-section__reset-settings {
@@ -32,6 +57,12 @@
                 color: white;
                 font-size: $fs-200;
                 margin-left: auto;
+
+                @media (max-width: $screen-small) {
+                    font-size: $fs-500;
+                    padding: .5rem 1rem;
+                    border-radius: 1rem;
+                }
     
                 &:hover {
                     background: $clr-text2;
@@ -51,6 +82,10 @@
         background-image: linear-gradient($clr-text, $clr-text);
         background-size: 50% 100%;
         background-repeat: no-repeat;
+
+        @media (max-width: $screen-small) {
+            height: 1rem;
+        }
 
         &:hover,
         &:focus-visible {
@@ -74,6 +109,14 @@
             background: $clr-text;
             cursor: pointer;  
 
+            @media (max-width: $screen-small) {
+                width: 1.875rem;
+                height: 1.875rem;
+                box-shadow:
+                0 0 0 0.375rem hsl(0, 0%, 100%),
+                0 0 0 0.425rem hsl(0, 0%, 0%);
+            }
+
         }
 
         &::-moz-range-thumb {
@@ -85,6 +128,14 @@
                 0 0 0 0.275rem hsl(0, 0%, 0%);
             background: $clr-text;
             cursor: pointer;  
+            
+            @media (max-width: $screen-small) {
+                width: 1.875rem;
+                height: 1.875rem;
+                box-shadow:
+                0 0 0 0.375rem hsl(0, 0%, 100%),
+                0 0 0 0.425rem hsl(0, 0%, 0%);
+            }
 
         }
 
