@@ -27,6 +27,7 @@ const AppearanceSectionFont = ({globalState, setGlobalState}) => {
 
     const allFontsOptions = fontsParams.map(font => (
         <AppearanceSectionFontOption
+            key={font.fontId}
             fontId={font.fontId}
             fontName={font.fontName}
             globalState={globalState}

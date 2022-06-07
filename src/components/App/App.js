@@ -4,11 +4,11 @@ import ControlPanel from '../ControlPanel/ControlPanel';
 import Nav from '../Nav/Nav';
 import Modal from '../Modal/Modal';
 import './App.scss';
-import UserSettings from '../UserSettings/UserSettings';
-import UserStatistics from '../UserStatistics/UserStatistics';
+import SettingsSection from '../SettingsSection/SettingsSection';
 import { getFromLocalStorage, getLastWeek, saveToLocalStorage } from '../../helpers';
 import RulesInfoSection from '../RulesInfoSection/RulesInfoSection';
 import AppearanceSection from '../AppearanceSection/AppearanceSection';
+import StatisticsSection from '../StatisticsSection/StatisticsSection';
 
 export const initGlobalState = {
   initLearnTime: 1500,
@@ -90,7 +90,7 @@ const App = () => {
     switch(activeModalContentBtnId) {
       case "settings-nav-btn":
         return (
-          <UserSettings
+          <SettingsSection
             globalState={globalState}
             setGlobalState={setGlobalState}
             setIsModalOpen={setIsModalOpen}
@@ -99,7 +99,7 @@ const App = () => {
           />
         )
       case "statistics-nav-btn":
-        return <UserStatistics/>
+        return <StatisticsSection/>
       case "rules-info-nav-btn":
         return <RulesInfoSection/>
       case "appearance-section-nav-btn":

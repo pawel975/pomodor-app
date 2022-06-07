@@ -1,20 +1,20 @@
 import {render, screen, fireEvent} from '@testing-library/react';
 import App from '../App/App';
 
-describe('<UserSettings/> should', () => {
+describe('<SettingsSection/> should', () => {
     
     test('not be rendered initially', () => {
         render(<App/>)
-        const userSettingsComponent = screen.queryByTestId("user-settings");
-        expect(userSettingsComponent).not.toBeInTheDocument();
+        const settingsSectionComponent = screen.queryByTestId("settings-section");
+        expect(settingsSectionComponent).not.toBeInTheDocument();
     });
 
     test("be rendered when settings button on navigation is clicked", () => {
         render(<App/>)
         const settingsBtn = screen.getByRole("button", {name: /settings/i});
         fireEvent.click(settingsBtn);
-        const userSettingsComponent = screen.queryByTestId("user-settings");
-        expect(userSettingsComponent).toBeInTheDocument();
+        const settingsSectionComponent = screen.queryByTestId("settings-section");
+        expect(settingsSectionComponent).toBeInTheDocument();
     })
 
     test("contain 5 user params to change", () => {
@@ -23,10 +23,10 @@ describe('<UserSettings/> should', () => {
         const settingsBtn = screen.getByTestId("settings-nav-btn");
         fireEvent.click(settingsBtn);
 
-        const userSettingsForm = screen.getByTestId("user-settings__form");
-        const userSettingsParams = screen.getAllByTestId("user-settings__param-container");
-        expect(userSettingsForm).toBeInTheDocument();
-        expect(userSettingsParams).toHaveLength(5);
+        const settingsSectionForm = screen.getByTestId("settings-section__form");
+        const settingsSectionParams = screen.getAllByTestId("settings-section__param-container");
+        expect(settingsSectionForm).toBeInTheDocument();
+        expect(settingsSectionParams).toHaveLength(5);
     })
 
     test('close modal on "Accept changes" button click in "user settings" tab', () => {
@@ -35,7 +35,7 @@ describe('<UserSettings/> should', () => {
         const settingsBtn = screen.getByTestId("settings-nav-btn");
         fireEvent.click(settingsBtn);
 
-        const acceptChangesBtn = screen.getByTestId("user-settings__accept-changes");
+        const acceptChangesBtn = screen.getByTestId("settings-section__accept-changes");
         fireEvent.click(acceptChangesBtn);
 
         const modal = screen.queryByTestId("modal");
@@ -52,7 +52,7 @@ describe('<UserSettings/> should', () => {
         const learningTimeSlider = screen.getByTestId("learning-time");
         fireEvent.change(learningTimeSlider, {target: {value: "30"}});
 
-        const acceptChangesBtn = screen.getByTestId("user-settings__accept-changes");
+        const acceptChangesBtn = screen.getByTestId("settings-section__accept-changes");
         fireEvent.click(acceptChangesBtn);
 
         const timer = screen.getByRole("timer");
@@ -77,7 +77,7 @@ describe('<UserSettings/> should', () => {
         const learningTimeSlider = screen.getByTestId("learning-time");
         fireEvent.change(learningTimeSlider, {target: {value: "30"}});
 
-        const acceptChangesBtn = screen.getByTestId("user-settings__accept-changes");
+        const acceptChangesBtn = screen.getByTestId("settings-section__accept-changes");
         fireEvent.click(acceptChangesBtn);
 
         const timer = screen.getByRole("timer");
@@ -94,7 +94,7 @@ describe('<UserSettings/> should', () => {
         const learningTimeSlider = screen.getByTestId("learning-time");
         fireEvent.change(learningTimeSlider, {target: {value: "30"}});
 
-        const resetSettingsBtn = screen.getByTestId("user-settings__reset-settings");
+        const resetSettingsBtn = screen.getByTestId("settings-section__reset-settings");
         fireEvent.click(resetSettingsBtn);
         fireEvent.click(settingsBtn)
 

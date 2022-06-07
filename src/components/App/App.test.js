@@ -123,11 +123,11 @@ describe("<App/> component should", () => {
 
         const modal = screen.getByTestId('modal');
         const settingsTab = screen.getByTestId("modal__settings-tab");
-        const userSettingsContent = screen.getByTestId("user-settings");
+        const settingsSectionContent = screen.getByTestId("settings-section");
 
         expect(modal).toBeVisible();
         expect(settingsTab).toHaveAttribute("aria-pressed", "true");
-        expect(userSettingsContent).toBeInTheDocument();
+        expect(settingsSectionContent).toBeInTheDocument();
     })
 
 })

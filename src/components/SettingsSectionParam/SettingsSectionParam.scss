@@ -1,7 +1,7 @@
 @use '../../variables.scss' as *;
 @use '../../globalStyles.scss' as *;
 
-.user-settings__param-container {
+.settings-section__param-container {
     gap: 1rem;
     display: flex;
     flex-direction: column;

@@ -1,6 +1,6 @@
 @use '../../variables.scss' as *;
 
-.user-statistics {
+.statistics-section {
     height: 100%;
     width: 100%;
     padding: 1rem;
@@ -8,5 +8,4 @@
     align-items: center;
     justify-content: center;
     flex-grow: 1;
-    // outline: 2px solid green;
 }

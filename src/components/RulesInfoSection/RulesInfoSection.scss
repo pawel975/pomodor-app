@@ -8,6 +8,12 @@
     display: flex;
     gap: 0.7rem;
     flex-direction: column;
+    font-size: $fs-200;
+
+    @media (max-width: $screen-small) {
+        font-size: $fs-500;
+        padding: 1.5rem 3rem;
+    }
 
     ul {
         padding-inline: 1rem;

@@ -1,7 +1,7 @@
 @use '../../globalStyles.scss' as *;
 @use '../../variables.scss' as *;
 
-.user-settings {
+.settings-section {
     width: 100%;
     height: 100%;
     display: flex;
@@ -22,15 +22,14 @@
             display: flex;
             gap: 1rem;
 
-            .user-settings__accept-changes,
-            .user-settings__reset-settings {
+            .settings-section__accept-changes,
+            .settings-section__reset-settings {
                 margin-top: 1rem;
                 border: none;
                 background: $clr-text;
                 border-radius: 0.5rem;
                 padding: 0.5rem;
                 color: white;
-                font-weight: bold;
                 font-size: $fs-200;
                 margin-left: auto;
     

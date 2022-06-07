@@ -1,10 +1,10 @@
 import { Bar } from 'react-chartjs-2';
 import {Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend,
 } from 'chart.js';
-import './UserStatisticsChart.scss';
+import './StatisticsSectionChart.scss';
 import { getFromLocalStorage } from '../../helpers';
 
-const UserStatisticsChart = () => {
+const StatisticsSectionChart = () => {
 
     ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
@@ -41,13 +41,13 @@ const UserStatisticsChart = () => {
     
     return (
         <div 
-            className="user-statistics-chart"
-            data-testid="user-statistics-chart"
+            className="statistics-section-chart"
+            data-testid="statistics-section-chart"
         >
             <Bar options={options} data={data} />
         </div>
     )
 }
 
-export default UserStatisticsChart;
+export default StatisticsSectionChart;
 

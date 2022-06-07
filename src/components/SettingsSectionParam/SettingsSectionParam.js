@@ -1,8 +1,8 @@
 import {useRef, useState } from "react";
 import { formatParam } from "../../helpers";
-import './UserSettingsParam.scss';
+import './SettingsSectionParam.scss';
 
-const UserSettingsParam = ({paramId, paramName, min, max, paramValue, type, globalStatePropName, setTempStateToSaveToGlobal}) => {
+const SettingsSectionParam = ({paramId, paramName, min, max, paramValue, type, globalStatePropName, setTempStateToSaveToGlobal}) => {
 
     const [currentParamValue, setCurrentParamValue] = useState(paramValue)
     const sliderRef = useRef();
@@ -29,8 +29,8 @@ const UserSettingsParam = ({paramId, paramName, min, max, paramValue, type, glob
 
     return (
         <div 
-            className='user-settings__param-container'
-            data-testid="user-settings__param-container"    
+            className='settings-section__param-container'
+            data-testid="settings-section__param-container"    
         >
             <label>{paramName}
                 <span
@@ -49,11 +49,11 @@ const UserSettingsParam = ({paramId, paramName, min, max, paramValue, type, glob
                 min={min} 
                 max={max} 
                 value={Math.floor(currentParamValue)} 
-                className='user-settings__slider'
+                className='settings-section__slider'
                 onChange={(e) => handleParamValueChange(e)}
             />
         </div>
     )
 }
 
-export default UserSettingsParam;
+export default SettingsSectionParam;

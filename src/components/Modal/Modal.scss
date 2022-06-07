@@ -56,6 +56,11 @@
                 display: flex;
                 flex-grow: 1;
                 gap: 1rem;
+
+                @media (max-width: $screen-small) {
+                    padding: 0.5rem 1rem;
+                    gap: 1.5rem;
+                }
                 
                 button {
                     cursor: pointer;

@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { formatSecondsToMinutes } from '../../helpers';
 import { initGlobalState } from '../App/App';
-import UserSettingsParam from '../UserSettingsParam/UserSettingsParam';
-import './UserSettings.scss';
+import SettingsSectionParam from '../SettingsSectionParam/SettingsSectionParam';
+import './SettingsSection.scss';
 
-const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLearnTime, setRemainBreakTime}) => {
+const SettingsSection = ({globalState, setGlobalState, setIsModalOpen, setRemainLearnTime, setRemainBreakTime}) => {
 
     const userStateData = [
         {
@@ -83,7 +83,7 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
     }
 
     const allUserSettingsParams = userStateData.map((param, index) => (
-        <UserSettingsParam
+        <SettingsSectionParam
             key={index} 
             paramId={param.paramId} 
             paramName={param.paramName}
@@ -99,10 +99,10 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
     ))
 
     return (
-        <div className="user-settings" data-testid="user-settings">
+        <div className="settings-section" data-testid="settings-section">
             <form 
-                className='user-settings__form'
-                data-testid='user-settings__form'
+                className='settings-section__form'
+                data-testid='settings-section__form'
             >
                 {allUserSettingsParams}
                 
@@ -110,15 +110,15 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
                     <input 
                         type="submit" 
                         value="Reset Settings" 
-                        className='user-settings__reset-settings'
-                        data-testid='user-settings__reset-settings'
+                        className='settings-section__reset-settings'
+                        data-testid='settings-section__reset-settings'
                         onClick={(e) => handleResetSettings(e)}
                     />
                     <input 
                         type="submit" 
                         value="Accept changes" 
-                        className='user-settings__accept-changes'
-                        data-testid='user-settings__accept-changes'
+                        className='settings-section__accept-changes'
+                        data-testid='settings-section__accept-changes'
                         onClick={(e) => handleAcceptChanges(e)}
                     />
                 </div>
@@ -128,4 +128,4 @@ const UserSettings = ({globalState, setGlobalState, setIsModalOpen, setRemainLea
     )
 }
 
-export default UserSettings;
+export default SettingsSection;

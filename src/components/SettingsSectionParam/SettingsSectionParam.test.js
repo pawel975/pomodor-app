@@ -1,17 +1,17 @@
 import {render, screen, fireEvent} from '@testing-library/react';
-import UserSettingsParam from './UserSettingsParam';
+import SettingsSectionParam from './SettingsSectionParam';
 
-describe('<UserSettingsParam/> should', () => {
+describe('<SettingsSectionParam/> should', () => {
     
     test('be rendered properly', () => {
-        render(<UserSettingsParam/>)
-        const settingsParamComponent = screen.getByTestId("user-settings__param-container");
+        render(<SettingsSectionParam/>)
+        const settingsParamComponent = screen.getByTestId("settings-section__param-container");
         expect(settingsParamComponent).toBeInTheDocument();
     });
 
     test("get max value from props", () => {
         render(
-            <UserSettingsParam 
+            <SettingsSectionParam 
                 max={100}
                 paramValue={50}
             />
@@ -22,7 +22,7 @@ describe('<UserSettingsParam/> should', () => {
 
     test("get min value from props", () => {
         render(
-            <UserSettingsParam 
+            <SettingsSectionParam 
                 min={1}
                 paramValue={50}
             />
@@ -37,7 +37,7 @@ describe('<UserSettingsParam/> should', () => {
         const spanId = "learning-time__formatted-value-container"
          
         render(
-            <UserSettingsParam
+            <SettingsSectionParam
                 setTempStateToSaveToGlobal={jest.fn()}
                 paramId={paramId}
                 type="time"

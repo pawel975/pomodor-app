@@ -12,7 +12,7 @@ describe('<UserStatisticsChart/> should', () => {
         
         await user.click(statisticsBtn)
 
-        const userStatisticsChart = screen.getByTestId("user-statistics-chart");
+        const userStatisticsChart = screen.getByTestId("statistics-section-chart");
         expect(userStatisticsChart).toBeInTheDocument();
     });
 
