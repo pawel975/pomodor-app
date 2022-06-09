@@ -1,0 +1,13 @@
+@use '../../globalStyles.scss' as *;
+@use '../../variables.scss' as *;
+
+.learning-phase-label {
+    position: absolute;
+    transform: translate(-50%, 50%);
+    bottom: 20%;
+    left: 50%;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background: lighten($color: $clr-primary-1, $amount: 10%);
+    color: $clr-text;
+}

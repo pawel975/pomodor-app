@@ -1,5 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { getFromLocalStorage, saveToLocalStorage } from '../../helpers';
+import LearningPhaseLabel from '../LearningPhaseLabel/LearningPhaseLabel';
 import RemainTimeBar from '../RemainTimeBar/RemainTimeBar';
 import SessionAndBlockCounter from '../SessionAndBlockCounter/SessionAndBlockCounter';
 import Timer from '../Timer/Timer';
@@ -7,7 +8,7 @@ import './Clock.scss';
 
 const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalState,  setRemainBreakTime, globalState, statistics, setStatistics}) => {
 
-    const {isTimerRun, isLearnPhaseActive, initBreakTime, initLearnTime} = globalState;
+    const {isTimerRun, isLearnPhaseActive, isLearningBlockActive, initBreakTime, initLearnTime} = globalState;
 
     const resetTimer = useCallback(() => {
 
@@ -66,21 +67,31 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
             }
         }
 
-    },[isLearnPhaseActive, isTimerRun, remainBreakTime, remainLearnTime, resetTimer, setRemainBreakTime, setRemainLearnTime])
+    },[isLearnPhaseActive, isTimerRun, remainBreakTime, remainLearnTime, resetTimer, setRemainBreakTime, setRemainLearnTime, setStatistics, statistics])
 
     return (
         <div className="clock" data-testid="clock">
+
             <RemainTimeBar 
                 globalState={globalState}
                 remainLearnTime={remainLearnTime}
                 remainBreakTime={remainBreakTime}
             />
+
             <Timer countDownTime={isLearnPhaseActive ? remainLearnTime : remainBreakTime}/>
+
             <SessionAndBlockCounter 
                 remainBreakTime={remainBreakTime}
                 globalState={globalState}
                 setGlobalState={setGlobalState}
             />
+
+            {isLearningBlockActive &&
+                <LearningPhaseLabel 
+                    labelText={isLearnPhaseActive ? "Learning session..." : "Have a break!"}
+                />         
+            }
+
         </div>
     )
 
