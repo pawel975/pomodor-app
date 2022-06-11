@@ -2,7 +2,6 @@
 
 Application based on well known "Pomodoro" technique. Pomodoro technique is used to enhance productivity of learning by dividing time on learning sessions of full concentration and short breaks to rest. 
 
-
 ## Features
 
 App has following features:
@@ -23,6 +22,10 @@ App has following features:
 ## Build
 
 `npm build` to create app for production
+
+## Test
+
+`npm test` to run all tests.
 
 ## Tech Stack
 
