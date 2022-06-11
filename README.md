@@ -2,6 +2,8 @@
 
 Application based on well known "Pomodoro" technique. Pomodoro technique is used to enhance productivity of learning by dividing time on learning sessions of full concentration and short breaks to rest. 
 
+Watch app at https://pomodoro-app-blush.vercel.app/
+
 ## Features
 
 App has following features:
