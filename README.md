@@ -19,13 +19,13 @@ App has following features:
 
 `npm start` to run app on localhost in development mode
 
-## Build
-
-`npm build` to create app for production
-
 ## Test
 
 `npm test` to run all tests.
+
+## Build
+
+`npm build` to create app for production
 
 ## Tech Stack
 
