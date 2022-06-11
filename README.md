@@ -51,6 +51,5 @@ App has following features:
 
 ![synthwave 85 theme home page](https://user-images.githubusercontent.com/74624831/172929142-b7f5566b-2ce3-4076-b1f0-26d34dc8ccfc.png)
 
-![break session runs](https://user-images.githubusercontent.com/74624831/172929344-1722dbcf-c44d-4f41-98d3-1e119ac6e012.png)
-
+![break session](https://user-images.githubusercontent.com/74624831/173191603-3d076b70-4286-4d5f-86d0-4499717ff24c.png)
 
