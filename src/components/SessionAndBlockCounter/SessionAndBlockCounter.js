@@ -1,9 +1,14 @@
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { globalStateUpdate } from '../../actions';
 import './SessionAndBlockCounter.scss';
 
-const SessionAndBlockCounter = ({globalState, setGlobalState, remainBreakTime}) => {
+const SessionAndBlockCounter = ({remainBreakTime}) => {
 
-    const {currentSession, maxSession, currentBlock, maxBlock} = globalState;
+    const dispatch = useDispatch();
+    const globalStateReducer = useSelector(state => state.globalStateReducer)
+
+    const {currentSession, maxSession, currentBlock, maxBlock} = globalStateReducer;
 
     useEffect(() => {
        
@@ -11,35 +16,42 @@ const SessionAndBlockCounter = ({globalState, setGlobalState, remainBreakTime}) 
             
             if (currentSession < maxSession) {
 
-                setGlobalState(prevState => ({
+                dispatch(
+                    globalStateUpdate(prevState => ({
                     ...prevState,
                     currentSession: currentSession + 1,
-                }))
+                    }))
+                )
 
             } else {
 
                 if (currentBlock < maxBlock) {
 
-                    setGlobalState(prevState => ({
+                    dispatch(
+                        globalStateUpdate(prevState => ({
                         ...prevState,
                         currentBlock: currentBlock + 1,
                         currentSession: 1,
-                    }))
+                        }))
+                    )
 
                 } else {
 
-                    setGlobalState(prevState => ({
+                    dispatch(
+                        globalStateUpdate(prevState => ({
                         ...prevState,
                         currentBlock: 1,
                         currentSession: 1,
-                    }))
+                        }))
+                    )
 
                 }
 
             }
         }
 
-    },[remainBreakTime])
+        },[currentBlock, currentSession, dispatch, maxBlock, maxSession, remainBreakTime]
+    )
 
     return (
         <div

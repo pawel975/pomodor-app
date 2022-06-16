@@ -1,6 +1,10 @@
+import { useDispatch } from "react-redux";
+import { globalStateUpdate } from "../../actions";
 import AppearanceSectionFontOption from "../AppearanceSectionFontOption/AppearanceSectionFontOption";
 
-const AppearanceSectionFont = ({globalState, setGlobalState}) => {
+const AppearanceSectionFont = () => {
+
+    const dispatch = useDispatch();
 
     const fontsParams = [
         {
@@ -19,10 +23,12 @@ const AppearanceSectionFont = ({globalState, setGlobalState}) => {
     ]
 
     const handleFontChange = (e) => {
-        setGlobalState(prevState => ({
+        dispatch(
+            globalStateUpdate(prevState => ({
             ...prevState,
             fontId: e.target.id,
-        }))
+            }))
+        )
     }
 
     const allFontsOptions = fontsParams.map(font => (
@@ -30,7 +36,6 @@ const AppearanceSectionFont = ({globalState, setGlobalState}) => {
             key={font.fontId}
             fontId={font.fontId}
             fontName={font.fontName}
-            globalState={globalState}
             handleFontChange={handleFontChange}
         />
     ))

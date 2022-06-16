@@ -1,9 +1,12 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
 import './RemainTimeBar.scss';
 
-const RemainTimeBar = ({remainLearnTime, remainBreakTime, globalState}) => {
+const RemainTimeBar = ({remainLearnTime, remainBreakTime}) => {
  
-    const {initBreakTime, initLearnTime, isLearnPhaseActive} = globalState;
+    const globalStateReducer = useSelector(state => state.globalStateReducer);
+
+    const {initBreakTime, initLearnTime, isLearnPhaseActive} = globalStateReducer;
 
     // Gets default font size for current resolution without 'px'
     const htmlFontSize = window.getComputedStyle(document.documentElement).getPropertyValue("font-size").slice(0,-2)

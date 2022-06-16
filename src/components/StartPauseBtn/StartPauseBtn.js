@@ -1,10 +1,13 @@
 import './StartPauseBtn.scss';
 import {BsFillPlayFill as PlayIcon} from 'react-icons/bs';
 import {BsFillPauseFill as PauseIcon} from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 
-const StartPauseBtn = ({handleStartPauseBtnClick, globalState}) => {
+const StartPauseBtn = ({handleStartPauseBtnClick}) => {
 
-    const {isTimerRun, isLearningBlockActive} = globalState;
+    const globalStateReducer = useSelector(state => state.globalStateReducer);
+    
+    const {isTimerRun, isLearningBlockActive} = globalStateReducer;
 
     let startPauseBtnIcon;
 

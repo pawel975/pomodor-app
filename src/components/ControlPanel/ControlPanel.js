@@ -1,15 +1,20 @@
 
+import { useDispatch, useSelector } from 'react-redux';
+import { globalStateUpdate } from '../../actions';
 import { saveToLocalStorage } from '../../helpers';
 import EndBtn from '../EndBtn/EndBtn';
 import SkipBtn from '../SkipBtn/SkipBtn';
 import StartPauseBtn from '../StartPauseBtn/StartPauseBtn';
 import './ControlPanel.scss';
 
-const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemainBreakTime}) => {
+const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
 
-    const {currentSession, maxSession, currentBlock, maxBlock, isLearnPhaseActive, initLearnTime, initBreakTime} = globalState;
+    const dispatch = useDispatch();
+    const globalStateReducer = useSelector(state => state.globalStateReducer);
 
-    saveToLocalStorage("globalState", globalState);
+    const {currentSession, maxSession, currentBlock, maxBlock, isLearnPhaseActive, initLearnTime, initBreakTime} = globalStateReducer;
+
+    saveToLocalStorage("globalState", globalStateReducer);
     
     const handleSkipBtnClick = () => {
 
@@ -17,37 +22,45 @@ const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemai
 
             if (currentSession < maxSession) {
 
-                setGlobalState(prevState => ({
-                    ...prevState,
-                    currentSession: currentSession + 1,
-                }))
+                dispatch(
+                    globalStateUpdate(prevState => ({
+                        ...prevState,
+                        currentSession: currentSession + 1,
+                    }))
+                )
 
             } else {
 
                 if (currentBlock < maxBlock) {
 
-                    setGlobalState(prevState => ({
-                        ...prevState,
-                        currentBlock: currentBlock + 1,
-                        currentSession: 1,
-                    }))
+                    dispatch(
+                        globalStateUpdate(prevState => ({
+                            ...prevState,
+                            currentBlock: currentBlock + 1,
+                            currentSession: 1,
+                        }))
+                    )
 
                 } else {
 
-                    setGlobalState(prevState => ({
-                        ...prevState,
-                        currentBlock: 1,
-                        currentSession: 1,
-                    }))
+                    dispatch(
+                        globalStateUpdate(prevState => ({
+                            ...prevState,
+                            currentBlock: 1,
+                            currentSession: 1,
+                        }))
+                    )
 
                 }
             }
         }
 
-        setGlobalState(prevState => ({
-            ...prevState,
-            isLearnPhaseActive: !prevState.isLearnPhaseActive,
-        }))
+        dispatch(
+            globalStateUpdate(prevState => ({
+                ...prevState,
+                isLearnPhaseActive: !prevState.isLearnPhaseActive,
+            }))
+        )
 
         setRemainLearnTime(initLearnTime)
         setRemainBreakTime(initBreakTime)
@@ -55,36 +68,37 @@ const ControlPanel = ({setGlobalState, setRemainLearnTime, globalState, setRemai
     }
 
     const handleStartPauseBtnClick = () => {
-        setGlobalState(prevState => ({
-            ...prevState,
-            isTimerRun: !prevState.isTimerRun,
-            isLearningBlockActive: true
-        }));
+        dispatch(
+            globalStateUpdate(prevState => ({
+                ...prevState,
+                isTimerRun: !prevState.isTimerRun,
+                isLearningBlockActive: true
+            }))
+        )
     }
     
     const handleEndBtnClick = () => {
-        setGlobalState(prevState => ({
-            ...prevState,
-            isLearnPhaseActive: true,
-            isLearningBlockActive: false,
-            currentBlock: 1,
-            currentSession: 1,
-        }))
+        dispatch(
+            globalStateUpdate(prevState => ({
+                ...prevState,
+                isLearnPhaseActive: true,
+                isLearningBlockActive: false,
+                currentBlock: 1,
+                currentSession: 1,
+            }))
+        )
         setRemainLearnTime(initLearnTime);
     }
 
     return (
         <div className="control-panel" data-testid='control-panel'>
             <SkipBtn 
-                globalState={globalState}
                 handleSkipBtnClick={handleSkipBtnClick}
             />
             <StartPauseBtn 
-                globalState={globalState}
                 handleStartPauseBtnClick={handleStartPauseBtnClick}
             />
             <EndBtn 
-                globalState={globalState}
                 handleEndBtnClick={handleEndBtnClick}
             />
         </div>

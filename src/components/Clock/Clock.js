@@ -1,4 +1,6 @@
 import { useCallback, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { globalStateUpdate } from '../../actions';
 import { getFromLocalStorage, saveToLocalStorage } from '../../helpers';
 import LearningPhaseLabel from '../LearningPhaseLabel/LearningPhaseLabel';
 import RemainTimeBar from '../RemainTimeBar/RemainTimeBar';
@@ -6,21 +8,26 @@ import SessionAndBlockCounter from '../SessionAndBlockCounter/SessionAndBlockCou
 import Timer from '../Timer/Timer';
 import './Clock.scss';
 
-const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalState,  setRemainBreakTime, globalState, statistics, setStatistics}) => {
+const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime,  setRemainBreakTime, statistics, setStatistics}) => {
 
-    const {isTimerRun, isLearnPhaseActive, isLearningBlockActive, initBreakTime, initLearnTime} = globalState;
+    const dispatch = useDispatch();
+    const globalStateReducer = (state => state.globalStateReducer);
+
+    const {isTimerRun, isLearnPhaseActive, isLearningBlockActive, initBreakTime, initLearnTime} = globalStateReducer;
 
     const resetTimer = useCallback(() => {
 
-        setGlobalState(prevState => ({
+        dispatch(
+            globalStateUpdate(prevState => ({
             ...prevState,
             isLearnPhaseActive: !prevState.isLearnPhaseActive,
             isTimerRun: false,
-        }))
+            }))
+        )
         setRemainLearnTime(initLearnTime)
         setRemainBreakTime(initBreakTime)
 
-    }, [initBreakTime, initLearnTime, setGlobalState, setRemainBreakTime, setRemainLearnTime])
+    }, [dispatch, initBreakTime, initLearnTime, setRemainBreakTime, setRemainLearnTime])
 
     const updatedStatistics = (statistics) => {
         const statisticsAfter = statistics;
@@ -73,7 +80,6 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
         <div className="clock" data-testid="clock">
 
             <RemainTimeBar 
-                globalState={globalState}
                 remainLearnTime={remainLearnTime}
                 remainBreakTime={remainBreakTime}
             />
@@ -82,8 +88,6 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime, setGlobalS
 
             <SessionAndBlockCounter 
                 remainBreakTime={remainBreakTime}
-                globalState={globalState}
-                setGlobalState={setGlobalState}
             />
 
             {isLearningBlockActive &&

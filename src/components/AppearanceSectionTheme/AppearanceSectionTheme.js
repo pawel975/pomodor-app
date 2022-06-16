@@ -1,7 +1,11 @@
+import { useDispatch } from "react-redux";
+import { globalStateUpdate } from "../../actions";
 import AppearanceSectionThemeOption from "../AppearanceSectionThemeOption/AppearanceSectionThemeOption";
 
-const AppearanceSectionTheme = ({setGlobalState, globalState}) => {
+const AppearanceSectionTheme = () => {
     
+    const dispatch = useDispatch();
+
     const themesParams = [
         {
             themeId: "synthwave-85",
@@ -18,10 +22,11 @@ const AppearanceSectionTheme = ({setGlobalState, globalState}) => {
     ]
 
     const handleThemeChange = (e) => {
-        setGlobalState(prevState => ({
+        dispatch(
+            globalStateUpdate(prevState => ({
             ...prevState,
             themeId: e.target.id
-        }));
+        })))
     }
 
     const allThemesOptions = themesParams.map(theme => (
@@ -30,7 +35,6 @@ const AppearanceSectionTheme = ({setGlobalState, globalState}) => {
             themeId={theme.themeId}
             themeName={theme.themeName}
             handleThemeChange={handleThemeChange}
-            globalState={globalState}
         />
     ))
 

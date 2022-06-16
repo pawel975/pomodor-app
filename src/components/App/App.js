@@ -9,26 +9,15 @@ import { getFromLocalStorage, getLastWeek, saveToLocalStorage } from '../../help
 import RulesInfoSection from '../RulesInfoSection/RulesInfoSection';
 import AppearanceSection from '../AppearanceSection/AppearanceSection';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
-
-export const initGlobalState = {
-  initLearnTime: 1500,
-  initBreakTime: 300,
-  initLongBreakTime: 900,
-  maxSession: 4,
-  maxBlock: 2,
-  currentBlock: 1,
-  currentSession: 1,
-  isLearnPhaseActive: true,
-  isLearningBlockActive: false,
-  isTimerRun: false,
-  themeId: "infinite-ocean",
-  fontId: "concert-one"
-}
+import { useSelector } from 'react-redux';
 
 const App = () => {
 
   const lastWeekDates = getLastWeek();
 
+  const globalStateReducer = useSelector(state => state.globalStateReducer)
+
+  console.log(globalStateReducer)
   // Check if local storage is empty to create record structure, and to update structure if it's not.
   if (!getFromLocalStorage("statistics")) {
       const lastWeekRecords = [];
@@ -60,24 +49,18 @@ const App = () => {
       saveToLocalStorage("statistics", filteredRecords);
   }
   
-  const [globalState, setGlobalState] = useState(
-    getFromLocalStorage("globalState") ? 
-    getFromLocalStorage('globalState') :
-    initGlobalState
-  )
-
   const [statistics, setStatistics] = useState(getFromLocalStorage("statistics"));
 
   const [remainLearnTime, setRemainLearnTime] = useState(
     getFromLocalStorage("remainLearnTime") ?
     getFromLocalStorage("remainLearnTime") :
-    globalState.initLearnTime
+    globalStateReducer.initLearnTime
   );
 
   const [remainBreakTime, setRemainBreakTime] = useState(
     getFromLocalStorage("remainBreakTime") ?
     getFromLocalStorage("remainBreakTime") :
-    globalState.initBreakTime
+    globalStateReducer.initBreakTime
   );
 
   const [activeModalContentBtnId, setActiveModalContentBtnId] = useState("");
@@ -91,8 +74,6 @@ const App = () => {
       case "settings-nav-btn":
         return (
           <SettingsSection
-            globalState={globalState}
-            setGlobalState={setGlobalState}
             setIsModalOpen={setIsModalOpen}
             setRemainLearnTime={setRemainLearnTime}
             setRemainBreakTime={setRemainBreakTime}
@@ -103,12 +84,7 @@ const App = () => {
       case "rules-info-nav-btn":
         return <RulesInfoSection/>
       case "appearance-section-nav-btn":
-        return (
-          <AppearanceSection
-            globalState={globalState}
-            setGlobalState={setGlobalState}
-          />
-        )
+        return <AppearanceSection/>
       default:
         break
     }
@@ -116,7 +92,7 @@ const App = () => {
 
   useEffect(() => {
 
-    const activeThemeId = globalState.themeId
+    const activeThemeId = globalStateReducer.themeId
     // Assign particular filter on whole app to generate theme based on theme id
     switch(activeThemeId) {
       case "synthwave-85":
@@ -131,11 +107,11 @@ const App = () => {
       default:
           break
   }
-  },[globalState.themeId])
+  },[globalStateReducer.themeId])
 
   useEffect(() => {
 
-    const activeFontId = globalState.fontId
+    const activeFontId = globalStateReducer.fontId
     // Assign particular filter on whole app to generate theme based on theme id
     switch(activeFontId) {
       case "concert-one":
@@ -150,7 +126,7 @@ const App = () => {
       default:
           break
   }
-  },[globalState.fontId])
+  },[globalStateReducer.fontId])
 
   return (
     <div className="app" data-testid="app">
@@ -176,16 +152,12 @@ const App = () => {
         remainBreakTime={remainBreakTime}
         setRemainLearnTime={setRemainLearnTime}
         setRemainBreakTime={setRemainBreakTime}
-        globalState={globalState}
-        setGlobalState={setGlobalState}
       />
 
       <ControlPanel
         remainBreakTime={remainBreakTime}
         setRemainLearnTime={setRemainLearnTime}
         setRemainBreakTime={setRemainBreakTime}
-        globalState={globalState}
-        setGlobalState={setGlobalState}
       />
 
     </div>

@@ -1,8 +1,11 @@
+import { useSelector } from 'react-redux';
 import './SkipBtn.scss';
 
-const SkipBtn = ({globalState, handleSkipBtnClick}) => {
+const SkipBtn = ({handleSkipBtnClick}) => {
 
-    const {isTimerRun, isLearningBlockActive} = globalState;
+    const globalStateReducer = useSelector(state => state.globalStateReducer);
+
+    const {isTimerRun, isLearningBlockActive} = globalStateReducer;
 
     let shouldSkipBtnBeVisible = false;
 

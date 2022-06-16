@@ -1,7 +1,9 @@
 
 
-const AppearanceSectionThemeOption = ({themeId, themeName, handleThemeChange, globalState}) => {
+const AppearanceSectionThemeOption = ({themeId, themeName, handleThemeChange}) => {
     
+    const globalStateReducer = (state => state.globalStateReducer);
+
     return (
         <label 
             onClick={(e) => handleThemeChange(e)}
@@ -13,7 +15,7 @@ const AppearanceSectionThemeOption = ({themeId, themeName, handleThemeChange, gl
                 type="radio" 
                 name='choose-theme'
                 data-testid={themeId}
-                checked={themeId === globalState.themeId}
+                checked={themeId === globalStateReducer.themeId}
                 id={themeId}
                 readOnly
             ></input>

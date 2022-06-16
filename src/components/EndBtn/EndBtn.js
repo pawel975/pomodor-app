@@ -1,8 +1,11 @@
+import { useSelector } from 'react-redux';
 import './EndBtn.scss';
 
-const EndBtn = ({handleEndBtnClick, globalState}) => {
+const EndBtn = ({handleEndBtnClick}) => {
 
-    const {isTimerRun, isLearningBlockActive} = globalState;
+    const globalStateReducer = useSelector(state => state.globalStateReducer);
+
+    const {isTimerRun, isLearningBlockActive} = globalStateReducer;
 
     let shouldEndBtnBeVisible;
 

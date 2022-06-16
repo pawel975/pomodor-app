@@ -1,7 +1,8 @@
 
-
-const AppearanceSectionFontOption = ({fontId, fontName, handleFontChange, globalState}) => {
+const AppearanceSectionFontOption = ({fontId, fontName, handleFontChange}) => {
     
+    const globalStateReducer = (state => state.globalStateReducer);
+
     return (
         <label 
             onClick={(e) => handleFontChange(e)}
@@ -13,7 +14,7 @@ const AppearanceSectionFontOption = ({fontId, fontName, handleFontChange, global
                 type="radio" 
                 name='choose-font'
                 data-testid={fontId}
-                checked={fontId === globalState.fontId}
+                checked={fontId === globalStateReducer.fontId}
                 id={fontId}
             ></input>
             <span className='checkmark'>{fontName}</span>

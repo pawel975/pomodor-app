@@ -2,21 +2,15 @@ import AppearanceSectionFont from '../AppearanceSectionFont/AppearanceSectionFon
 import AppearanceSectionTheme from '../AppearanceSectionTheme/AppearanceSectionTheme';
 import  './AppearanceSection.scss';
 
-const AppearanceSection = ({globalState, setGlobalState}) => {
+const AppearanceSection = () => {
 
     return (
         <section
             className="appearance-section"
             data-testid="appearance-section"
         >
-            <AppearanceSectionTheme 
-                globalState={globalState}
-                setGlobalState={setGlobalState}
-            />
-            <AppearanceSectionFont    
-                globalState={globalState}
-                setGlobalState={setGlobalState}
-            />
+            <AppearanceSectionTheme />
+            <AppearanceSectionFont />
         </section>
     )
 }

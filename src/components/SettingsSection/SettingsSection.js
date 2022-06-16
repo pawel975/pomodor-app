@@ -1,16 +1,36 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { globalStateUpdate } from '../../actions';
 import { formatSecondsToMinutes } from '../../helpers';
-import { initGlobalState } from '../App/App';
 import SettingsSectionParam from '../SettingsSectionParam/SettingsSectionParam';
 import './SettingsSection.scss';
 
-const SettingsSection = ({globalState, setGlobalState, setIsModalOpen, setRemainLearnTime, setRemainBreakTime}) => {
+const initGlobalState = 
+    {
+        initLearnTime: 1500,
+        initBreakTime: 300,
+        initLongBreakTime: 900,
+        maxSession: 4,
+        maxBlock: 2,
+        currentBlock: 1,
+        currentSession: 1,
+        isLearnPhaseActive: true,
+        isLearningBlockActive: false,
+        isTimerRun: false,
+        themeId: "infinite-ocean",
+        fontId: "concert-one"
+    }
+
+const SettingsSection = ({setIsModalOpen, setRemainLearnTime, setRemainBreakTime}) => {
+
+    const dispatch = useDispatch();
+    const globalStateReducer = useSelector(state => state.globalStateReducer)
 
     const userStateData = [
         {
             paramId: "learning-time",
             paramName: "Learning Time",
-            paramValue: formatSecondsToMinutes(globalState.initLearnTime),
+            paramValue: formatSecondsToMinutes(globalStateReducer.initLearnTime),
             min: 10,
             max: 120,
             type: 'time',
@@ -19,7 +39,7 @@ const SettingsSection = ({globalState, setGlobalState, setIsModalOpen, setRemain
         {
             paramId: "break-time",
             paramName: "Break Time",
-            paramValue: formatSecondsToMinutes(globalState.initBreakTime),
+            paramValue: formatSecondsToMinutes(globalStateReducer.initBreakTime),
             min: 2,
             max: 30,
             type: 'time',
@@ -28,7 +48,7 @@ const SettingsSection = ({globalState, setGlobalState, setIsModalOpen, setRemain
         {
             paramId: "long-break-time",
             paramName: "Long Break Time",
-            paramValue: formatSecondsToMinutes(globalState.initLongBreakTime),
+            paramValue: formatSecondsToMinutes(globalStateReducer.initLongBreakTime),
             min: 5,
             max: 60,
             type: 'time',
@@ -37,7 +57,7 @@ const SettingsSection = ({globalState, setGlobalState, setIsModalOpen, setRemain
         {
             paramId: "sessions-per-block",
             paramName: "Sessions Per Block",
-            paramValue: globalState.maxSession,
+            paramValue: globalStateReducer.maxSession,
             min: 2,
             max: 6,
             type: 'none',
@@ -46,7 +66,7 @@ const SettingsSection = ({globalState, setGlobalState, setIsModalOpen, setRemain
         {
             paramId: "amount-of-blocks",
             paramName: "Amount Of Blocks",
-            paramValue: globalState.maxBlock,
+            paramValue: globalStateReducer.maxBlock,
             min: 1,
             max: 4,
             type: 'none',
@@ -54,31 +74,39 @@ const SettingsSection = ({globalState, setGlobalState, setIsModalOpen, setRemain
         },
     ]
     
-    const [tempStateToSaveToGlobal, setTempStateToSaveToGlobal] = useState(globalState);
+    const [tempStateToSaveToGlobal, setTempStateToSaveToGlobal] = useState(globalStateReducer);
 
     const handleAcceptChanges = (e) => {
         e.preventDefault();
         setRemainLearnTime(tempStateToSaveToGlobal.initLearnTime)
         setRemainBreakTime(tempStateToSaveToGlobal.initBreakTime)
-        setGlobalState(prevState => ({
+
+        dispatch(
+            globalStateUpdate(prevState => ({
             ...prevState,
             ...tempStateToSaveToGlobal,
             isLearnPhaseActive: true,
             isLearningBlockActive: false,
             isTimerRun: false,
-        }));
-        setIsModalOpen(false);
+            }))
+        )
+
+        setIsModalOpen(false)
     }
 
     const handleResetSettings = (e) => {
         e.preventDefault();
-        setRemainLearnTime(initGlobalState.initLearnTime);
-        setRemainBreakTime(initGlobalState.initBreakTime);
-        setGlobalState(prevState => ({
+        setRemainLearnTime(globalStateReducer.initLearnTime);
+        setRemainBreakTime(globalStateReducer.initBreakTime);
+
+        dispatch(
+            globalStateUpdate(prevState => ({
             ...prevState,
             ...initGlobalState,
             themeId: prevState.themeId,
-        }));
+            }))
+        )
+
         setIsModalOpen(false);
     }
 
@@ -91,7 +119,6 @@ const SettingsSection = ({globalState, setGlobalState, setIsModalOpen, setRemain
             min={param.min}
             max={param.max}
             type={param.type}
-            setGlobalState={setGlobalState}
             globalStatePropName={param.globalStatePropName}
             tempStateToSaveToGlobal={tempStateToSaveToGlobal}
             setTempStateToSaveToGlobal={setTempStateToSaveToGlobal}
