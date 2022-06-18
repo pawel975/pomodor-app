@@ -2,10 +2,12 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import './RemainTimeBar.scss';
 
-const RemainTimeBar = ({remainLearnTime, remainBreakTime}) => {
+const RemainTimeBar = () => {
  
     const globalStateReducer = useSelector(state => state.globalState);
-
+    const remainLearnTimeReducer = useSelector(state => state.remainLearnTime);
+    const remainBreakTimeReducer = useSelector(state => state.remainBreakTime);
+    
     const {initBreakTime, initLearnTime, isLearnPhaseActive} = globalStateReducer;
 
     // Gets default font size for current resolution without 'px'
@@ -20,7 +22,7 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime}) => {
         
         if (isLearnPhaseActive) {
 
-            const offset = defaultStrokeArray - (defaultStrokeArray * (remainLearnTime / initLearnTime))
+            const offset = defaultStrokeArray - (defaultStrokeArray * (remainLearnTimeReducer / initLearnTime))
 
             if (offset > 0) {
                 setStrokeOffset(offset)
@@ -30,7 +32,7 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime}) => {
 
         } else {
             
-            const offset = defaultStrokeArray - (defaultStrokeArray * (remainBreakTime / initBreakTime))
+            const offset = defaultStrokeArray - (defaultStrokeArray * (remainBreakTimeReducer / initBreakTime))
             
             if (offset > 0) {
                 setStrokeOffset(offset)
@@ -39,7 +41,7 @@ const RemainTimeBar = ({remainLearnTime, remainBreakTime}) => {
             }
         }
 
-    },[defaultStrokeArray, initBreakTime, initLearnTime, isLearnPhaseActive, remainBreakTime, remainLearnTime])
+    },[defaultStrokeArray, initBreakTime, initLearnTime, isLearnPhaseActive, remainBreakTimeReducer, remainLearnTimeReducer])
     
     useEffect(() => {
         refreshRemainTime();

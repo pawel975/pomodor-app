@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { globalStateUpdate } from '../../actions';
+import { globalStateUpdate, remainBreakTimeUpdate, remainLearnTimeUpdate } from '../../actions';
 import { formatSecondsToMinutes } from '../../helpers';
 import SettingsSectionParam from '../SettingsSectionParam/SettingsSectionParam';
 import './SettingsSection.scss';
@@ -21,7 +21,7 @@ const initGlobalState =
         fontId: "concert-one"
     }
 
-const SettingsSection = ({setIsModalOpen, setRemainLearnTime, setRemainBreakTime}) => {
+const SettingsSection = ({setIsModalOpen}) => {
 
     const dispatch = useDispatch();
     const globalStateReducer = useSelector(state => state.globalState)
@@ -78,32 +78,34 @@ const SettingsSection = ({setIsModalOpen, setRemainLearnTime, setRemainBreakTime
 
     const handleAcceptChanges = (e) => {
         e.preventDefault();
-        setRemainLearnTime(tempStateToSaveToGlobal.initLearnTime)
-        setRemainBreakTime(tempStateToSaveToGlobal.initBreakTime)
 
         dispatch(
             globalStateUpdate({
-            ...tempStateToSaveToGlobal,
-            isLearnPhaseActive: true,
-            isLearningBlockActive: false,
-            isTimerRun: false,
+                ...tempStateToSaveToGlobal,
+                isLearnPhaseActive: true,
+                isLearningBlockActive: false,
+                isTimerRun: false,
             })
         )
+
+        dispatch(remainLearnTimeUpdate(tempStateToSaveToGlobal.initLearnTime));
+        dispatch(remainBreakTimeUpdate(tempStateToSaveToGlobal.initBreakTime));
 
         setIsModalOpen(false)
     }
 
     const handleResetSettings = (e) => {
         e.preventDefault();
-        setRemainLearnTime(globalStateReducer.initLearnTime);
-        setRemainBreakTime(globalStateReducer.initBreakTime);
-
+        
         dispatch(
             globalStateUpdate({
                 ...initGlobalState,
                 themeId: globalStateReducer.themeId,
             })
         )
+
+        dispatch(remainLearnTimeUpdate(initGlobalState.initLearnTime));
+        dispatch(remainBreakTimeUpdate(initGlobalState.initBreakTime));
 
         setIsModalOpen(false);
     }

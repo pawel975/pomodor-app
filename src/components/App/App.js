@@ -15,7 +15,9 @@ const App = () => {
 
   const lastWeekDates = getLastWeek();
 
-  const globalStateReducer = useSelector(state => state.globalState)
+  const globalStateReducer = useSelector(state => state.globalState);
+  const remainLearnTimeReducer = useSelector(state => state.remainLearnTime)
+  const remainBreakTimeReducer = useSelector(state => state.remainBreakTime);
 
   // Check if local storage is empty to create record structure, and to update structure if it's not.
   if (!getFromLocalStorage("statistics")) {
@@ -50,23 +52,11 @@ const App = () => {
   
   const [statistics, setStatistics] = useState(getFromLocalStorage("statistics"));
 
-  const [remainLearnTime, setRemainLearnTime] = useState(
-    getFromLocalStorage("remainLearnTime") ?
-    getFromLocalStorage("remainLearnTime") :
-    globalStateReducer.initLearnTime
-  );
-
-  const [remainBreakTime, setRemainBreakTime] = useState(
-    getFromLocalStorage("remainBreakTime") ?
-    getFromLocalStorage("remainBreakTime") :
-    globalStateReducer.initBreakTime
-  );
-
   const [activeModalContentBtnId, setActiveModalContentBtnId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  saveToLocalStorage("remainLearnTime", remainLearnTime);
-  saveToLocalStorage("remainBreakTime", remainBreakTime);
+  saveToLocalStorage("remainLearnTime", remainLearnTimeReducer);
+  saveToLocalStorage("remainBreakTime", remainBreakTimeReducer);
 
   const getModalContent = (activeModalContentBtnId) => {
     switch(activeModalContentBtnId) {
@@ -74,8 +64,6 @@ const App = () => {
         return (
           <SettingsSection
             setIsModalOpen={setIsModalOpen}
-            setRemainLearnTime={setRemainLearnTime}
-            setRemainBreakTime={setRemainBreakTime}
           />
         )
       case "statistics-nav-btn":
@@ -147,17 +135,9 @@ const App = () => {
       <Clock 
         statistics={statistics}
         setStatistics={setStatistics}
-        remainLearnTime={remainLearnTime}
-        remainBreakTime={remainBreakTime}
-        setRemainLearnTime={setRemainLearnTime}
-        setRemainBreakTime={setRemainBreakTime}
       />
 
-      <ControlPanel
-        remainBreakTime={remainBreakTime}
-        setRemainLearnTime={setRemainLearnTime}
-        setRemainBreakTime={setRemainBreakTime}
-      />
+      <ControlPanel />
 
     </div>
   );

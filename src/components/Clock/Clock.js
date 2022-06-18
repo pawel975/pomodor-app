@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { globalStateUpdate } from '../../actions';
+import { globalStateUpdate, remainBreakTimeUpdate, remainLearnTimeUpdate } from '../../actions';
 import { getFromLocalStorage, saveToLocalStorage } from '../../helpers';
 import LearningPhaseLabel from '../LearningPhaseLabel/LearningPhaseLabel';
 import RemainTimeBar from '../RemainTimeBar/RemainTimeBar';
@@ -8,10 +8,12 @@ import SessionAndBlockCounter from '../SessionAndBlockCounter/SessionAndBlockCou
 import Timer from '../Timer/Timer';
 import './Clock.scss';
 
-const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime,  setRemainBreakTime, statistics, setStatistics}) => {
+const Clock = ({statistics, setStatistics}) => {
 
     const dispatch = useDispatch();
     const globalStateReducer = useSelector(state => state.globalState);
+    const remainLearnTimeReducer = useSelector(state => state.remainLearnTime);
+    const remainBreakTimeReducer = useSelector(state => state.remainBreakTime);
 
     const {isTimerRun, isLearnPhaseActive, isLearningBlockActive, initBreakTime, initLearnTime} = globalStateReducer;
 
@@ -23,10 +25,11 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime,  setRemain
                 isTimerRun: false,
             })
         )
-        setRemainLearnTime(initLearnTime)
-        setRemainBreakTime(initBreakTime)
 
-    }, [dispatch, initBreakTime, initLearnTime, isLearnPhaseActive, setRemainBreakTime, setRemainLearnTime])
+        dispatch(remainLearnTimeUpdate(initLearnTime))
+        dispatch(remainBreakTimeUpdate(initBreakTime))
+
+    }, [dispatch, initBreakTime, initLearnTime, isLearnPhaseActive])
 
     const updatedStatistics = (statistics) => {
         const statisticsAfter = statistics;
@@ -42,24 +45,24 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime,  setRemain
 
             if (isLearnPhaseActive) {
 
-                if (remainLearnTime > 0) {
+                if (remainLearnTimeReducer > 0) {
                     countingTimeout = setTimeout(() => {
-                        setRemainLearnTime(remainLearnTime - 1)
+                        dispatch(remainLearnTimeUpdate(remainLearnTimeReducer - 1))
                         saveToLocalStorage("statistics", updatedStatistics(statistics));
                         setStatistics(getFromLocalStorage("statistics"));
                     }, 1000);
                 } else {
                     countingTimeout = setTimeout(() => {
-                        resetTimer();
+                        resetTimer(initLearnTime);
                     }, 1000);
 
                 }
 
             } else {
                 
-                if (remainBreakTime > 0) {
+                if (remainBreakTimeReducer > 0) {
                     countingTimeout = setTimeout(() => {
-                        setRemainBreakTime(remainBreakTime - 1)
+                        dispatch(remainBreakTimeUpdate(remainBreakTimeReducer - 1))
                     }, 1000);
                 } else {
                     countingTimeout = setTimeout(() => {
@@ -73,21 +76,16 @@ const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime,  setRemain
             }
         }
 
-    },[isLearnPhaseActive, isTimerRun, remainBreakTime, remainLearnTime, resetTimer, setRemainBreakTime, setRemainLearnTime, setStatistics, statistics])
+    },[dispatch, initLearnTime, isLearnPhaseActive, isTimerRun, remainBreakTimeReducer, remainLearnTimeReducer, resetTimer, setStatistics, statistics])
 
     return (
         <div className="clock" data-testid="clock">
 
-            <RemainTimeBar 
-                remainLearnTime={remainLearnTime}
-                remainBreakTime={remainBreakTime}
-            />
+            <RemainTimeBar />
 
-            <Timer countDownTime={isLearnPhaseActive ? remainLearnTime : remainBreakTime}/>
+            <Timer countDownTime={isLearnPhaseActive ? remainLearnTimeReducer : remainBreakTimeReducer}/>
 
-            <SessionAndBlockCounter 
-                remainBreakTime={remainBreakTime}
-            />
+            <SessionAndBlockCounter />
 
             {isLearningBlockActive &&
                 <LearningPhaseLabel 

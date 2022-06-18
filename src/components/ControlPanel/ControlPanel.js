@@ -1,13 +1,13 @@
 
 import { useDispatch, useSelector } from 'react-redux';
-import { globalStateUpdate } from '../../actions';
+import { globalStateUpdate, remainBreakTimeUpdate, remainLearnTimeUpdate } from '../../actions';
 import { saveToLocalStorage } from '../../helpers';
 import EndBtn from '../EndBtn/EndBtn';
 import SkipBtn from '../SkipBtn/SkipBtn';
 import StartPauseBtn from '../StartPauseBtn/StartPauseBtn';
 import './ControlPanel.scss';
 
-const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
+const ControlPanel = () => {
 
     const dispatch = useDispatch();
     const globalStateReducer = useSelector(state => state.globalState);
@@ -45,7 +45,6 @@ const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
                             currentSession: 1,
                         })
                     )
-
                 }
             }
         }
@@ -56,13 +55,12 @@ const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
             })
         )
 
-        setRemainLearnTime(initLearnTime)
-        setRemainBreakTime(initBreakTime)
+        dispatch(remainLearnTimeUpdate(initLearnTime))
+        dispatch(remainBreakTimeUpdate(initBreakTime))
 
     }
 
     const handleStartPauseBtnClick = () => {
-        console.log(globalStateReducer)
         dispatch(
             globalStateUpdate({
                 isTimerRun: !isTimerRun,
@@ -80,7 +78,7 @@ const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
                 currentSession: 1,
             })
         )
-        setRemainLearnTime(initLearnTime);
+        dispatch(remainLearnTimeUpdate(initLearnTime));
     }
 
     return (

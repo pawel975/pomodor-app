@@ -3,16 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { globalStateUpdate } from '../../actions';
 import './SessionAndBlockCounter.scss';
 
-const SessionAndBlockCounter = ({remainBreakTime}) => {
+const SessionAndBlockCounter = () => {
 
     const dispatch = useDispatch();
     const globalStateReducer = useSelector(state => state.globalState)
+    const remainBreakTimeReducer = useSelector(state => state.remainBreakTime);
 
     const {currentSession, maxSession, currentBlock, maxBlock} = globalStateReducer;
 
     useEffect(() => {
        
-        if (remainBreakTime < 1) {
+        if (remainBreakTimeReducer < 1) {
             
             if (currentSession < maxSession) {
 
@@ -47,7 +48,7 @@ const SessionAndBlockCounter = ({remainBreakTime}) => {
             }
         }
 
-        },[currentBlock, currentSession, dispatch, maxBlock, maxSession, remainBreakTime]
+        },[currentBlock, currentSession, dispatch, maxBlock, maxSession, remainBreakTimeReducer]
     )
 
     return (
