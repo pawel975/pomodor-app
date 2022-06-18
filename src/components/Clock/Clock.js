@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { globalStateUpdate, remainBreakTimeUpdate, remainLearnTimeUpdate, statsticsUpdate } from '../../actions';
+import { globalStateUpdate, remainBreakTimeUpdate, remainLearnTimeUpdate, statsticsUpdate, todaysSecondsLearnedIncrement } from '../../actions';
 import { getFromLocalStorage, saveToLocalStorage } from '../../helpers';
 import LearningPhaseLabel from '../LearningPhaseLabel/LearningPhaseLabel';
 import RemainTimeBar from '../RemainTimeBar/RemainTimeBar';
@@ -32,11 +32,11 @@ const Clock = () => {
 
     }, [dispatch, initBreakTime, initLearnTime, isLearnPhaseActive])
 
-    const incrementStatisticsRecordTime = (statistics) => {
-        const statisticsAfter = statistics;
-        statisticsAfter[0].secondsLearned += 1;
-        return statisticsAfter
-    }
+    // const incrementStatisticsRecordTime = (statistics) => {
+    //     const statisticsAfter = [...statistics];
+    //     statisticsAfter[0].secondsLearned += 1;
+    //     return statisticsAfter
+    // }
 
     useEffect(() => {
         
@@ -49,7 +49,8 @@ const Clock = () => {
                 if (remainLearnTimeReducer > 0) {
                     countingTimeout = setTimeout(() => {
                         dispatch(remainLearnTimeUpdate(remainLearnTimeReducer - 1))
-                        saveToLocalStorage("statistics", incrementStatisticsRecordTime(statisticsReducer));
+                        dispatch(todaysSecondsLearnedIncrement());
+                        saveToLocalStorage("statistics",statisticsReducer);
                         dispatch(statsticsUpdate(getFromLocalStorage("statistics")));
                     }, 1000);
                 } else {

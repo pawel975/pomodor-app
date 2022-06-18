@@ -6,11 +6,12 @@ import { Provider } from 'react-redux';
 import { configureStore } from "@reduxjs/toolkit";
 import allReducers from './reducers';
 
-const store = configureStore({
+export const store = configureStore({
   reducer: allReducers
 });
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root') || document.createElement('div'));
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>

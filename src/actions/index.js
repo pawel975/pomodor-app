@@ -10,3 +10,6 @@ export const remainBreakTimeUpdate = (state) =>
 
 export const statsticsUpdate = (state) => 
     ({type: "STATISTICS_UPDATE", payload: state})
+
+export const todaysSecondsLearnedIncrement = () => 
+    ({type: "TODAYS_SECONDS_LEARNED_INCREMENT"})

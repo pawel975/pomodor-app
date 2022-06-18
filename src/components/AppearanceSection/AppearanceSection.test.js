@@ -1,4 +1,4 @@
-import {render, screen} from '@testing-library/react';
+import {render, screen} from '../../testUtils';
 import AppearanceSection from './AppearanceSection';
 import userEvent from '@testing-library/user-event';
 import AppearanceSectionThemeOption from '../AppearanceSectionThemeOption/AppearanceSectionThemeOption';

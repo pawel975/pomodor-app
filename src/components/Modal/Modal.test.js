@@ -1,4 +1,4 @@
-import {render, screen, fireEvent} from '@testing-library/react';
+import {render, screen, fireEvent} from '../../testUtils';
 import Modal from './Modal';
 import App from '../App/App';
 import userEvent from "@testing-library/user-event";

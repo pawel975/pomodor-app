@@ -36,11 +36,17 @@ if (!getFromLocalStorage("statistics")) {
 
 const initStatistics = getFromLocalStorage("statistics");
 
+
 const statisticsReducer = (state = initStatistics, action) => {
 
     switch (action.type) {
         case "STATISTICS_UPDATE": {
             return state = action.payload
+        }
+        case "TODAYS_SECONDS_LEARNED_INCREMENT": {
+            const newState = JSON.parse(JSON.stringify(state));;
+            newState[0].secondsLearned += 1;
+            return newState;
         }
         default:
             return state

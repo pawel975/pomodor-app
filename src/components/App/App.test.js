@@ -1,4 +1,4 @@
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, render, fireEvent } from "../../testUtils";
 import { act } from "react-dom/test-utils";
 import { sleep } from "../../helpers";
 import Clock from "../Clock/Clock";

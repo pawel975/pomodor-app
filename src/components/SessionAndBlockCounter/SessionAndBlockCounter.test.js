@@ -1,10 +1,11 @@
-import {render, screen} from '@testing-library/react';
+import {render, screen} from '../../testUtils';
 import { useState } from 'react';
 import SessionAndBlockCounter from './SessionAndBlockCounter';
 
 describe('<SessionAndBlockCounter/> should', () => {
-    
+
     test('be rendered properly', () => {
+        
         render(<SessionAndBlockCounter globalState={{}}/>)
         const sessionAndBlockCounterComponent = screen.getByTestId("session-and-block-counter");
         expect(sessionAndBlockCounterComponent).toBeInTheDocument();

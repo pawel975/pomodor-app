@@ -1,4 +1,4 @@
-import {render, screen} from "@testing-library/react";
+import {render, screen} from "../../testUtils";
 import App from "../App/App";
 import RulesInfoBtn from "./RulesInfoBtn";
 import userEvent from '@testing-library/user-event';
