@@ -15,9 +15,8 @@ const App = () => {
 
   const lastWeekDates = getLastWeek();
 
-  const globalStateReducer = useSelector(state => state.globalStateReducer)
+  const globalStateReducer = useSelector(state => state.globalState)
 
-  console.log(globalStateReducer)
   // Check if local storage is empty to create record structure, and to update structure if it's not.
   if (!getFromLocalStorage("statistics")) {
       const lastWeekRecords = [];

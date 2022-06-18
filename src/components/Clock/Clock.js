@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { globalStateUpdate } from '../../actions';
 import { getFromLocalStorage, saveToLocalStorage } from '../../helpers';
 import LearningPhaseLabel from '../LearningPhaseLabel/LearningPhaseLabel';
@@ -11,23 +11,22 @@ import './Clock.scss';
 const Clock = ({remainLearnTime, remainBreakTime, setRemainLearnTime,  setRemainBreakTime, statistics, setStatistics}) => {
 
     const dispatch = useDispatch();
-    const globalStateReducer = (state => state.globalStateReducer);
+    const globalStateReducer = useSelector(state => state.globalState);
 
     const {isTimerRun, isLearnPhaseActive, isLearningBlockActive, initBreakTime, initLearnTime} = globalStateReducer;
 
     const resetTimer = useCallback(() => {
 
         dispatch(
-            globalStateUpdate(prevState => ({
-            ...prevState,
-            isLearnPhaseActive: !prevState.isLearnPhaseActive,
-            isTimerRun: false,
-            }))
+            globalStateUpdate({
+                isLearnPhaseActive: !isLearnPhaseActive,
+                isTimerRun: false,
+            })
         )
         setRemainLearnTime(initLearnTime)
         setRemainBreakTime(initBreakTime)
 
-    }, [dispatch, initBreakTime, initLearnTime, setRemainBreakTime, setRemainLearnTime])
+    }, [dispatch, initBreakTime, initLearnTime, isLearnPhaseActive, setRemainBreakTime, setRemainLearnTime])
 
     const updatedStatistics = (statistics) => {
         const statisticsAfter = statistics;

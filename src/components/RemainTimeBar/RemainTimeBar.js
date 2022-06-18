@@ -4,7 +4,7 @@ import './RemainTimeBar.scss';
 
 const RemainTimeBar = ({remainLearnTime, remainBreakTime}) => {
  
-    const globalStateReducer = useSelector(state => state.globalStateReducer);
+    const globalStateReducer = useSelector(state => state.globalState);
 
     const {initBreakTime, initLearnTime, isLearnPhaseActive} = globalStateReducer;
 

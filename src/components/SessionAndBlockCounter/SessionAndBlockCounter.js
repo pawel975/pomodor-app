@@ -6,7 +6,7 @@ import './SessionAndBlockCounter.scss';
 const SessionAndBlockCounter = ({remainBreakTime}) => {
 
     const dispatch = useDispatch();
-    const globalStateReducer = useSelector(state => state.globalStateReducer)
+    const globalStateReducer = useSelector(state => state.globalState)
 
     const {currentSession, maxSession, currentBlock, maxBlock} = globalStateReducer;
 
@@ -17,10 +17,9 @@ const SessionAndBlockCounter = ({remainBreakTime}) => {
             if (currentSession < maxSession) {
 
                 dispatch(
-                    globalStateUpdate(prevState => ({
-                    ...prevState,
-                    currentSession: currentSession + 1,
-                    }))
+                    globalStateUpdate({
+                        currentSession: currentSession + 1,
+                    })
                 )
 
             } else {
@@ -28,21 +27,19 @@ const SessionAndBlockCounter = ({remainBreakTime}) => {
                 if (currentBlock < maxBlock) {
 
                     dispatch(
-                        globalStateUpdate(prevState => ({
-                        ...prevState,
-                        currentBlock: currentBlock + 1,
-                        currentSession: 1,
-                        }))
+                        globalStateUpdate({
+                            currentBlock: currentBlock + 1,
+                            currentSession: 1,
+                        })
                     )
 
                 } else {
 
                     dispatch(
-                        globalStateUpdate(prevState => ({
-                        ...prevState,
-                        currentBlock: 1,
-                        currentSession: 1,
-                        }))
+                        globalStateUpdate({
+                            currentBlock: 1,
+                            currentSession: 1,
+                        })
                     )
 
                 }

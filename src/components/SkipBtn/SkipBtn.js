@@ -3,7 +3,7 @@ import './SkipBtn.scss';
 
 const SkipBtn = ({handleSkipBtnClick}) => {
 
-    const globalStateReducer = useSelector(state => state.globalStateReducer);
+    const globalStateReducer = useSelector(state => state.globalState);
 
     const {isTimerRun, isLearningBlockActive} = globalStateReducer;
 

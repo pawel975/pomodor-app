@@ -10,9 +10,9 @@ import './ControlPanel.scss';
 const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
 
     const dispatch = useDispatch();
-    const globalStateReducer = useSelector(state => state.globalStateReducer);
+    const globalStateReducer = useSelector(state => state.globalState);
 
-    const {currentSession, maxSession, currentBlock, maxBlock, isLearnPhaseActive, initLearnTime, initBreakTime} = globalStateReducer;
+    const {currentSession, maxSession, currentBlock, maxBlock, isLearnPhaseActive, initLearnTime, initBreakTime, isTimerRun} = globalStateReducer;
 
     saveToLocalStorage("globalState", globalStateReducer);
     
@@ -23,10 +23,7 @@ const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
             if (currentSession < maxSession) {
 
                 dispatch(
-                    globalStateUpdate(prevState => ({
-                        ...prevState,
-                        currentSession: currentSession + 1,
-                    }))
+                    globalStateUpdate({currentSession: currentSession + 1})
                 )
 
             } else {
@@ -34,21 +31,19 @@ const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
                 if (currentBlock < maxBlock) {
 
                     dispatch(
-                        globalStateUpdate(prevState => ({
-                            ...prevState,
+                        globalStateUpdate({
                             currentBlock: currentBlock + 1,
                             currentSession: 1,
-                        }))
+                        })
                     )
 
                 } else {
 
                     dispatch(
-                        globalStateUpdate(prevState => ({
-                            ...prevState,
+                        globalStateUpdate({
                             currentBlock: 1,
                             currentSession: 1,
-                        }))
+                        })
                     )
 
                 }
@@ -56,10 +51,9 @@ const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
         }
 
         dispatch(
-            globalStateUpdate(prevState => ({
-                ...prevState,
-                isLearnPhaseActive: !prevState.isLearnPhaseActive,
-            }))
+            globalStateUpdate({
+                isLearnPhaseActive: !isLearnPhaseActive,
+            })
         )
 
         setRemainLearnTime(initLearnTime)
@@ -68,24 +62,23 @@ const ControlPanel = ({setRemainLearnTime, setRemainBreakTime}) => {
     }
 
     const handleStartPauseBtnClick = () => {
+        console.log(globalStateReducer)
         dispatch(
-            globalStateUpdate(prevState => ({
-                ...prevState,
-                isTimerRun: !prevState.isTimerRun,
+            globalStateUpdate({
+                isTimerRun: !isTimerRun,
                 isLearningBlockActive: true
-            }))
+            })
         )
     }
     
     const handleEndBtnClick = () => {
         dispatch(
-            globalStateUpdate(prevState => ({
-                ...prevState,
+            globalStateUpdate({
                 isLearnPhaseActive: true,
                 isLearningBlockActive: false,
                 currentBlock: 1,
                 currentSession: 1,
-            }))
+            })
         )
         setRemainLearnTime(initLearnTime);
     }

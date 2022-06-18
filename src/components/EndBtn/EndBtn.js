@@ -3,7 +3,7 @@ import './EndBtn.scss';
 
 const EndBtn = ({handleEndBtnClick}) => {
 
-    const globalStateReducer = useSelector(state => state.globalStateReducer);
+    const globalStateReducer = useSelector(state => state.globalState);
 
     const {isTimerRun, isLearningBlockActive} = globalStateReducer;
 

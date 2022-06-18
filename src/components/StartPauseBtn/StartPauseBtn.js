@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 const StartPauseBtn = ({handleStartPauseBtnClick}) => {
 
-    const globalStateReducer = useSelector(state => state.globalStateReducer);
+    const globalStateReducer = useSelector(state => state.globalState);
     
     const {isTimerRun, isLearningBlockActive} = globalStateReducer;
 

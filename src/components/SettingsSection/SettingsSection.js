@@ -24,7 +24,7 @@ const initGlobalState =
 const SettingsSection = ({setIsModalOpen, setRemainLearnTime, setRemainBreakTime}) => {
 
     const dispatch = useDispatch();
-    const globalStateReducer = useSelector(state => state.globalStateReducer)
+    const globalStateReducer = useSelector(state => state.globalState)
 
     const userStateData = [
         {
