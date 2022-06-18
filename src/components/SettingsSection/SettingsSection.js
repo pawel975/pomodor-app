@@ -82,13 +82,12 @@ const SettingsSection = ({setIsModalOpen, setRemainLearnTime, setRemainBreakTime
         setRemainBreakTime(tempStateToSaveToGlobal.initBreakTime)
 
         dispatch(
-            globalStateUpdate(prevState => ({
-            ...prevState,
+            globalStateUpdate({
             ...tempStateToSaveToGlobal,
             isLearnPhaseActive: true,
             isLearningBlockActive: false,
             isTimerRun: false,
-            }))
+            })
         )
 
         setIsModalOpen(false)
@@ -100,11 +99,10 @@ const SettingsSection = ({setIsModalOpen, setRemainLearnTime, setRemainBreakTime
         setRemainBreakTime(globalStateReducer.initBreakTime);
 
         dispatch(
-            globalStateUpdate(prevState => ({
-            ...prevState,
-            ...initGlobalState,
-            themeId: prevState.themeId,
-            }))
+            globalStateUpdate({
+                ...initGlobalState,
+                themeId: globalStateReducer.themeId,
+            })
         )
 
         setIsModalOpen(false);

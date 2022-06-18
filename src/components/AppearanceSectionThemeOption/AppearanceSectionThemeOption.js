@@ -1,8 +1,8 @@
-
+import {useSelector} from 'react-redux';
 
 const AppearanceSectionThemeOption = ({themeId, themeName, handleThemeChange}) => {
     
-    const globalStateReducer = (state => state.globalStateReducer);
+    const globalStateReducer = useSelector(state => state.globalState);
 
     return (
         <label 

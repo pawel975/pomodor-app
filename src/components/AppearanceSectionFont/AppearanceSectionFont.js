@@ -24,10 +24,9 @@ const AppearanceSectionFont = () => {
 
     const handleFontChange = (e) => {
         dispatch(
-            globalStateUpdate(prevState => ({
-            ...prevState,
-            fontId: e.target.id,
-            }))
+            globalStateUpdate({
+                fontId: e.target.id,
+            })
         )
     }
 

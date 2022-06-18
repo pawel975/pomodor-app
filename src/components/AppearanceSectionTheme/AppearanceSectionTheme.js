@@ -23,10 +23,10 @@ const AppearanceSectionTheme = () => {
 
     const handleThemeChange = (e) => {
         dispatch(
-            globalStateUpdate(prevState => ({
-            ...prevState,
-            themeId: e.target.id
-        })))
+            globalStateUpdate({
+                themeId: e.target.id
+            })
+        )
     }
 
     const allThemesOptions = themesParams.map(theme => (

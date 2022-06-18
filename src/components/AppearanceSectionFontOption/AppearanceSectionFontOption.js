@@ -1,7 +1,8 @@
+import {useSelector} from 'react-redux';
 
 const AppearanceSectionFontOption = ({fontId, fontName, handleFontChange}) => {
     
-    const globalStateReducer = (state => state.globalStateReducer);
+    const globalStateReducer = useSelector(state => state.globalState);
 
     return (
         <label 
@@ -16,6 +17,7 @@ const AppearanceSectionFontOption = ({fontId, fontName, handleFontChange}) => {
                 data-testid={fontId}
                 checked={fontId === globalStateReducer.fontId}
                 id={fontId}
+                readOnly
             ></input>
             <span className='checkmark'>{fontName}</span>
         </label>
