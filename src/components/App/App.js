@@ -5,7 +5,7 @@ import Nav from '../Nav/Nav';
 import Modal from '../Modal/Modal';
 import './App.scss';
 import SettingsSection from '../SettingsSection/SettingsSection';
-import { getFromLocalStorage, getLastWeek, saveToLocalStorage } from '../../helpers';
+import { saveToLocalStorage } from '../../helpers';
 import RulesInfoSection from '../RulesInfoSection/RulesInfoSection';
 import AppearanceSection from '../AppearanceSection/AppearanceSection';
 import StatisticsSection from '../StatisticsSection/StatisticsSection';
@@ -13,45 +13,10 @@ import { useSelector } from 'react-redux';
 
 const App = () => {
 
-  const lastWeekDates = getLastWeek();
-
   const globalStateReducer = useSelector(state => state.globalState);
   const remainLearnTimeReducer = useSelector(state => state.remainLearnTime)
   const remainBreakTimeReducer = useSelector(state => state.remainBreakTime);
-
-  // Check if local storage is empty to create record structure, and to update structure if it's not.
-  if (!getFromLocalStorage("statistics")) {
-      const lastWeekRecords = [];
-
-      lastWeekDates.forEach(dayDate => {
-          lastWeekRecords.push({
-              date: dayDate,
-              minutesLearned: 0
-          })
-      })
-
-      saveToLocalStorage("statistics", lastWeekRecords);
-  } else {
-
-      const lastWeekRecords = getFromLocalStorage("statistics");
-      const filteredRecords = [];
-
-      lastWeekDates.forEach(day => {
-
-          const matchedRecordDay = lastWeekRecords.filter(record => record.date === day)
-
-          if (matchedRecordDay[0]) {
-              filteredRecords.push(matchedRecordDay[0])
-          } else {
-              filteredRecords.push({date: day, minutesLearned: 0})
-          }
-      })
-
-      saveToLocalStorage("statistics", filteredRecords);
-  }
   
-  const [statistics, setStatistics] = useState(getFromLocalStorage("statistics"));
-
   const [activeModalContentBtnId, setActiveModalContentBtnId] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -131,12 +96,8 @@ const App = () => {
           setActiveModalContentBtnId={setActiveModalContentBtnId}
         />
       }
-
-      <Clock 
-        statistics={statistics}
-        setStatistics={setStatistics}
-      />
-
+      
+      <Clock />
       <ControlPanel />
 
     </div>

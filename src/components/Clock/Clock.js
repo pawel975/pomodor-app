@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { globalStateUpdate, remainBreakTimeUpdate, remainLearnTimeUpdate } from '../../actions';
+import { globalStateUpdate, remainBreakTimeUpdate, remainLearnTimeUpdate, statsticsUpdate } from '../../actions';
 import { getFromLocalStorage, saveToLocalStorage } from '../../helpers';
 import LearningPhaseLabel from '../LearningPhaseLabel/LearningPhaseLabel';
 import RemainTimeBar from '../RemainTimeBar/RemainTimeBar';
@@ -8,12 +8,13 @@ import SessionAndBlockCounter from '../SessionAndBlockCounter/SessionAndBlockCou
 import Timer from '../Timer/Timer';
 import './Clock.scss';
 
-const Clock = ({statistics, setStatistics}) => {
+const Clock = () => {
 
     const dispatch = useDispatch();
     const globalStateReducer = useSelector(state => state.globalState);
     const remainLearnTimeReducer = useSelector(state => state.remainLearnTime);
     const remainBreakTimeReducer = useSelector(state => state.remainBreakTime);
+    const statisticsReducer = useSelector(state => state.statistics);
 
     const {isTimerRun, isLearnPhaseActive, isLearningBlockActive, initBreakTime, initLearnTime} = globalStateReducer;
 
@@ -31,9 +32,9 @@ const Clock = ({statistics, setStatistics}) => {
 
     }, [dispatch, initBreakTime, initLearnTime, isLearnPhaseActive])
 
-    const updatedStatistics = (statistics) => {
+    const incrementStatisticsRecordTime = (statistics) => {
         const statisticsAfter = statistics;
-        statisticsAfter[0].minutesLearned += 1;
+        statisticsAfter[0].secondsLearned += 1;
         return statisticsAfter
     }
 
@@ -48,8 +49,8 @@ const Clock = ({statistics, setStatistics}) => {
                 if (remainLearnTimeReducer > 0) {
                     countingTimeout = setTimeout(() => {
                         dispatch(remainLearnTimeUpdate(remainLearnTimeReducer - 1))
-                        saveToLocalStorage("statistics", updatedStatistics(statistics));
-                        setStatistics(getFromLocalStorage("statistics"));
+                        saveToLocalStorage("statistics", incrementStatisticsRecordTime(statisticsReducer));
+                        dispatch(statsticsUpdate(getFromLocalStorage("statistics")));
                     }, 1000);
                 } else {
                     countingTimeout = setTimeout(() => {
@@ -76,7 +77,7 @@ const Clock = ({statistics, setStatistics}) => {
             }
         }
 
-    },[dispatch, initLearnTime, isLearnPhaseActive, isTimerRun, remainBreakTimeReducer, remainLearnTimeReducer, resetTimer, setStatistics, statistics])
+    },[dispatch, initLearnTime, isLearnPhaseActive, isTimerRun, remainBreakTimeReducer, remainLearnTimeReducer, resetTimer, statisticsReducer])
 
     return (
         <div className="clock" data-testid="clock">

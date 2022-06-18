@@ -8,3 +8,5 @@ export const remainLearnTimeUpdate = (state) =>
 export const remainBreakTimeUpdate = (state) => 
     ({type: "REMAIN_BREAK_TIME_UPDATE", payload: state })
 
+export const statsticsUpdate = (state) => 
+    ({type: "STATISTICS_UPDATE", payload: state})
