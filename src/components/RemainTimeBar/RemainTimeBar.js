@@ -8,7 +8,7 @@ const RemainTimeBar = () => {
     const remainLearnTimeReducer = useSelector(state => state.remainLearnTime);
     const remainBreakTimeReducer = useSelector(state => state.remainBreakTime);
     
-    const {initBreakTime, initLearnTime, isLearnPhaseActive} = globalStateReducer;
+    const {initBreakTime, initLongBreakTime, initLearnTime, isLearnPhaseActive, currentSession, maxSession} = globalStateReducer;
 
     // Gets default font size for current resolution without 'px'
     const htmlFontSize = window.getComputedStyle(document.documentElement).getPropertyValue("font-size").slice(0,-2)
@@ -32,7 +32,9 @@ const RemainTimeBar = () => {
 
         } else {
             
-            const offset = defaultStrokeArray - (defaultStrokeArray * (remainBreakTimeReducer / initBreakTime))
+            const currentBreakType = currentSession === maxSession ? initLongBreakTime : initBreakTime;
+
+            const offset = defaultStrokeArray - (defaultStrokeArray * (remainBreakTimeReducer / currentBreakType))
             
             if (offset > 0) {
                 setStrokeOffset(offset)
@@ -41,7 +43,7 @@ const RemainTimeBar = () => {
             }
         }
 
-    },[defaultStrokeArray, initBreakTime, initLearnTime, isLearnPhaseActive, remainBreakTimeReducer, remainLearnTimeReducer])
+    },[currentSession, defaultStrokeArray, initBreakTime, initLearnTime, initLongBreakTime, isLearnPhaseActive, maxSession, remainBreakTimeReducer, remainLearnTimeReducer])
     
     useEffect(() => {
         refreshRemainTime();

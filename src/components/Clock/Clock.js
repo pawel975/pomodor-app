@@ -16,7 +16,7 @@ const Clock = () => {
     const remainBreakTimeReducer = useSelector(state => state.remainBreakTime);
     const statisticsReducer = useSelector(state => state.statistics);
 
-    const {isTimerRun, isLearnPhaseActive, isLearningBlockActive, initBreakTime, initLearnTime} = globalStateReducer;
+    const {isTimerRun, isLearnPhaseActive, isLearningBlockActive, initBreakTime, initLongBreakTime, initLearnTime, currentSession, maxBlock, maxSession, currentBlock} = globalStateReducer;
 
     const resetTimer = useCallback(() => {
 
@@ -27,16 +27,7 @@ const Clock = () => {
             })
         )
 
-        dispatch(remainLearnTimeUpdate(initLearnTime))
-        dispatch(remainBreakTimeUpdate(initBreakTime))
-
-    }, [dispatch, initBreakTime, initLearnTime, isLearnPhaseActive])
-
-    // const incrementStatisticsRecordTime = (statistics) => {
-    //     const statisticsAfter = [...statistics];
-    //     statisticsAfter[0].secondsLearned += 1;
-    //     return statisticsAfter
-    // }
+    }, [dispatch, isLearnPhaseActive])
 
     useEffect(() => {
         
@@ -44,31 +35,78 @@ const Clock = () => {
 
             let countingTimeout;
 
+            // Learning Phase
             if (isLearnPhaseActive) {
 
                 if (remainLearnTimeReducer > 0) {
-                    countingTimeout = setTimeout(() => {
-                        dispatch(remainLearnTimeUpdate(remainLearnTimeReducer - 1))
-                        dispatch(todaysSecondsLearnedIncrement());
-                        saveToLocalStorage("statistics",statisticsReducer);
-                        dispatch(statsticsUpdate(getFromLocalStorage("statistics")));
-                    }, 1000);
+                    countingTimeout = 
+                        setTimeout(() => {
+                            dispatch(remainLearnTimeUpdate(remainLearnTimeReducer - 1));
+                            dispatch(todaysSecondsLearnedIncrement());
+                            saveToLocalStorage("statistics", statisticsReducer);
+                            dispatch(statsticsUpdate(getFromLocalStorage("statistics")));
+                        }, 1000);
+
                 } else {
                     countingTimeout = setTimeout(() => {
-                        resetTimer(initLearnTime);
+                        resetTimer();
+                        dispatch(remainLearnTimeUpdate(initLearnTime));
                     }, 1000);
 
                 }
 
+            // Break Phase
             } else {
                 
+                // Decrement remain time if is more than 0
                 if (remainBreakTimeReducer > 0) {
+
                     countingTimeout = setTimeout(() => {
                         dispatch(remainBreakTimeUpdate(remainBreakTimeReducer - 1))
                     }, 1000);
+
+                // Change session
                 } else {
+
                     countingTimeout = setTimeout(() => {
+
                         resetTimer();
+                        dispatch(remainLearnTimeUpdate(initLearnTime))
+
+                        // If it's not last session than increment session counter
+                        if (currentSession < maxSession) {
+                            dispatch(globalStateUpdate({currentSession: currentSession + 1}))
+                            
+                            if (currentSession === maxSession - 1) {
+                                dispatch(remainBreakTimeUpdate(initLongBreakTime))
+                            } else {
+                                dispatch(remainBreakTimeUpdate(initBreakTime))
+                            }
+
+
+                        // If it's last session, increment block nad set session to 1
+                        } else {
+
+                            dispatch(remainBreakTimeUpdate(initBreakTime))
+
+                            if (currentBlock < maxBlock) {
+                                dispatch(
+                                    globalStateUpdate({
+                                        currentBlock: currentBlock + 1,
+                                        currentSession: 1,
+                                    })
+                                )
+
+                            } else {
+            
+                                dispatch(
+                                    globalStateUpdate({
+                                        currentBlock: 1,
+                                        currentSession: 1,
+                                    })
+                                )
+                            }
+                        }
                     }, 1000);
                 }
             }
@@ -78,7 +116,7 @@ const Clock = () => {
             }
         }
 
-    },[dispatch, initLearnTime, isLearnPhaseActive, isTimerRun, remainBreakTimeReducer, remainLearnTimeReducer, resetTimer, statisticsReducer])
+    },[currentBlock, currentSession, dispatch, initBreakTime, initLearnTime, initLongBreakTime, isLearnPhaseActive, isTimerRun, maxBlock, maxSession, remainBreakTimeReducer, remainLearnTimeReducer, resetTimer, statisticsReducer])
 
     return (
         <div className="clock" data-testid="clock">

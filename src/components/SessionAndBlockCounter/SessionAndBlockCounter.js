@@ -1,55 +1,11 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { globalStateUpdate } from '../../actions';
+import { useSelector } from 'react-redux';
 import './SessionAndBlockCounter.scss';
 
 const SessionAndBlockCounter = () => {
-
-    const dispatch = useDispatch();
+    
     const globalStateReducer = useSelector(state => state.globalState)
-    const remainBreakTimeReducer = useSelector(state => state.remainBreakTime);
 
     const {currentSession, maxSession, currentBlock, maxBlock} = globalStateReducer;
-
-    useEffect(() => {
-       
-        if (remainBreakTimeReducer < 1) {
-            
-            if (currentSession < maxSession) {
-
-                dispatch(
-                    globalStateUpdate({
-                        currentSession: currentSession + 1,
-                    })
-                )
-
-            } else {
-
-                if (currentBlock < maxBlock) {
-
-                    dispatch(
-                        globalStateUpdate({
-                            currentBlock: currentBlock + 1,
-                            currentSession: 1,
-                        })
-                    )
-
-                } else {
-
-                    dispatch(
-                        globalStateUpdate({
-                            currentBlock: 1,
-                            currentSession: 1,
-                        })
-                    )
-
-                }
-
-            }
-        }
-
-        },[currentBlock, currentSession, dispatch, maxBlock, maxSession, remainBreakTimeReducer]
-    )
 
     return (
         <div

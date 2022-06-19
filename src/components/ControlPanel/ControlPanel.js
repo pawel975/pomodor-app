@@ -12,7 +12,7 @@ const ControlPanel = () => {
     const dispatch = useDispatch();
     const globalStateReducer = useSelector(state => state.globalState);
 
-    const {currentSession, maxSession, currentBlock, maxBlock, isLearnPhaseActive, initLearnTime, initBreakTime, isTimerRun} = globalStateReducer;
+    const {currentSession, maxSession, currentBlock, maxBlock, isLearnPhaseActive, initLearnTime, initBreakTime, isTimerRun, initLongBreakTime} = globalStateReducer;
 
     saveToLocalStorage("globalState", globalStateReducer);
     
@@ -22,9 +22,13 @@ const ControlPanel = () => {
 
             if (currentSession < maxSession) {
 
-                dispatch(
-                    globalStateUpdate({currentSession: currentSession + 1})
-                )
+                if (currentSession === maxSession - 1) {
+                    dispatch(remainBreakTimeUpdate(initLongBreakTime));
+                } else {
+                    dispatch(remainBreakTimeUpdate(initBreakTime));
+                }
+
+                dispatch(globalStateUpdate({currentSession: currentSession + 1}))
 
             } else {
 
@@ -46,6 +50,8 @@ const ControlPanel = () => {
                         })
                     )
                 }
+
+                dispatch(remainBreakTimeUpdate(initBreakTime));
             }
         }
 
@@ -56,8 +62,6 @@ const ControlPanel = () => {
         )
 
         dispatch(remainLearnTimeUpdate(initLearnTime))
-        dispatch(remainBreakTimeUpdate(initBreakTime))
-
     }
 
     const handleStartPauseBtnClick = () => {

@@ -31,7 +31,7 @@ const SettingsSection = ({setIsModalOpen}) => {
             paramId: "learning-time",
             paramName: "Learning Time",
             paramValue: formatSecondsToMinutes(globalStateReducer.initLearnTime),
-            min: 10,
+            min: 0.1, // change for 10
             max: 120,
             type: 'time',
             globalStatePropName: 'initLearnTime'
@@ -40,7 +40,7 @@ const SettingsSection = ({setIsModalOpen}) => {
             paramId: "break-time",
             paramName: "Break Time",
             paramValue: formatSecondsToMinutes(globalStateReducer.initBreakTime),
-            min: 2,
+            min: 0.05, // change fo 2
             max: 30,
             type: 'time',
             globalStatePropName: 'initBreakTime'
@@ -49,7 +49,7 @@ const SettingsSection = ({setIsModalOpen}) => {
             paramId: "long-break-time",
             paramName: "Long Break Time",
             paramValue: formatSecondsToMinutes(globalStateReducer.initLongBreakTime),
-            min: 5,
+            min: 0.15, // change fo 5
             max: 60,
             type: 'time',
             globalStatePropName: 'initLongBreakTime'
