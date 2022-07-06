@@ -23,7 +23,7 @@ nav {
         background: transparent;
         border: none;
         font-size: $fs-700;
-        color: $clr-greyed;
+        color: rgba(255,255,255,0.35);
         transition: 0.2s ease-in-out;
 
         &:hover,
