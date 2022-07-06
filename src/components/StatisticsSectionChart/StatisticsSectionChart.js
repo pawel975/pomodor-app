@@ -11,7 +11,7 @@ const StatisticsSectionChart = () => {
     // reversed statistics records so today's record is rightmost on chart
     const lastWeekLearningRecords = getFromLocalStorage("statistics").reverse();
     const lastWeekRecordsDays = lastWeekLearningRecords.map(record => record.date)
-    const lastWeekRecordsMinutes = lastWeekLearningRecords.map(record => record.minutesLearned / 60)
+    const lastWeekRecordsSeconds = lastWeekLearningRecords.map(record => record.secondsLearned / 60)
     
     const options = {
         responsive: true,
@@ -33,7 +33,7 @@ const StatisticsSectionChart = () => {
         datasets: [
             {   
                 label: 'Minutes learned',
-                data: lastWeekRecordsMinutes,
+                data: lastWeekRecordsSeconds,
                 backgroundColor: '#ff52c2',
             },
         ],

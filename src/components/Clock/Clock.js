@@ -44,7 +44,6 @@ const Clock = () => {
                             dispatch(remainLearnTimeUpdate(remainLearnTimeReducer - 1));
                             dispatch(todaysSecondsLearnedIncrement());
                             saveToLocalStorage("statistics", statisticsReducer);
-                            dispatch(statsticsUpdate(getFromLocalStorage("statistics")));
                         }, 1000);
 
                 } else {
